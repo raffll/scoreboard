@@ -1,4 +1,4 @@
-package com.braindead.scoreboardmvvm.model;
+package com.braindead.scoreboard.model;
 
 public class Player {
 

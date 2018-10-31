@@ -1,4 +1,4 @@
-package com.braindead.scoreboardmvvm.view;
+package com.braindead.scoreboard.view;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.NumberPicker;
 
-import com.braindead.scoreboardmvvm.R;
+import com.braindead.scoreboard.R;
 
 public class ScoreboardBeginDialog extends DialogFragment {
 

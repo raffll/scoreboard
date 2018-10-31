@@ -1,4 +1,4 @@
-package com.braindead.scoreboardmvvm.view;
+package com.braindead.scoreboard.view;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
@@ -7,9 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.braindead.scoreboardmvvm.R;
-import com.braindead.scoreboardmvvm.databinding.ActivityScoreboardBinding;
-import com.braindead.scoreboardmvvm.viewmodel.ScoreboardViewModel;
+import com.braindead.scoreboard.R;
+import com.braindead.scoreboard.databinding.ActivityScoreboardBinding;
+import com.braindead.scoreboard.viewmodel.ScoreboardViewModel;
 
 public class ScoreboardActivity extends AppCompatActivity {
 

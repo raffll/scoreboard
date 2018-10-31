@@ -1,4 +1,4 @@
-package com.braindead.scoreboardmvvm.model;
+package com.braindead.scoreboard.model;
 
 import java.util.ArrayList;
 import java.util.List;

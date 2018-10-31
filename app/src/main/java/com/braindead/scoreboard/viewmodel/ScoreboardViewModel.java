@@ -1,10 +1,10 @@
-package com.braindead.scoreboardmvvm.viewmodel;
+package com.braindead.scoreboard.viewmodel;
 
 import android.arch.lifecycle.ViewModel;
 import android.databinding.ObservableArrayList;
 import android.view.View;
 
-import com.braindead.scoreboardmvvm.model.Scoreboard;
+import com.braindead.scoreboard.model.Scoreboard;
 
 public class ScoreboardViewModel extends ViewModel {
 

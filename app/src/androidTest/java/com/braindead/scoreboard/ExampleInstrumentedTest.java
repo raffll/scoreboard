@@ -1,4 +1,4 @@
-package com.braindead.scoreboardmvvm;
+package com.braindead.scoreboard;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

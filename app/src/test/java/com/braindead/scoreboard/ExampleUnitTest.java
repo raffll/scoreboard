@@ -1,4 +1,4 @@
-package com.braindead.scoreboardmvvm;
+package com.braindead.scoreboard;
 
 import org.junit.Test;
 

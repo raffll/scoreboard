@@ -6,7 +6,7 @@
 
         <variable
             name="scoreboardViewModel"
-            type="com.braindead.scoreboardmvvm.viewmodel.ScoreboardViewModel" />
+            type="com.braindead.scoreboard.viewmodel.ScoreboardViewModel" />
 
     </data>
 
