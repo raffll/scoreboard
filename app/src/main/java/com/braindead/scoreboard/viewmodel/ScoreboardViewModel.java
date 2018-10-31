@@ -13,9 +13,10 @@ public class ScoreboardViewModel extends ViewModel {
     public ObservableArrayList<String> observablePlayerScoreList;
 
     private Scoreboard scoreboard;
-    private int currentPlayerNumber = 0;
+    private int currentPlayerNumber;
 
     public void init(int numberOfPlayers) {
+        currentPlayerNumber = 0;
         scoreboard = new Scoreboard();
         initObservablePlayerVisibility(numberOfPlayers);
         initObservablePlayerNameList();

@@ -14,7 +14,7 @@ import com.braindead.scoreboard.R;
 
 public class ScoreboardBeginDialog extends DialogFragment {
 
-    private int numberOfPlayers = 2;
+    private int numberOfPlayers;
 
     private View rootView;
     private ScoreboardActivity scoreboardActivity;
@@ -28,7 +28,9 @@ public class ScoreboardBeginDialog extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+        numberOfPlayers = 2;
         initViews();
+
         AlertDialog alertDialog = new AlertDialog.Builder(getContext())
                 .setView(rootView)
                 .setCancelable(false)
@@ -47,15 +49,13 @@ public class ScoreboardBeginDialog extends DialogFragment {
                 .inflate(R.layout.begin_dialog, null, false);
 
         NumberPicker numberPicker = rootView.findViewById(R.id.dialog_how_many_players);
-
         numberPicker.setMinValue(1);
         numberPicker.setMaxValue(10);
         numberPicker.setValue(2);
-
         numberPicker.setOnValueChangedListener(onValueChangeListener);
     }
 
-    NumberPicker.OnValueChangeListener onValueChangeListener =
+    private NumberPicker.OnValueChangeListener onValueChangeListener =
             (picker, oldVal, newVal) -> {
                 numberOfPlayers = newVal;
             };
