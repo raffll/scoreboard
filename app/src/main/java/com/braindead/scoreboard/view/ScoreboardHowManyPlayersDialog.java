@@ -12,15 +12,15 @@ import android.widget.NumberPicker;
 
 import com.braindead.scoreboard.R;
 
-public class ScoreboardBeginDialog extends DialogFragment {
-
-    private int numberOfPlayers;
+public class ScoreboardHowManyPlayersDialog extends DialogFragment {
 
     private View rootView;
     private ScoreboardActivity scoreboardActivity;
 
-    public static ScoreboardBeginDialog newInstance(ScoreboardActivity activity) {
-        ScoreboardBeginDialog dialog = new ScoreboardBeginDialog();
+    private int numberOfPlayers;
+
+    public static ScoreboardHowManyPlayersDialog newInstance(ScoreboardActivity activity) {
+        ScoreboardHowManyPlayersDialog dialog = new ScoreboardHowManyPlayersDialog();
         dialog.scoreboardActivity = activity;
         return dialog;
     }
@@ -46,7 +46,7 @@ public class ScoreboardBeginDialog extends DialogFragment {
 
     private void initViews() {
         rootView = LayoutInflater.from(getContext())
-                .inflate(R.layout.begin_dialog, null, false);
+                .inflate(R.layout.how_many_players_dialog, null, false);
 
         NumberPicker numberPicker = rootView.findViewById(R.id.dialog_how_many_players);
         numberPicker.setMinValue(1);

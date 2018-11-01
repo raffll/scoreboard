@@ -1,23 +1,23 @@
 package com.braindead.scoreboard.viewmodel;
 
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
-import android.databinding.BindingAdapter;
 import android.databinding.ObservableArrayList;
-import android.graphics.Typeface;
-import android.view.View;
-import android.widget.TextView;
 
 import com.braindead.scoreboard.model.Scoreboard;
 
 public class ScoreboardViewModel extends ViewModel {
 
-    public ObservableArrayList<Integer> observablePlayerVisibility;
+    private Scoreboard scoreboard;
+    private int currentPlayerNumber;
+
+    public ObservableArrayList<Boolean> observablePlayerVisibility;
     public ObservableArrayList<String> observablePlayerNameList;
     public ObservableArrayList<String> observablePlayerScoreList;
     public ObservableArrayList<Boolean> observablePlayerIsActiveList;
 
-    private Scoreboard scoreboard;
-    private int currentPlayerNumber;
+    private MutableLiveData<Integer> currentPlayerSettings = new MutableLiveData<>();
 
     public void init(int numberOfPlayers) {
         currentPlayerNumber = 0;
@@ -32,9 +32,9 @@ public class ScoreboardViewModel extends ViewModel {
         observablePlayerVisibility = new ObservableArrayList<>();
         for (int i = 0; i < Scoreboard.MAX_PLAYERS; i++) {
             if (i < numberOfPlayers) {
-                observablePlayerVisibility.add(View.VISIBLE);
+                observablePlayerVisibility.add(true);
             } else {
-                observablePlayerVisibility.add(View.GONE);
+                observablePlayerVisibility.add(false);
             }
         }
     }
@@ -69,6 +69,19 @@ public class ScoreboardViewModel extends ViewModel {
         updateObservablePlayerIsActiveList();
     }
 
+    public boolean onLongClickedAtPlayer(int playerNumber) {
+        currentPlayerNumber = playerNumber;
+        updateObservablePlayerIsActiveList();
+        currentPlayerSettings.setValue(currentPlayerNumber);
+        return true;
+    }
+
+    public void onClickedScoreChange(int delta) {
+        delta = scoreboard.getPlayer(currentPlayerNumber).getScore() + delta;
+        scoreboard.getPlayer(currentPlayerNumber).setScore(delta);
+        observablePlayerScoreList.set(currentPlayerNumber, Integer.toString(scoreboard.getPlayer(currentPlayerNumber).getScore()));
+    }
+
     private void updateObservablePlayerIsActiveList() {
         for (int i = 0; i < Scoreboard.MAX_PLAYERS; i++) {
             if (i == currentPlayerNumber) {
@@ -79,21 +92,7 @@ public class ScoreboardViewModel extends ViewModel {
         }
     }
 
-    public void onClickedScoreChange(int delta) {
-        delta = scoreboard.getPlayer(currentPlayerNumber).getScore() + delta;
-        scoreboard.getPlayer(currentPlayerNumber).setScore(delta);
-        observablePlayerScoreList.set(currentPlayerNumber, Integer.toString(scoreboard.getPlayer(currentPlayerNumber).getScore()));
-    }
-
-    @BindingAdapter("android:textStyle")
-    public static void setTypeface(TextView textView, String style) {
-        switch (style) {
-            case "bold":
-                textView.setTypeface(null, Typeface.BOLD);
-                break;
-            default:
-                textView.setTypeface(null, Typeface.NORMAL);
-                break;
-        }
+    public LiveData<Integer> getCurrentPlayerSettings() {
+        return currentPlayerSettings;
     }
 }

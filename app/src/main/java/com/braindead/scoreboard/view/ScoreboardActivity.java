@@ -4,6 +4,7 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -13,7 +14,9 @@ import com.braindead.scoreboard.viewmodel.ScoreboardViewModel;
 
 public class ScoreboardActivity extends AppCompatActivity {
 
-    private static final String BEGIN_DIALOG_TAG = "begin_dialog_tag";
+    private static final String TAG_HOW_MANY_PLAYERS = "TAG_HOW_MANY_PLAYERS";
+    private static final String TAG_PLAYER_SETTINGS = "TAG_PLAYER_SETTINGS";
+
     private ScoreboardViewModel scoreboardViewModel;
 
     @Override
@@ -22,10 +25,10 @@ public class ScoreboardActivity extends AppCompatActivity {
         promptForNewSession();
     }
 
-    public void promptForNewSession() {
-        ScoreboardBeginDialog dialog = ScoreboardBeginDialog.newInstance(this);
+    private void promptForNewSession() {
+        ScoreboardHowManyPlayersDialog dialog = ScoreboardHowManyPlayersDialog.newInstance(this);
         dialog.setCancelable(false);
-        dialog.show(getSupportFragmentManager(), BEGIN_DIALOG_TAG);
+        dialog.show(getSupportFragmentManager(), TAG_HOW_MANY_PLAYERS);
     }
 
     public void onNewSessionSet(int numberOfPlayers) {
@@ -37,6 +40,18 @@ public class ScoreboardActivity extends AppCompatActivity {
         scoreboardViewModel = ViewModelProviders.of(this).get(ScoreboardViewModel.class);
         scoreboardViewModel.init(numberOfPlayers);
         activityScoreboardBinding.setScoreboardViewModel(scoreboardViewModel);
+        setUpOnPlayerSettingsStatusListener();
+    }
+
+    private void setUpOnPlayerSettingsStatusListener() {
+        scoreboardViewModel.getCurrentPlayerSettings().observe(this, this::onPlayerSettingsStatusChanged);
+    }
+
+    private void onPlayerSettingsStatusChanged(Integer currentPlayerSettings) {
+        ScoreboardPlayerSettingsDialog dialog = ScoreboardPlayerSettingsDialog.newInstance(this);
+        dialog.setCancelable(false);
+        dialog.show(getSupportFragmentManager(), TAG_PLAYER_SETTINGS);
+        Log.e("TAG", Integer.toString(currentPlayerSettings));
     }
 
     @Override
