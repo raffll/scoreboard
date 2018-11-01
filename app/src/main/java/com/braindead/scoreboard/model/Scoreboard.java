@@ -12,7 +12,7 @@ public class Scoreboard {
     public Scoreboard() {
         playerList = new ArrayList<>();
         for (int i = 0; i < MAX_PLAYERS; i++) {
-            playerList.add(new Player("Player " + i, 0, 0));
+            playerList.add(new Player("Player " + (i + 1), 0, 0));
         }
     }
 

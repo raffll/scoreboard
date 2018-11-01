@@ -45,6 +45,7 @@
                         android:layout_weight="1"
                         android:onClick="@{() -> scoreboardViewModel.onClickedAtPlayer(0)}"
                         android:text="@{scoreboardViewModel.observablePlayerNameList[0]}"
+                        android:textStyle='@{safeUnbox(scoreboardViewModel.observablePlayerIsActiveList[0]) == true ? "bold" : "normal"}'
                         android:theme="@style/PlayerRowText" />
 
                     <TextView
@@ -55,6 +56,7 @@
                         android:layout_weight="1"
                         android:gravity="right"
                         android:text="@{scoreboardViewModel.observablePlayerScoreList[0]}"
+                        android:textStyle='@{safeUnbox(scoreboardViewModel.observablePlayerIsActiveList[0]) == true ? "bold" : "normal"}'
                         android:theme="@style/PlayerRowText" />
 
                 </TableRow>
@@ -72,6 +74,7 @@
                         android:layout_weight="1"
                         android:onClick="@{() -> scoreboardViewModel.onClickedAtPlayer(1)}"
                         android:text="@{scoreboardViewModel.observablePlayerNameList[1]}"
+                        android:textStyle='@{safeUnbox(scoreboardViewModel.observablePlayerIsActiveList[1]) == true ? "bold" : "normal"}'
                         android:theme="@style/PlayerRowText" />
 
                     <TextView
@@ -82,6 +85,7 @@
                         android:layout_weight="1"
                         android:gravity="right"
                         android:text="@{scoreboardViewModel.observablePlayerScoreList[1]}"
+                        android:textStyle='@{safeUnbox(scoreboardViewModel.observablePlayerIsActiveList[1]) == true ? "bold" : "normal"}'
                         android:theme="@style/PlayerRowText" />
 
                 </TableRow>
@@ -99,6 +103,7 @@
                         android:layout_weight="1"
                         android:onClick="@{() -> scoreboardViewModel.onClickedAtPlayer(2)}"
                         android:text="@{scoreboardViewModel.observablePlayerNameList[2]}"
+                        android:textStyle='@{safeUnbox(scoreboardViewModel.observablePlayerIsActiveList[2]) == true ? "bold" : "normal"}'
                         android:theme="@style/PlayerRowText" />
 
                     <TextView
@@ -109,6 +114,7 @@
                         android:layout_weight="1"
                         android:gravity="right"
                         android:text="@{scoreboardViewModel.observablePlayerScoreList[2]}"
+                        android:textStyle='@{safeUnbox(scoreboardViewModel.observablePlayerIsActiveList[2]) == true ? "bold" : "normal"}'
                         android:theme="@style/PlayerRowText" />
 
                 </TableRow>
@@ -126,6 +132,7 @@
                         android:layout_weight="1"
                         android:onClick="@{() -> scoreboardViewModel.onClickedAtPlayer(3)}"
                         android:text="@{scoreboardViewModel.observablePlayerNameList[3]}"
+                        android:textStyle='@{safeUnbox(scoreboardViewModel.observablePlayerIsActiveList[3]) == true ? "bold" : "normal"}'
                         android:theme="@style/PlayerRowText" />
 
                     <TextView
@@ -136,6 +143,7 @@
                         android:layout_weight="1"
                         android:gravity="right"
                         android:text="@{scoreboardViewModel.observablePlayerScoreList[3]}"
+                        android:textStyle='@{safeUnbox(scoreboardViewModel.observablePlayerIsActiveList[3]) == true ? "bold" : "normal"}'
                         android:theme="@style/PlayerRowText" />
 
                 </TableRow>
@@ -153,6 +161,7 @@
                         android:layout_weight="1"
                         android:onClick="@{() -> scoreboardViewModel.onClickedAtPlayer(4)}"
                         android:text="@{scoreboardViewModel.observablePlayerNameList[4]}"
+                        android:textStyle='@{safeUnbox(scoreboardViewModel.observablePlayerIsActiveList[4]) == true ? "bold" : "normal"}'
                         android:theme="@style/PlayerRowText" />
 
                     <TextView
@@ -163,6 +172,7 @@
                         android:layout_weight="1"
                         android:gravity="right"
                         android:text="@{scoreboardViewModel.observablePlayerScoreList[4]}"
+                        android:textStyle='@{safeUnbox(scoreboardViewModel.observablePlayerIsActiveList[4]) == true ? "bold" : "normal"}'
                         android:theme="@style/PlayerRowText" />
 
                 </TableRow>
@@ -180,6 +190,7 @@
                         android:layout_weight="1"
                         android:onClick="@{() -> scoreboardViewModel.onClickedAtPlayer(5)}"
                         android:text="@{scoreboardViewModel.observablePlayerNameList[5]}"
+                        android:textStyle='@{safeUnbox(scoreboardViewModel.observablePlayerIsActiveList[5]) == true ? "bold" : "normal"}'
                         android:theme="@style/PlayerRowText" />
 
                     <TextView
@@ -190,6 +201,7 @@
                         android:layout_weight="1"
                         android:gravity="right"
                         android:text="@{scoreboardViewModel.observablePlayerScoreList[5]}"
+                        android:textStyle='@{safeUnbox(scoreboardViewModel.observablePlayerIsActiveList[5]) == true ? "bold" : "normal"}'
                         android:theme="@style/PlayerRowText" />
 
                 </TableRow>
@@ -207,6 +219,7 @@
                         android:layout_weight="1"
                         android:onClick="@{() -> scoreboardViewModel.onClickedAtPlayer(6)}"
                         android:text="@{scoreboardViewModel.observablePlayerNameList[6]}"
+                        android:textStyle='@{safeUnbox(scoreboardViewModel.observablePlayerIsActiveList[6]) == true ? "bold" : "normal"}'
                         android:theme="@style/PlayerRowText" />
 
                     <TextView
@@ -217,6 +230,7 @@
                         android:layout_weight="1"
                         android:gravity="right"
                         android:text="@{scoreboardViewModel.observablePlayerScoreList[6]}"
+                        android:textStyle='@{safeUnbox(scoreboardViewModel.observablePlayerIsActiveList[6]) == true ? "bold" : "normal"}'
                         android:theme="@style/PlayerRowText" />
 
                 </TableRow>
@@ -234,6 +248,7 @@
                         android:layout_weight="1"
                         android:onClick="@{() -> scoreboardViewModel.onClickedAtPlayer(7)}"
                         android:text="@{scoreboardViewModel.observablePlayerNameList[7]}"
+                        android:textStyle='@{safeUnbox(scoreboardViewModel.observablePlayerIsActiveList[7]) == true ? "bold" : "normal"}'
                         android:theme="@style/PlayerRowText" />
 
                     <TextView
@@ -244,6 +259,7 @@
                         android:layout_weight="1"
                         android:gravity="right"
                         android:text="@{scoreboardViewModel.observablePlayerScoreList[7]}"
+                        android:textStyle='@{safeUnbox(scoreboardViewModel.observablePlayerIsActiveList[7]) == true ? "bold" : "normal"}'
                         android:theme="@style/PlayerRowText" />
 
                 </TableRow>
@@ -261,6 +277,7 @@
                         android:layout_weight="1"
                         android:onClick="@{() -> scoreboardViewModel.onClickedAtPlayer(8)}"
                         android:text="@{scoreboardViewModel.observablePlayerNameList[8]}"
+                        android:textStyle='@{safeUnbox(scoreboardViewModel.observablePlayerIsActiveList[8]) == true ? "bold" : "normal"}'
                         android:theme="@style/PlayerRowText" />
 
                     <TextView
@@ -271,6 +288,7 @@
                         android:layout_weight="1"
                         android:gravity="right"
                         android:text="@{scoreboardViewModel.observablePlayerScoreList[8]}"
+                        android:textStyle='@{safeUnbox(scoreboardViewModel.observablePlayerIsActiveList[8]) == true ? "bold" : "normal"}'
                         android:theme="@style/PlayerRowText" />
 
                 </TableRow>
@@ -288,6 +306,7 @@
                         android:layout_weight="1"
                         android:onClick="@{() -> scoreboardViewModel.onClickedAtPlayer(9)}"
                         android:text="@{scoreboardViewModel.observablePlayerNameList[9]}"
+                        android:textStyle='@{safeUnbox(scoreboardViewModel.observablePlayerIsActiveList[9]) == true ? "bold" : "normal"}'
                         android:theme="@style/PlayerRowText" />
 
                     <TextView
@@ -298,6 +317,7 @@
                         android:layout_weight="1"
                         android:gravity="right"
                         android:text="@{scoreboardViewModel.observablePlayerScoreList[9]}"
+                        android:textStyle='@{safeUnbox(scoreboardViewModel.observablePlayerIsActiveList[9]) == true ? "bold" : "normal"}'
                         android:theme="@style/PlayerRowText" />
 
                 </TableRow>
