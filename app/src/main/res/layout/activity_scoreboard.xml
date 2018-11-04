@@ -35,7 +35,7 @@
                 <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:visibility="@{safeUnbox(scoreboardViewModel.observablePlayerVisibility[0])}">
+                    android:visibility="@{safeUnbox(scoreboardViewModel.observablePlayerVisibilityList[0])}">
 
                     <TextView
                         android:id="@+id/player_0_name"
@@ -43,8 +43,8 @@
                         android:layout_height="match_parent"
                         android:layout_margin="4dp"
                         android:layout_weight="1"
-                        android:onClick="@{() -> scoreboardViewModel.onClickedAtPlayer(0)}"
-                        android:onLongClick="@{() -> scoreboardViewModel.onLongClickedAtPlayer(0)}"
+                        android:onClick="@{() -> scoreboardViewModel.onActivatePlayer(0)}"
+                        android:onLongClick="@{() -> scoreboardViewModel.onActivatePlayerSettings(0)}"
                         android:text="@{scoreboardViewModel.observablePlayerNameList[0]}"
                         android:textStyle='@{safeUnbox(scoreboardViewModel.observablePlayerIsActiveList[0]) == true ? "bold" : "normal"}'
                         android:theme="@style/PlayerRowText" />
@@ -65,7 +65,7 @@
                 <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:visibility="@{safeUnbox(scoreboardViewModel.observablePlayerVisibility[1])}">
+                    android:visibility="@{safeUnbox(scoreboardViewModel.observablePlayerVisibilityList[1])}">
 
                     <TextView
                         android:id="@+id/player_1_name"
@@ -73,7 +73,8 @@
                         android:layout_height="match_parent"
                         android:layout_margin="4dp"
                         android:layout_weight="1"
-                        android:onClick="@{() -> scoreboardViewModel.onClickedAtPlayer(1)}"
+                        android:onClick="@{() -> scoreboardViewModel.onActivatePlayer(1)}"
+                        android:onLongClick="@{() -> scoreboardViewModel.onActivatePlayerSettings(1)}"
                         android:text="@{scoreboardViewModel.observablePlayerNameList[1]}"
                         android:textStyle='@{safeUnbox(scoreboardViewModel.observablePlayerIsActiveList[1]) == true ? "bold" : "normal"}'
                         android:theme="@style/PlayerRowText" />
@@ -94,7 +95,7 @@
                 <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:visibility="@{safeUnbox(scoreboardViewModel.observablePlayerVisibility[2])}">
+                    android:visibility="@{safeUnbox(scoreboardViewModel.observablePlayerVisibilityList[2])}">
 
                     <TextView
                         android:id="@+id/player_2_name"
@@ -102,7 +103,8 @@
                         android:layout_height="match_parent"
                         android:layout_margin="4dp"
                         android:layout_weight="1"
-                        android:onClick="@{() -> scoreboardViewModel.onClickedAtPlayer(2)}"
+                        android:onClick="@{() -> scoreboardViewModel.onActivatePlayer(2)}"
+                        android:onLongClick="@{() -> scoreboardViewModel.onActivatePlayerSettings(2)}"
                         android:text="@{scoreboardViewModel.observablePlayerNameList[2]}"
                         android:textStyle='@{safeUnbox(scoreboardViewModel.observablePlayerIsActiveList[2]) == true ? "bold" : "normal"}'
                         android:theme="@style/PlayerRowText" />
@@ -123,7 +125,7 @@
                 <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:visibility="@{safeUnbox(scoreboardViewModel.observablePlayerVisibility[3])}">
+                    android:visibility="@{safeUnbox(scoreboardViewModel.observablePlayerVisibilityList[3])}">
 
                     <TextView
                         android:id="@+id/player_3_name"
@@ -131,7 +133,8 @@
                         android:layout_height="match_parent"
                         android:layout_margin="4dp"
                         android:layout_weight="1"
-                        android:onClick="@{() -> scoreboardViewModel.onClickedAtPlayer(3)}"
+                        android:onClick="@{() -> scoreboardViewModel.onActivatePlayer(3)}"
+                        android:onLongClick="@{() -> scoreboardViewModel.onActivatePlayerSettings(3)}"
                         android:text="@{scoreboardViewModel.observablePlayerNameList[3]}"
                         android:textStyle='@{safeUnbox(scoreboardViewModel.observablePlayerIsActiveList[3]) == true ? "bold" : "normal"}'
                         android:theme="@style/PlayerRowText" />
@@ -152,7 +155,7 @@
                 <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:visibility="@{safeUnbox(scoreboardViewModel.observablePlayerVisibility[4])}">
+                    android:visibility="@{safeUnbox(scoreboardViewModel.observablePlayerVisibilityList[4])}">
 
                     <TextView
                         android:id="@+id/player_4_name"
@@ -160,7 +163,8 @@
                         android:layout_height="match_parent"
                         android:layout_margin="4dp"
                         android:layout_weight="1"
-                        android:onClick="@{() -> scoreboardViewModel.onClickedAtPlayer(4)}"
+                        android:onClick="@{() -> scoreboardViewModel.onActivatePlayer(4)}"
+                        android:onLongClick="@{() -> scoreboardViewModel.onActivatePlayerSettings(4)}"
                         android:text="@{scoreboardViewModel.observablePlayerNameList[4]}"
                         android:textStyle='@{safeUnbox(scoreboardViewModel.observablePlayerIsActiveList[4]) == true ? "bold" : "normal"}'
                         android:theme="@style/PlayerRowText" />
@@ -181,7 +185,7 @@
                 <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:visibility="@{safeUnbox(scoreboardViewModel.observablePlayerVisibility[5])}">
+                    android:visibility="@{safeUnbox(scoreboardViewModel.observablePlayerVisibilityList[5])}">
 
                     <TextView
                         android:id="@+id/player_5_name"
@@ -189,7 +193,8 @@
                         android:layout_height="match_parent"
                         android:layout_margin="4dp"
                         android:layout_weight="1"
-                        android:onClick="@{() -> scoreboardViewModel.onClickedAtPlayer(5)}"
+                        android:onClick="@{() -> scoreboardViewModel.onActivatePlayer(5)}"
+                        android:onLongClick="@{() -> scoreboardViewModel.onActivatePlayerSettings(5)}"
                         android:text="@{scoreboardViewModel.observablePlayerNameList[5]}"
                         android:textStyle='@{safeUnbox(scoreboardViewModel.observablePlayerIsActiveList[5]) == true ? "bold" : "normal"}'
                         android:theme="@style/PlayerRowText" />
@@ -210,7 +215,7 @@
                 <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:visibility="@{safeUnbox(scoreboardViewModel.observablePlayerVisibility[6])}">
+                    android:visibility="@{safeUnbox(scoreboardViewModel.observablePlayerVisibilityList[6])}">
 
                     <TextView
                         android:id="@+id/player_6_name"
@@ -218,7 +223,8 @@
                         android:layout_height="match_parent"
                         android:layout_margin="4dp"
                         android:layout_weight="1"
-                        android:onClick="@{() -> scoreboardViewModel.onClickedAtPlayer(6)}"
+                        android:onClick="@{() -> scoreboardViewModel.onActivatePlayer(6)}"
+                        android:onLongClick="@{() -> scoreboardViewModel.onActivatePlayerSettings(6)}"
                         android:text="@{scoreboardViewModel.observablePlayerNameList[6]}"
                         android:textStyle='@{safeUnbox(scoreboardViewModel.observablePlayerIsActiveList[6]) == true ? "bold" : "normal"}'
                         android:theme="@style/PlayerRowText" />
@@ -239,7 +245,7 @@
                 <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:visibility="@{safeUnbox(scoreboardViewModel.observablePlayerVisibility[7])}">
+                    android:visibility="@{safeUnbox(scoreboardViewModel.observablePlayerVisibilityList[7])}">
 
                     <TextView
                         android:id="@+id/player_7_name"
@@ -247,7 +253,8 @@
                         android:layout_height="match_parent"
                         android:layout_margin="4dp"
                         android:layout_weight="1"
-                        android:onClick="@{() -> scoreboardViewModel.onClickedAtPlayer(7)}"
+                        android:onClick="@{() -> scoreboardViewModel.onActivatePlayer(7)}"
+                        android:onLongClick="@{() -> scoreboardViewModel.onActivatePlayerSettings(7)}"
                         android:text="@{scoreboardViewModel.observablePlayerNameList[7]}"
                         android:textStyle='@{safeUnbox(scoreboardViewModel.observablePlayerIsActiveList[7]) == true ? "bold" : "normal"}'
                         android:theme="@style/PlayerRowText" />
@@ -268,7 +275,7 @@
                 <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:visibility="@{safeUnbox(scoreboardViewModel.observablePlayerVisibility[8])}">
+                    android:visibility="@{safeUnbox(scoreboardViewModel.observablePlayerVisibilityList[8])}">
 
                     <TextView
                         android:id="@+id/player_8_name"
@@ -276,7 +283,8 @@
                         android:layout_height="match_parent"
                         android:layout_margin="4dp"
                         android:layout_weight="1"
-                        android:onClick="@{() -> scoreboardViewModel.onClickedAtPlayer(8)}"
+                        android:onClick="@{() -> scoreboardViewModel.onActivatePlayer(8)}"
+                        android:onLongClick="@{() -> scoreboardViewModel.onActivatePlayerSettings(8)}"
                         android:text="@{scoreboardViewModel.observablePlayerNameList[8]}"
                         android:textStyle='@{safeUnbox(scoreboardViewModel.observablePlayerIsActiveList[8]) == true ? "bold" : "normal"}'
                         android:theme="@style/PlayerRowText" />
@@ -297,7 +305,7 @@
                 <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:visibility="@{safeUnbox(scoreboardViewModel.observablePlayerVisibility[9])}">
+                    android:visibility="@{safeUnbox(scoreboardViewModel.observablePlayerVisibilityList[9])}">
 
                     <TextView
                         android:id="@+id/player_9_name"
@@ -305,7 +313,8 @@
                         android:layout_height="match_parent"
                         android:layout_margin="4dp"
                         android:layout_weight="1"
-                        android:onClick="@{() -> scoreboardViewModel.onClickedAtPlayer(9)}"
+                        android:onClick="@{() -> scoreboardViewModel.onActivatePlayer(9)}"
+                        android:onLongClick="@{() -> scoreboardViewModel.onActivatePlayerSettings(9)}"
                         android:text="@{scoreboardViewModel.observablePlayerNameList[9]}"
                         android:textStyle='@{safeUnbox(scoreboardViewModel.observablePlayerIsActiveList[9]) == true ? "bold" : "normal"}'
                         android:theme="@style/PlayerRowText" />
@@ -346,7 +355,7 @@
                     android:layout_height="match_parent"
                     android:layout_margin="4dp"
                     android:layout_weight="1"
-                    android:onClick="@{() -> scoreboardViewModel.onClickedScoreChange(-1)}"
+                    android:onClick="@{() -> scoreboardViewModel.onChangeCurrentPlayerScore(-1)}"
                     android:text="@string/minus1"
                     android:textSize="24sp" />
 
@@ -357,7 +366,7 @@
                     android:layout_height="match_parent"
                     android:layout_margin="4dp"
                     android:layout_weight="1"
-                    android:onClick="@{() -> scoreboardViewModel.onClickedScoreChange(1)}"
+                    android:onClick="@{() -> scoreboardViewModel.onChangeCurrentPlayerScore(1)}"
                     android:text="@string/plus1"
                     android:textSize="24sp" />
 
@@ -374,7 +383,7 @@
                     android:layout_height="match_parent"
                     android:layout_margin="4dp"
                     android:layout_weight="1"
-                    android:onClick="@{() -> scoreboardViewModel.onClickedScoreChange(-10)}"
+                    android:onClick="@{() -> scoreboardViewModel.onChangeCurrentPlayerScore(-10)}"
                     android:text="@string/minus10"
                     android:textSize="24sp" />
 
@@ -385,7 +394,7 @@
                     android:layout_height="match_parent"
                     android:layout_margin="4dp"
                     android:layout_weight="1"
-                    android:onClick="@{() -> scoreboardViewModel.onClickedScoreChange(10)}"
+                    android:onClick="@{() -> scoreboardViewModel.onChangeCurrentPlayerScore(10)}"
                     android:text="@string/plus10"
                     android:textSize="24sp" />
 

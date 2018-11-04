@@ -15,5 +15,6 @@
     <string name="plus">+</string>
 
     <string name="menu_new_session">New session</string>
+    <string name="dialog_player_settings">Player settings</string>
 
 </resources>

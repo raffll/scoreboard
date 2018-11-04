@@ -10,14 +10,15 @@ import com.braindead.scoreboard.model.Scoreboard;
 public class ScoreboardViewModel extends ViewModel {
 
     private Scoreboard scoreboard;
+
     private int currentPlayerNumber;
 
-    public ObservableArrayList<Boolean> observablePlayerVisibility;
+    public ObservableArrayList<Boolean> observablePlayerVisibilityList;
     public ObservableArrayList<String> observablePlayerNameList;
     public ObservableArrayList<String> observablePlayerScoreList;
     public ObservableArrayList<Boolean> observablePlayerIsActiveList;
 
-    private MutableLiveData<Integer> currentPlayerSettings = new MutableLiveData<>();
+    private MutableLiveData<Boolean> playerSettingsEvent = new MutableLiveData<>();
 
     public void init(int numberOfPlayers) {
         currentPlayerNumber = 0;
@@ -29,12 +30,12 @@ public class ScoreboardViewModel extends ViewModel {
     }
 
     private void initObservablePlayerVisibility(int numberOfPlayers) {
-        observablePlayerVisibility = new ObservableArrayList<>();
+        observablePlayerVisibilityList = new ObservableArrayList<>();
         for (int i = 0; i < Scoreboard.MAX_PLAYERS; i++) {
             if (i < numberOfPlayers) {
-                observablePlayerVisibility.add(true);
+                observablePlayerVisibilityList.add(true);
             } else {
-                observablePlayerVisibility.add(false);
+                observablePlayerVisibilityList.add(false);
             }
         }
     }
@@ -64,22 +65,27 @@ public class ScoreboardViewModel extends ViewModel {
         }
     }
 
-    public void onClickedAtPlayer(int playerNumber) {
+    public void onActivatePlayer(int playerNumber) {
         currentPlayerNumber = playerNumber;
         updateObservablePlayerIsActiveList();
     }
 
-    public boolean onLongClickedAtPlayer(int playerNumber) {
+    public boolean onActivatePlayerSettings(int playerNumber) {
         currentPlayerNumber = playerNumber;
         updateObservablePlayerIsActiveList();
-        currentPlayerSettings.setValue(currentPlayerNumber);
+        playerSettingsEvent.setValue(true);
         return true;
     }
 
-    public void onClickedScoreChange(int delta) {
+    public void onChangeCurrentPlayerScore(int delta) {
         delta = scoreboard.getPlayer(currentPlayerNumber).getScore() + delta;
         scoreboard.getPlayer(currentPlayerNumber).setScore(delta);
         observablePlayerScoreList.set(currentPlayerNumber, Integer.toString(scoreboard.getPlayer(currentPlayerNumber).getScore()));
+    }
+
+    public void onChangeCurrentPlayerName(String playerName) {
+        scoreboard.getPlayer(currentPlayerNumber).setName(playerName);
+        observablePlayerNameList.set(currentPlayerNumber, scoreboard.getPlayer(currentPlayerNumber).getName());
     }
 
     private void updateObservablePlayerIsActiveList() {
@@ -92,7 +98,11 @@ public class ScoreboardViewModel extends ViewModel {
         }
     }
 
-    public LiveData<Integer> getCurrentPlayerSettings() {
-        return currentPlayerSettings;
+    public LiveData<Boolean> getPlayerSettingsEvent() {
+        return playerSettingsEvent;
+    }
+
+    public void disablePlayerSettingsEvent() {
+        this.playerSettingsEvent.setValue(false);
     }
 }

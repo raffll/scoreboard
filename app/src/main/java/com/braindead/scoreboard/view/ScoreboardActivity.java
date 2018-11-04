@@ -4,7 +4,6 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -26,7 +25,7 @@ public class ScoreboardActivity extends AppCompatActivity {
     }
 
     private void promptForNewSession() {
-        ScoreboardHowManyPlayersDialog dialog = ScoreboardHowManyPlayersDialog.newInstance(this);
+        ScoreboardDialogHowManyPlayers dialog = ScoreboardDialogHowManyPlayers.newInstance(this);
         dialog.setCancelable(false);
         dialog.show(getSupportFragmentManager(), TAG_HOW_MANY_PLAYERS);
     }
@@ -40,18 +39,24 @@ public class ScoreboardActivity extends AppCompatActivity {
         scoreboardViewModel = ViewModelProviders.of(this).get(ScoreboardViewModel.class);
         scoreboardViewModel.init(numberOfPlayers);
         activityScoreboardBinding.setScoreboardViewModel(scoreboardViewModel);
-        setUpOnPlayerSettingsStatusListener();
+        setUpOnPlayerSettingsEventListener();
     }
 
-    private void setUpOnPlayerSettingsStatusListener() {
-        scoreboardViewModel.getCurrentPlayerSettings().observe(this, this::onPlayerSettingsStatusChanged);
+    private void setUpOnPlayerSettingsEventListener() {
+        scoreboardViewModel.getPlayerSettingsEvent().observe(this, this::onPlayerSettingsEventTriggered);
     }
 
-    private void onPlayerSettingsStatusChanged(Integer currentPlayerSettings) {
-        ScoreboardPlayerSettingsDialog dialog = ScoreboardPlayerSettingsDialog.newInstance(this);
-        dialog.setCancelable(false);
-        dialog.show(getSupportFragmentManager(), TAG_PLAYER_SETTINGS);
-        Log.e("TAG", Integer.toString(currentPlayerSettings));
+    private void onPlayerSettingsEventTriggered(Boolean playerSettingsEvent) {
+        if(playerSettingsEvent) {
+            ScoreboardDialogPlayerSettings dialog = ScoreboardDialogPlayerSettings.newInstance(this);
+            dialog.setCancelable(false);
+            dialog.show(getSupportFragmentManager(), TAG_PLAYER_SETTINGS);
+            scoreboardViewModel.disablePlayerSettingsEvent();
+        }
+    }
+
+    public void onPlayerSettingSet(String playerName) {
+        scoreboardViewModel.onChangeCurrentPlayerName(playerName);
     }
 
     @Override

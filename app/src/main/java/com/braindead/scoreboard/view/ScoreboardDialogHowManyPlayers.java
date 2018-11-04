@@ -7,20 +7,20 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.NumberPicker;
 
 import com.braindead.scoreboard.R;
+import com.braindead.scoreboard.model.Scoreboard;
 
-public class ScoreboardHowManyPlayersDialog extends DialogFragment {
+public class ScoreboardDialogHowManyPlayers extends DialogFragment {
 
     private View rootView;
     private ScoreboardActivity scoreboardActivity;
 
     private int numberOfPlayers;
 
-    public static ScoreboardHowManyPlayersDialog newInstance(ScoreboardActivity activity) {
-        ScoreboardHowManyPlayersDialog dialog = new ScoreboardHowManyPlayersDialog();
+    public static ScoreboardDialogHowManyPlayers newInstance(ScoreboardActivity activity) {
+        ScoreboardDialogHowManyPlayers dialog = new ScoreboardDialogHowManyPlayers();
         dialog.scoreboardActivity = activity;
         return dialog;
     }
@@ -28,30 +28,30 @@ public class ScoreboardHowManyPlayersDialog extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        numberOfPlayers = 2;
+        initParams();
         initViews();
-
         AlertDialog alertDialog = new AlertDialog.Builder(getContext())
                 .setView(rootView)
                 .setCancelable(false)
-                .setNegativeButton(R.string.cancel, null)
-                .setPositiveButton(R.string.ok, null)
+                .setNegativeButton(R.string.cancel,  ((dialog, which) -> onCancelClicked()))
+                .setPositiveButton(R.string.ok,   ((dialog, which) -> onDoneClicked()))
                 .create();
         alertDialog.setCanceledOnTouchOutside(false);
-        alertDialog.setOnShowListener(dialog -> {
-            onDialogShow(alertDialog);
-        });
         return alertDialog;
+    }
+
+    private void initParams() {
+        numberOfPlayers = Scoreboard.DEFAULT_NUMBER_OF_PLAYERS;
     }
 
     private void initViews() {
         rootView = LayoutInflater.from(getContext())
-                .inflate(R.layout.how_many_players_dialog, null, false);
+                .inflate(R.layout.dialog_how_many_players, null, false);
 
         NumberPicker numberPicker = rootView.findViewById(R.id.dialog_how_many_players);
         numberPicker.setMinValue(1);
         numberPicker.setMaxValue(10);
-        numberPicker.setValue(2);
+        numberPicker.setValue(numberOfPlayers);
         numberPicker.setOnValueChangedListener(onValueChangeListener);
     }
 
@@ -59,18 +59,6 @@ public class ScoreboardHowManyPlayersDialog extends DialogFragment {
             (picker, oldVal, newVal) -> {
                 numberOfPlayers = newVal;
             };
-
-    private void onDialogShow(AlertDialog dialog) {
-        Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
-        positiveButton.setOnClickListener(v -> {
-            onDoneClicked();
-        });
-
-        Button negativeButton = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
-        negativeButton.setOnClickListener(v -> {
-            onCancelClicked();
-        });
-    }
 
     private void onDoneClicked() {
         scoreboardActivity.onNewSessionSet(numberOfPlayers);

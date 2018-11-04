@@ -6,6 +6,7 @@ import java.util.List;
 public class Scoreboard {
 
     public static final int MAX_PLAYERS = 10;
+    public static final int DEFAULT_NUMBER_OF_PLAYERS = 2;
 
     private List<Player> playerList;
 
