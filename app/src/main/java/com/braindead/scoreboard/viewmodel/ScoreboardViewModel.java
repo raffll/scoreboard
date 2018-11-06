@@ -14,19 +14,22 @@ public class ScoreboardViewModel extends ViewModel {
     private int currentPlayerNumber;
 
     public ObservableArrayList<Boolean> observablePlayerVisibilityList;
+    public ObservableArrayList<Boolean> observablePlayerIsActiveList;
     public ObservableArrayList<String> observablePlayerNameList;
     public ObservableArrayList<String> observablePlayerScoreList;
-    public ObservableArrayList<Boolean> observablePlayerIsActiveList;
+    public ObservableArrayList<Integer> observablePlayerColorList;
 
-    private MutableLiveData<Boolean> playerSettingsEvent = new MutableLiveData<>();
+    private MutableLiveData<Boolean> playerNameChangingEvent = new MutableLiveData<>();
+    private MutableLiveData<Boolean> playerColorChangingEvent = new MutableLiveData<>();
 
     public void init(int numberOfPlayers) {
         currentPlayerNumber = 0;
         scoreboard = new Scoreboard();
         initObservablePlayerVisibility(numberOfPlayers);
+        initObservablePlayerIsActiveList();
         initObservablePlayerNameList();
         initObservablePlayerScoreList();
-        initObservablePlayerIsActiveList();
+        initObservablePlayerColorList();
     }
 
     private void initObservablePlayerVisibility(int numberOfPlayers) {
@@ -36,6 +39,17 @@ public class ScoreboardViewModel extends ViewModel {
                 observablePlayerVisibilityList.add(true);
             } else {
                 observablePlayerVisibilityList.add(false);
+            }
+        }
+    }
+
+    private void initObservablePlayerIsActiveList() {
+        observablePlayerIsActiveList = new ObservableArrayList<>();
+        for (int i = 0; i < Scoreboard.MAX_PLAYERS; i++) {
+            if (i == currentPlayerNumber) {
+                observablePlayerIsActiveList.add(true);
+            } else {
+                observablePlayerIsActiveList.add(false);
             }
         }
     }
@@ -54,14 +68,10 @@ public class ScoreboardViewModel extends ViewModel {
         }
     }
 
-    private void initObservablePlayerIsActiveList() {
-        observablePlayerIsActiveList = new ObservableArrayList<>();
+    private void initObservablePlayerColorList() {
+        observablePlayerColorList = new ObservableArrayList<>();
         for (int i = 0; i < Scoreboard.MAX_PLAYERS; i++) {
-            if (i == currentPlayerNumber) {
-                observablePlayerIsActiveList.add(true);
-            } else {
-                observablePlayerIsActiveList.add(false);
-            }
+            observablePlayerColorList.add(scoreboard.getPlayer(i).getColor());
         }
     }
 
@@ -70,10 +80,17 @@ public class ScoreboardViewModel extends ViewModel {
         updateObservablePlayerIsActiveList();
     }
 
-    public boolean onActivatePlayerSettings(int playerNumber) {
+    public boolean onActivatePlayerNameChanging(int playerNumber) {
         currentPlayerNumber = playerNumber;
         updateObservablePlayerIsActiveList();
-        playerSettingsEvent.setValue(true);
+        playerNameChangingEvent.setValue(true);
+        return true;
+    }
+
+    public boolean onActivatePlayerColorChanging(int playerNumber) {
+        currentPlayerNumber = playerNumber;
+        updateObservablePlayerIsActiveList();
+        playerColorChangingEvent.setValue(true);
         return true;
     }
 
@@ -88,6 +105,11 @@ public class ScoreboardViewModel extends ViewModel {
         observablePlayerNameList.set(currentPlayerNumber, scoreboard.getPlayer(currentPlayerNumber).getName());
     }
 
+    public void onChangeCurrentPlayerColor(int playerColor) {
+        scoreboard.getPlayer(currentPlayerNumber).setColor(playerColor);
+        observablePlayerColorList.set(currentPlayerNumber, scoreboard.getPlayer(currentPlayerNumber).getColor());
+    }
+
     private void updateObservablePlayerIsActiveList() {
         for (int i = 0; i < Scoreboard.MAX_PLAYERS; i++) {
             if (i == currentPlayerNumber) {
@@ -98,11 +120,23 @@ public class ScoreboardViewModel extends ViewModel {
         }
     }
 
-    public LiveData<Boolean> getPlayerNameChangingEvent() {
-        return playerSettingsEvent;
+    public int getCurrentPlayerNumber() {
+        return currentPlayerNumber;
     }
 
-    public void disablePlayerSettingsEvent() {
-        this.playerSettingsEvent.setValue(false);
+    public LiveData<Boolean> getPlayerNameChangingEvent() {
+        return playerNameChangingEvent;
+    }
+
+    public void disablePlayerNameChangingEvent() {
+        this.playerNameChangingEvent.setValue(false);
+    }
+
+    public LiveData<Boolean> getPlayerColorChangingEvent() {
+        return playerColorChangingEvent;
+    }
+
+    public void disablePlayerColorChangingEvent() {
+        this.playerColorChangingEvent.setValue(false);
     }
 }
