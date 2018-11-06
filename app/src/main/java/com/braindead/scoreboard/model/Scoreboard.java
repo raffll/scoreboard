@@ -8,6 +8,8 @@ public class Scoreboard {
     public static final int MAX_PLAYERS = 10;
     public static final int DEFAULT_NUMBER_OF_PLAYERS = 2;
 
+    //public static final int[] PLAYER_DEFAULT_COLORS = {10, 20, 30, 40, 50};
+
     private List<Player> playerList;
 
     public Scoreboard() {

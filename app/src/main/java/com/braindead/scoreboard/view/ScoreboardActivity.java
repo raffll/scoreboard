@@ -2,19 +2,28 @@ package com.braindead.scoreboard.view;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.braindead.scoreboard.R;
 import com.braindead.scoreboard.databinding.ActivityScoreboardBinding;
+import com.braindead.scoreboard.model.Scoreboard;
 import com.braindead.scoreboard.viewmodel.ScoreboardViewModel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ScoreboardActivity extends AppCompatActivity {
 
     private static final String TAG_HOW_MANY_PLAYERS = "TAG_HOW_MANY_PLAYERS";
     private static final String TAG_PLAYER_SETTINGS = "TAG_PLAYER_SETTINGS";
+
+    public static final int[] PLAYER_DEFAULT_COLORS = {Color.GREEN, Color.BLUE, Color.RED, Color.YELLOW, Color.BLACK};
 
     private ScoreboardViewModel scoreboardViewModel;
 
@@ -32,6 +41,7 @@ public class ScoreboardActivity extends AppCompatActivity {
 
     public void onNewSessionSet(int numberOfPlayers) {
         initDataBinding(numberOfPlayers);
+        initDynamicViews(numberOfPlayers);
     }
 
     private void initDataBinding(int numberOfPlayers) {
@@ -39,7 +49,9 @@ public class ScoreboardActivity extends AppCompatActivity {
         scoreboardViewModel = ViewModelProviders.of(this).get(ScoreboardViewModel.class);
         scoreboardViewModel.init(numberOfPlayers);
         activityScoreboardBinding.setScoreboardViewModel(scoreboardViewModel);
+
         setUpOnPlayerSettingsEventListener();
+        //setUpOnPlayerColorChangeEventListener();
     }
 
     private void setUpOnPlayerSettingsEventListener() {
@@ -47,7 +59,7 @@ public class ScoreboardActivity extends AppCompatActivity {
     }
 
     private void onPlayerSettingsEventTriggered(Boolean playerSettingsEvent) {
-        if(playerSettingsEvent) {
+        if (playerSettingsEvent) {
             ScoreboardDialogPlayerSettings dialog = ScoreboardDialogPlayerSettings.newInstance(this);
             dialog.setCancelable(false);
             dialog.show(getSupportFragmentManager(), TAG_PLAYER_SETTINGS);
@@ -57,6 +69,22 @@ public class ScoreboardActivity extends AppCompatActivity {
 
     public void onPlayerSettingSet(String playerName) {
         scoreboardViewModel.onChangeCurrentPlayerName(playerName);
+    }
+
+    private void initDynamicViews(int numberOfPlayers) {
+        List<TextView> playerColorTextViewList = new ArrayList<>();
+
+
+        for (int i = 0; i < numberOfPlayers; i++) {
+            String playerColorTextView = "player_" + i + "_color";
+            int playerColorTextViewID = getResources().getIdentifier(playerColorTextView, "id", getPackageName());
+            playerColorTextViewList.add((TextView) findViewById(playerColorTextViewID));
+
+            GradientDrawable shape = new GradientDrawable();
+            shape.setShape(GradientDrawable.OVAL);
+            shape.setColor(PLAYER_DEFAULT_COLORS[i]);
+            playerColorTextViewList.get(i).setBackground(shape);
+        }
     }
 
     @Override

@@ -40,9 +40,9 @@
                     <TextView
                         android:id="@+id/player_0_name"
                         android:layout_width="0dip"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_margin="4dp"
-                        android:layout_weight="1"
+                        android:layout_weight="2"
                         android:onClick="@{() -> scoreboardViewModel.onActivatePlayer(0)}"
                         android:onLongClick="@{() -> scoreboardViewModel.onActivatePlayerSettings(0)}"
                         android:text="@{scoreboardViewModel.observablePlayerNameList[0]}"
@@ -50,9 +50,15 @@
                         android:theme="@style/PlayerRowText" />
 
                     <TextView
+                        android:id="@+id/player_0_color"
+                        android:layout_width="30sp"
+                        android:layout_height="30sp"
+                        android:gravity="center" />
+
+                    <TextView
                         android:id="@+id/player_0_score"
                         android:layout_width="0dip"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_margin="4dp"
                         android:layout_weight="1"
                         android:gravity="end"
@@ -70,9 +76,9 @@
                     <TextView
                         android:id="@+id/player_1_name"
                         android:layout_width="0dip"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_margin="4dp"
-                        android:layout_weight="1"
+                        android:layout_weight="2"
                         android:onClick="@{() -> scoreboardViewModel.onActivatePlayer(1)}"
                         android:onLongClick="@{() -> scoreboardViewModel.onActivatePlayerSettings(1)}"
                         android:text="@{scoreboardViewModel.observablePlayerNameList[1]}"
@@ -80,9 +86,15 @@
                         android:theme="@style/PlayerRowText" />
 
                     <TextView
+                        android:id="@+id/player_1_color"
+                        android:layout_width="30sp"
+                        android:layout_height="30sp"
+                        android:gravity="center" />
+
+                    <TextView
                         android:id="@+id/player_1_score"
                         android:layout_width="0dip"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_margin="4dp"
                         android:layout_weight="1"
                         android:gravity="end"
@@ -100,9 +112,9 @@
                     <TextView
                         android:id="@+id/player_2_name"
                         android:layout_width="0dip"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_margin="4dp"
-                        android:layout_weight="1"
+                        android:layout_weight="2"
                         android:onClick="@{() -> scoreboardViewModel.onActivatePlayer(2)}"
                         android:onLongClick="@{() -> scoreboardViewModel.onActivatePlayerSettings(2)}"
                         android:text="@{scoreboardViewModel.observablePlayerNameList[2]}"
@@ -110,9 +122,15 @@
                         android:theme="@style/PlayerRowText" />
 
                     <TextView
+                        android:id="@+id/player_2_color"
+                        android:layout_width="30sp"
+                        android:layout_height="30sp"
+                        android:gravity="center" />
+
+                    <TextView
                         android:id="@+id/player_2_score"
                         android:layout_width="0dip"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_margin="4dp"
                         android:layout_weight="1"
                         android:gravity="end"
@@ -130,9 +148,9 @@
                     <TextView
                         android:id="@+id/player_3_name"
                         android:layout_width="0dip"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_margin="4dp"
-                        android:layout_weight="1"
+                        android:layout_weight="2"
                         android:onClick="@{() -> scoreboardViewModel.onActivatePlayer(3)}"
                         android:onLongClick="@{() -> scoreboardViewModel.onActivatePlayerSettings(3)}"
                         android:text="@{scoreboardViewModel.observablePlayerNameList[3]}"
@@ -140,9 +158,15 @@
                         android:theme="@style/PlayerRowText" />
 
                     <TextView
+                        android:id="@+id/player_3_color"
+                        android:layout_width="30sp"
+                        android:layout_height="30sp"
+                        android:gravity="center" />
+
+                    <TextView
                         android:id="@+id/player_3_score"
                         android:layout_width="0dip"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_margin="4dp"
                         android:layout_weight="1"
                         android:gravity="end"
@@ -160,9 +184,9 @@
                     <TextView
                         android:id="@+id/player_4_name"
                         android:layout_width="0dip"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_margin="4dp"
-                        android:layout_weight="1"
+                        android:layout_weight="2"
                         android:onClick="@{() -> scoreboardViewModel.onActivatePlayer(4)}"
                         android:onLongClick="@{() -> scoreboardViewModel.onActivatePlayerSettings(4)}"
                         android:text="@{scoreboardViewModel.observablePlayerNameList[4]}"
@@ -170,9 +194,15 @@
                         android:theme="@style/PlayerRowText" />
 
                     <TextView
+                        android:id="@+id/player_4_color"
+                        android:layout_width="30sp"
+                        android:layout_height="30sp"
+                        android:gravity="center" />
+
+                    <TextView
                         android:id="@+id/player_4_score"
                         android:layout_width="0dip"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_margin="4dp"
                         android:layout_weight="1"
                         android:gravity="end"
@@ -190,9 +220,9 @@
                     <TextView
                         android:id="@+id/player_5_name"
                         android:layout_width="0dip"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_margin="4dp"
-                        android:layout_weight="1"
+                        android:layout_weight="2"
                         android:onClick="@{() -> scoreboardViewModel.onActivatePlayer(5)}"
                         android:onLongClick="@{() -> scoreboardViewModel.onActivatePlayerSettings(5)}"
                         android:text="@{scoreboardViewModel.observablePlayerNameList[5]}"
@@ -200,9 +230,15 @@
                         android:theme="@style/PlayerRowText" />
 
                     <TextView
+                        android:id="@+id/player_5_color"
+                        android:layout_width="30sp"
+                        android:layout_height="30sp"
+                        android:gravity="center" />
+
+                    <TextView
                         android:id="@+id/player_5_score"
                         android:layout_width="0dip"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_margin="4dp"
                         android:layout_weight="1"
                         android:gravity="end"
@@ -220,9 +256,9 @@
                     <TextView
                         android:id="@+id/player_6_name"
                         android:layout_width="0dip"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_margin="4dp"
-                        android:layout_weight="1"
+                        android:layout_weight="2"
                         android:onClick="@{() -> scoreboardViewModel.onActivatePlayer(6)}"
                         android:onLongClick="@{() -> scoreboardViewModel.onActivatePlayerSettings(6)}"
                         android:text="@{scoreboardViewModel.observablePlayerNameList[6]}"
@@ -230,9 +266,15 @@
                         android:theme="@style/PlayerRowText" />
 
                     <TextView
+                        android:id="@+id/player_6_color"
+                        android:layout_width="30sp"
+                        android:layout_height="30sp"
+                        android:gravity="center" />
+
+                    <TextView
                         android:id="@+id/player_6_score"
                         android:layout_width="0dip"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_margin="4dp"
                         android:layout_weight="1"
                         android:gravity="end"
@@ -250,9 +292,9 @@
                     <TextView
                         android:id="@+id/player_7_name"
                         android:layout_width="0dip"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_margin="4dp"
-                        android:layout_weight="1"
+                        android:layout_weight="2"
                         android:onClick="@{() -> scoreboardViewModel.onActivatePlayer(7)}"
                         android:onLongClick="@{() -> scoreboardViewModel.onActivatePlayerSettings(7)}"
                         android:text="@{scoreboardViewModel.observablePlayerNameList[7]}"
@@ -260,9 +302,15 @@
                         android:theme="@style/PlayerRowText" />
 
                     <TextView
+                        android:id="@+id/player_7_color"
+                        android:layout_width="30sp"
+                        android:layout_height="30sp"
+                        android:gravity="center" />
+
+                    <TextView
                         android:id="@+id/player_7_score"
                         android:layout_width="0dip"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_margin="4dp"
                         android:layout_weight="1"
                         android:gravity="end"
@@ -280,9 +328,9 @@
                     <TextView
                         android:id="@+id/player_8_name"
                         android:layout_width="0dip"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_margin="4dp"
-                        android:layout_weight="1"
+                        android:layout_weight="2"
                         android:onClick="@{() -> scoreboardViewModel.onActivatePlayer(8)}"
                         android:onLongClick="@{() -> scoreboardViewModel.onActivatePlayerSettings(8)}"
                         android:text="@{scoreboardViewModel.observablePlayerNameList[8]}"
@@ -290,9 +338,15 @@
                         android:theme="@style/PlayerRowText" />
 
                     <TextView
+                        android:id="@+id/player_8_color"
+                        android:layout_width="30sp"
+                        android:layout_height="30sp"
+                        android:gravity="center" />
+
+                    <TextView
                         android:id="@+id/player_8_score"
                         android:layout_width="0dip"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_margin="4dp"
                         android:layout_weight="1"
                         android:gravity="end"
@@ -310,9 +364,9 @@
                     <TextView
                         android:id="@+id/player_9_name"
                         android:layout_width="0dip"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_margin="4dp"
-                        android:layout_weight="1"
+                        android:layout_weight="2"
                         android:onClick="@{() -> scoreboardViewModel.onActivatePlayer(9)}"
                         android:onLongClick="@{() -> scoreboardViewModel.onActivatePlayerSettings(9)}"
                         android:text="@{scoreboardViewModel.observablePlayerNameList[9]}"
@@ -320,9 +374,15 @@
                         android:theme="@style/PlayerRowText" />
 
                     <TextView
+                        android:id="@+id/player_9_color"
+                        android:layout_width="30sp"
+                        android:layout_height="30sp"
+                        android:gravity="center" />
+
+                    <TextView
                         android:id="@+id/player_9_score"
                         android:layout_width="0dip"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_margin="4dp"
                         android:layout_weight="1"
                         android:gravity="end"
