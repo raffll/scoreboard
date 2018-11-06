@@ -98,7 +98,7 @@ public class ScoreboardViewModel extends ViewModel {
         }
     }
 
-    public LiveData<Boolean> getPlayerSettingsEvent() {
+    public LiveData<Boolean> getPlayerNameChangingEvent() {
         return playerSettingsEvent;
     }
 

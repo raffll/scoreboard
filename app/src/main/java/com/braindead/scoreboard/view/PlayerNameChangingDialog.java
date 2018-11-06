@@ -13,7 +13,7 @@ import android.view.View;
 
 import com.braindead.scoreboard.R;
 
-public class ScoreboardDialogPlayerSettings extends DialogFragment {
+public class PlayerNameChangingDialog extends DialogFragment {
 
     private View rootView;
     private ScoreboardActivity scoreboardActivity;
@@ -22,8 +22,8 @@ public class ScoreboardDialogPlayerSettings extends DialogFragment {
 
     private TextInputEditText nameEditText;
 
-    public static ScoreboardDialogPlayerSettings newInstance(ScoreboardActivity activity) {
-        ScoreboardDialogPlayerSettings dialog = new ScoreboardDialogPlayerSettings();
+    public static PlayerNameChangingDialog newInstance(ScoreboardActivity activity) {
+        PlayerNameChangingDialog dialog = new PlayerNameChangingDialog();
         dialog.scoreboardActivity = activity;
         return dialog;
     }
@@ -44,19 +44,19 @@ public class ScoreboardDialogPlayerSettings extends DialogFragment {
     }
 
     private void initParams() {
-        //playerName = scoreboardActivity.getCurrentPlayerName();
+
     }
 
     private void initViews() {
         rootView = LayoutInflater.from(getContext())
-                .inflate(R.layout.dialog_player_settings, null, false);
+                .inflate(R.layout.dialog_player_name_changing, null, false);
 
         nameEditText = rootView.findViewById(R.id.name_edit_text);
         addTextWatchers();
     }
 
     private void onDoneClicked() {
-        scoreboardActivity.onPlayerSettingSet(playerName);
+        scoreboardActivity.onPlayerNameSet(playerName);
         dismiss();
     }
 
