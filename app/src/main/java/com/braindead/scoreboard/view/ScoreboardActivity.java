@@ -24,6 +24,8 @@ public class ScoreboardActivity extends AppCompatActivity {
 
     private ScoreboardViewModel scoreboardViewModel;
 
+    List<TextView> playerColorTextViewList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,12 +50,11 @@ public class ScoreboardActivity extends AppCompatActivity {
         activityScoreboardBinding.setScoreboardViewModel(scoreboardViewModel);
 
         setUpOnPlayerNameChangingEventListener();
-        //setUpOnPlayerColorChangingEventListener();
+        setUpOnPlayerColorChangingEventListener();
     }
 
     private void initDynamicViews(int numberOfPlayers) {
-        List<TextView> playerColorTextViewList = new ArrayList<>();
-
+        playerColorTextViewList = new ArrayList<>();
         for (int i = 0; i < numberOfPlayers; i++) {
             String playerColorTextView = "player_" + i + "_color";
             int playerColorTextViewID = getResources().getIdentifier(playerColorTextView, "id", getPackageName());
@@ -70,17 +71,39 @@ public class ScoreboardActivity extends AppCompatActivity {
         scoreboardViewModel.getPlayerNameChangingEvent().observe(this, this::onPlayerNameChangingEventTriggered);
     }
 
+    private void setUpOnPlayerColorChangingEventListener() {
+        scoreboardViewModel.getPlayerColorChangingEvent().observe(this, this::onPlayerColorChangingEventTriggered);
+    }
+
     private void onPlayerNameChangingEventTriggered(Boolean playerNameChangingEvent) {
         if (playerNameChangingEvent) {
             PlayerNameChangingDialog dialog = PlayerNameChangingDialog.newInstance(this);
             dialog.setCancelable(false);
             dialog.show(getSupportFragmentManager(), TAG_PLAYER_SETTINGS);
-            scoreboardViewModel.disablePlayerSettingsEvent();
+            scoreboardViewModel.disablePlayerNameChangingEvent();
+        }
+    }
+
+    private void onPlayerColorChangingEventTriggered(Boolean playerColorChangingEvent) {
+        if (playerColorChangingEvent) {
+            PlayerColorChangingDialog dialog = PlayerColorChangingDialog.newInstance(this);
+            dialog.setCancelable(false);
+            dialog.show(getSupportFragmentManager(), TAG_PLAYER_SETTINGS);
+            scoreboardViewModel.disablePlayerColorChangingEvent();
         }
     }
 
     public void onPlayerNameSet(String playerName) {
         scoreboardViewModel.onChangeCurrentPlayerName(playerName);
+    }
+
+    public void onPlayerColorSet(int playerColor) {
+        scoreboardViewModel.onChangeCurrentPlayerColor(playerColor);
+
+        GradientDrawable shape = new GradientDrawable();
+        shape.setShape(GradientDrawable.OVAL);
+        shape.setColor(playerColor);
+        playerColorTextViewList.get(scoreboardViewModel.getCurrentPlayerNumber()).setBackground(shape);
     }
 
     @Override
