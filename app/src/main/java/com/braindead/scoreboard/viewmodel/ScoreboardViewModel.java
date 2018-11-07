@@ -75,21 +75,29 @@ public class ScoreboardViewModel extends ViewModel {
         }
     }
 
+    private void updateObservablePlayerIsActiveList() {
+        for (int i = 0; i < Scoreboard.MAX_PLAYERS; i++) {
+            if (i == currentPlayerNumber) {
+                observablePlayerIsActiveList.set(i, true);
+            } else {
+                observablePlayerIsActiveList.set(i, false);
+            }
+        }
+    }
+
     public void onActivatePlayer(int playerNumber) {
         currentPlayerNumber = playerNumber;
         updateObservablePlayerIsActiveList();
     }
 
     public boolean onActivatePlayerNameChanging(int playerNumber) {
-        currentPlayerNumber = playerNumber;
-        updateObservablePlayerIsActiveList();
+        onActivatePlayer(playerNumber);
         playerNameChangingEvent.setValue(true);
         return true;
     }
 
     public boolean onActivatePlayerColorChanging(int playerNumber) {
-        currentPlayerNumber = playerNumber;
-        updateObservablePlayerIsActiveList();
+        onActivatePlayer(playerNumber);
         playerColorChangingEvent.setValue(true);
         return true;
     }
@@ -108,16 +116,6 @@ public class ScoreboardViewModel extends ViewModel {
     public void onChangeCurrentPlayerColor(int playerColor) {
         scoreboard.getPlayer(currentPlayerNumber).setColor(playerColor);
         observablePlayerColorList.set(currentPlayerNumber, scoreboard.getPlayer(currentPlayerNumber).getColor());
-    }
-
-    private void updateObservablePlayerIsActiveList() {
-        for (int i = 0; i < Scoreboard.MAX_PLAYERS; i++) {
-            if (i == currentPlayerNumber) {
-                observablePlayerIsActiveList.set(i, true);
-            } else {
-                observablePlayerIsActiveList.set(i, false);
-            }
-        }
     }
 
     public int getCurrentPlayerNumber() {
