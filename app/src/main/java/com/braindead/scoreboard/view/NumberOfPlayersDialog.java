@@ -32,6 +32,7 @@ public class NumberOfPlayersDialog extends DialogFragment {
         initViews();
         AlertDialog alertDialog = new AlertDialog.Builder(getContext())
                 .setView(rootView)
+                .setTitle("Select number of players")
                 .setCancelable(false)
                 .setNegativeButton(R.string.cancel,  ((dialog, which) -> onCancelClicked()))
                 .setPositiveButton(R.string.ok,   ((dialog, which) -> onDoneClicked()))
