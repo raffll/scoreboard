@@ -73,6 +73,7 @@ public class ScoreboardActivity extends AppCompatActivity {
     private void onPlayerNameChangingEventTriggered(Boolean playerNameChangingEvent) {
         if (playerNameChangingEvent) {
             PlayerNameChangingDialog dialog = PlayerNameChangingDialog.newInstance(this);
+            dialog.setText(scoreboardViewModel.getCurrentPlayerName());
             dialog.setCancelable(false);
             dialog.show(getSupportFragmentManager(), "TAG");
             scoreboardViewModel.disablePlayerNameChangingEvent();
@@ -86,8 +87,8 @@ public class ScoreboardActivity extends AppCompatActivity {
             spectrumDialog.setColors(R.array.rainbow);
             //int color = some_color_constant;
             //spectrumDialog.setSelectedColor(color);
-            spectrumDialog.setNegativeButtonText(R.string.cancel);
             spectrumDialog.setPositiveButtonText(R.string.ok);
+            spectrumDialog.setNegativeButtonText(R.string.cancel);
             spectrumDialog.setDismissOnColorSelected(false);
             spectrumDialog.setOnColorSelectedListener(new SpectrumDialog.OnColorSelectedListener() {
                 @Override

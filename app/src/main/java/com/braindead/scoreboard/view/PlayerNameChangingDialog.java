@@ -31,7 +31,6 @@ public class PlayerNameChangingDialog extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        initParams();
         initViews();
         AlertDialog alertDialog = new AlertDialog.Builder(getContext())
                 .setView(rootView)
@@ -44,8 +43,8 @@ public class PlayerNameChangingDialog extends DialogFragment {
         return alertDialog;
     }
 
-    private void initParams() {
-
+    public void setText(String playerName) {
+        this.playerName = playerName;
     }
 
     private void initViews() {
@@ -53,6 +52,7 @@ public class PlayerNameChangingDialog extends DialogFragment {
                 .inflate(R.layout.dialog_player_name_changing, null, false);
 
         nameEditText = rootView.findViewById(R.id.name_edit_text);
+        nameEditText.setText(playerName);
         addTextWatchers();
     }
 

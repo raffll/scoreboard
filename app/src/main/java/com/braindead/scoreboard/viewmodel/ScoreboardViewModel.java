@@ -113,6 +113,10 @@ public class ScoreboardViewModel extends ViewModel {
         return currentPlayerNumber;
     }
 
+    public String getCurrentPlayerName() {
+        return observablePlayerNameList.get(currentPlayerNumber);
+    }
+
     public LiveData<Boolean> getPlayerNameChangingEvent() {
         return playerNameChangingEvent;
     }
