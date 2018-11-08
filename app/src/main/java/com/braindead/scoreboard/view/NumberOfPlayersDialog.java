@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.NumberPicker;
 
 import com.braindead.scoreboard.R;
-import com.braindead.scoreboard.model.Scoreboard;
+import com.braindead.scoreboard.viewmodel.ScoreboardViewModel;
 
 public class NumberOfPlayersDialog extends DialogFragment {
 
@@ -41,7 +41,7 @@ public class NumberOfPlayersDialog extends DialogFragment {
     }
 
     private void initParams() {
-        numberOfPlayers = Scoreboard.DEFAULT_NUMBER_OF_PLAYERS;
+        numberOfPlayers = ScoreboardViewModel.DEFAULT_NUMBER_OF_PLAYERS;
     }
 
     private void initViews() {
@@ -50,8 +50,8 @@ public class NumberOfPlayersDialog extends DialogFragment {
 
         NumberPicker numberPicker = rootView.findViewById(R.id.dialog_how_many_players);
         numberPicker.setMinValue(1);
-        numberPicker.setMaxValue(10);
-        numberPicker.setValue(numberOfPlayers);
+        numberPicker.setMaxValue(ScoreboardViewModel.MAX_NUMBER_OF_PLAYERS);
+        numberPicker.setValue(ScoreboardViewModel.DEFAULT_NUMBER_OF_PLAYERS);
         numberPicker.setOnValueChangedListener(onValueChangeListener);
     }
 

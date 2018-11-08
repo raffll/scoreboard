@@ -2,7 +2,7 @@ package com.braindead.scoreboard.utilities;
 
 public abstract class DefaultColors {
 
-    public static final int[] COLORS = {
+    public static final int[] COLOR = {
             0xff00ff00,
             0xff0000ff,
             0xffff0000,

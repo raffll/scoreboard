@@ -19,9 +19,6 @@ import java.util.List;
 
 public class ScoreboardActivity extends AppCompatActivity {
 
-    private static final String TAG_HOW_MANY_PLAYERS = "TAG_HOW_MANY_PLAYERS";
-    private static final String TAG_PLAYER_SETTINGS = "TAG_PLAYER_SETTINGS";
-
     private ScoreboardViewModel scoreboardViewModel;
 
     List<TextView> playerColorTextViewList;
@@ -35,7 +32,7 @@ public class ScoreboardActivity extends AppCompatActivity {
     private void promptForNewSession() {
         NumberOfPlayersDialog dialog = NumberOfPlayersDialog.newInstance(this);
         dialog.setCancelable(false);
-        dialog.show(getSupportFragmentManager(), TAG_HOW_MANY_PLAYERS);
+        dialog.show(getSupportFragmentManager(), "TAG");
     }
 
     public void onNewSessionSet(int numberOfPlayers) {
@@ -59,11 +56,7 @@ public class ScoreboardActivity extends AppCompatActivity {
             String playerColorTextView = "player_" + i + "_color";
             int playerColorTextViewID = getResources().getIdentifier(playerColorTextView, "id", getPackageName());
             playerColorTextViewList.add((TextView) findViewById(playerColorTextViewID));
-
-            GradientDrawable shape = new GradientDrawable();
-            shape.setShape(GradientDrawable.OVAL);
-            shape.setColor(DefaultColors.COLORS[i]);
-            playerColorTextViewList.get(i).setBackground(shape);
+            setPlayerColor(i, DefaultColors.COLOR[i]);
         }
     }
 
@@ -79,7 +72,7 @@ public class ScoreboardActivity extends AppCompatActivity {
         if (playerNameChangingEvent) {
             PlayerNameChangingDialog dialog = PlayerNameChangingDialog.newInstance(this);
             dialog.setCancelable(false);
-            dialog.show(getSupportFragmentManager(), TAG_PLAYER_SETTINGS);
+            dialog.show(getSupportFragmentManager(), "TAG");
             scoreboardViewModel.disablePlayerNameChangingEvent();
         }
     }
@@ -88,7 +81,7 @@ public class ScoreboardActivity extends AppCompatActivity {
         if (playerColorChangingEvent) {
             PlayerColorChangingDialog dialog = PlayerColorChangingDialog.newInstance(this);
             dialog.setCancelable(false);
-            dialog.show(getSupportFragmentManager(), TAG_PLAYER_SETTINGS);
+            dialog.show(getSupportFragmentManager(), "TAG");
             scoreboardViewModel.disablePlayerColorChangingEvent();
         }
     }
@@ -98,12 +91,14 @@ public class ScoreboardActivity extends AppCompatActivity {
     }
 
     public void onPlayerColorSet(int playerColor) {
-        scoreboardViewModel.onChangeCurrentPlayerColor(playerColor);
+        setPlayerColor(scoreboardViewModel.getCurrentPlayerNumber(), playerColor);
+    }
 
+    private void setPlayerColor(int playerNumber, int playerColor) {
         GradientDrawable shape = new GradientDrawable();
         shape.setShape(GradientDrawable.OVAL);
         shape.setColor(playerColor);
-        playerColorTextViewList.get(scoreboardViewModel.getCurrentPlayerNumber()).setBackground(shape);
+        playerColorTextViewList.get(playerNumber).setBackground(shape);
     }
 
     @Override

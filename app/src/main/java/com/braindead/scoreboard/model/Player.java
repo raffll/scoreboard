@@ -4,12 +4,10 @@ public class Player {
 
     private String name;
     private int score;
-    private int color;
 
-    Player(String name, int score, int color) {
+    Player(String name, int score) {
         this.name = name;
         this.score = score;
-        this.color = color;
     }
 
     public String getName() {
@@ -26,13 +24,5 @@ public class Player {
 
     public void setScore(int score) {
         this.score = score;
-    }
-
-    public int getColor() {
-        return color;
-    }
-
-    public void setColor(int color) {
-        this.color = color;
     }
 }
