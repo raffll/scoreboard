@@ -35,6 +35,7 @@ public class PlayerNameChangingDialog extends DialogFragment {
         initViews();
         AlertDialog alertDialog = new AlertDialog.Builder(getContext())
                 .setView(rootView)
+                .setTitle("Type player name")
                 .setCancelable(false)
                 .setNegativeButton(R.string.cancel, ((dialog, which) -> onCancelClicked()))
                 .setPositiveButton(R.string.ok, ((dialog, which) -> onDoneClicked()))
