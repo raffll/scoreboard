@@ -11,6 +11,18 @@ public class ScoreboardViewModel extends ViewModel {
 
     public static final int MAX_NUMBER_OF_PLAYERS = 10;
     public static final int DEFAULT_NUMBER_OF_PLAYERS = 2;
+    public static final int[] DEFAULT_COLORS = {
+            0xff00ff00,
+            0xff0000ff,
+            0xffff0000,
+            0xffffff00,
+            0xff000000,
+            0xdddddddd,
+            0xffff00ff,
+            0xff00ffff,
+            0xffffffff,
+            0xffff00ff
+    };
 
     private Scoreboard scoreboard;
 
@@ -21,6 +33,7 @@ public class ScoreboardViewModel extends ViewModel {
     public ObservableArrayList<Boolean> observablePlayerIsActiveList;
     public ObservableArrayList<String> observablePlayerNameList;
     public ObservableArrayList<String> observablePlayerScoreList;
+    public ObservableArrayList<Integer> observablePlayerColorList;
 
     private MutableLiveData<Boolean> playerNameChangingEvent = new MutableLiveData<>();
     private MutableLiveData<Boolean> playerColorChangingEvent = new MutableLiveData<>();
@@ -28,11 +41,12 @@ public class ScoreboardViewModel extends ViewModel {
     public void init(int numberOfPlayers) {
         this.numberOfPlayers = numberOfPlayers;
         currentPlayerNumber = 0;
-        scoreboard = new Scoreboard(numberOfPlayers, 0);
+        scoreboard = new Scoreboard(numberOfPlayers, 0, DEFAULT_COLORS);
         initObservablePlayerVisibility();
         initObservablePlayerIsActiveList();
         initObservablePlayerNameList();
         initObservablePlayerScoreList();
+        initObservablePlayerColorList();
     }
 
     private void initObservablePlayerVisibility() {
@@ -65,6 +79,13 @@ public class ScoreboardViewModel extends ViewModel {
     }
 
     private void initObservablePlayerScoreList() {
+        observablePlayerColorList = new ObservableArrayList<>();
+        for (int i = 0; i < numberOfPlayers; i++) {
+            observablePlayerColorList.add(scoreboard.getPlayer(i).getColor());
+        }
+    }
+
+    private void initObservablePlayerColorList() {
         observablePlayerScoreList = new ObservableArrayList<>();
         for (int i = 0; i < numberOfPlayers; i++) {
             observablePlayerScoreList.add(Integer.toString(scoreboard.getPlayer(i).getScore()));
@@ -109,12 +130,21 @@ public class ScoreboardViewModel extends ViewModel {
         observablePlayerNameList.set(currentPlayerNumber, scoreboard.getPlayer(currentPlayerNumber).getName());
     }
 
+    public void onChangeCurrentPlayerColor(int playerColor) {
+        scoreboard.getPlayer(currentPlayerNumber).setColor(playerColor);
+        observablePlayerColorList.set(currentPlayerNumber, scoreboard.getPlayer(currentPlayerNumber).getColor());
+    }
+
     public int getCurrentPlayerNumber() {
         return currentPlayerNumber;
     }
 
     public String getCurrentPlayerName() {
-        return observablePlayerNameList.get(currentPlayerNumber);
+    return observablePlayerNameList.get(currentPlayerNumber);
+    }
+
+    public int getCurrentPlayerColor() {
+       return observablePlayerColorList.get(currentPlayerNumber);
     }
 
     public LiveData<Boolean> getPlayerNameChangingEvent() {

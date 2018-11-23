@@ -7,6 +7,7 @@ import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,6 +54,8 @@ public class PlayerNameChangingDialog extends DialogFragment {
 
         nameEditText = rootView.findViewById(R.id.name_edit_text);
         nameEditText.setText(playerName);
+        nameEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
+        nameEditText.setSelection(nameEditText.getText().length());
         addTextWatchers();
     }
 

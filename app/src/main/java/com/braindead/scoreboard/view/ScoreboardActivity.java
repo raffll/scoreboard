@@ -4,7 +4,6 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
-import android.support.annotation.ColorInt;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,7 +11,6 @@ import android.widget.TextView;
 
 import com.braindead.scoreboard.R;
 import com.braindead.scoreboard.databinding.ActivityScoreboardBinding;
-import com.braindead.scoreboard.utilities.DefaultColors;
 import com.braindead.scoreboard.viewmodel.ScoreboardViewModel;
 import com.thebluealliance.spectrum.SpectrumDialog;
 
@@ -58,7 +56,7 @@ public class ScoreboardActivity extends AppCompatActivity {
             String playerColorTextView = "player_" + i + "_color";
             int playerColorTextViewID = getResources().getIdentifier(playerColorTextView, "id", getPackageName());
             playerColorTextViewList.add((TextView) findViewById(playerColorTextViewID));
-            setPlayerColor(i, DefaultColors.COLOR[i]);
+            setDynamicViewPlayerColor(i, scoreboardViewModel.observablePlayerColorList.get(i));
         }
     }
 
@@ -82,23 +80,18 @@ public class ScoreboardActivity extends AppCompatActivity {
 
     private void onPlayerColorChangingEventTriggered(Boolean playerColorChangingEvent) {
         if (playerColorChangingEvent) {
-
             SpectrumDialog.Builder spectrumDialog = new SpectrumDialog.Builder(this);
-            spectrumDialog.setColors(R.array.rainbow);
-            //int color = some_color_constant;
-            //spectrumDialog.setSelectedColor(color);
+            spectrumDialog.setColors(ScoreboardViewModel.DEFAULT_COLORS);
+            spectrumDialog.setSelectedColor(scoreboardViewModel.getCurrentPlayerColor());
             spectrumDialog.setPositiveButtonText(R.string.ok);
             spectrumDialog.setNegativeButtonText(R.string.cancel);
             spectrumDialog.setDismissOnColorSelected(false);
-            spectrumDialog.setOnColorSelectedListener(new SpectrumDialog.OnColorSelectedListener() {
-                @Override
-                public void onColorSelected(boolean positiveResult, @ColorInt int color) {
-                    if (positiveResult) {
-                        onPlayerColorSet(color);
-                    }
+            spectrumDialog.setOnColorSelectedListener((positiveResult, color) -> {
+                if (positiveResult) {
+                    onPlayerColorSet(color);
                 }
             });
-            spectrumDialog.build().show(getSupportFragmentManager(), "tag");
+            spectrumDialog.build().show(getSupportFragmentManager(), "TAG");
             scoreboardViewModel.disablePlayerColorChangingEvent();
         }
     }
@@ -108,10 +101,11 @@ public class ScoreboardActivity extends AppCompatActivity {
     }
 
     public void onPlayerColorSet(int playerColor) {
-        setPlayerColor(scoreboardViewModel.getCurrentPlayerNumber(), playerColor);
+        scoreboardViewModel.onChangeCurrentPlayerColor(playerColor);
+        setDynamicViewPlayerColor(scoreboardViewModel.getCurrentPlayerNumber(), playerColor);
     }
 
-    private void setPlayerColor(int playerNumber, int playerColor) {
+    private void setDynamicViewPlayerColor(int playerNumber, int playerColor) {
         GradientDrawable shape = new GradientDrawable();
         shape.setShape(GradientDrawable.OVAL);
         shape.setColor(playerColor);
