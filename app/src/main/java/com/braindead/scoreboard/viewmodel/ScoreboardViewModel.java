@@ -12,16 +12,16 @@ public class ScoreboardViewModel extends ViewModel {
     public static final int MAX_NUMBER_OF_PLAYERS = 10;
     public static final int DEFAULT_NUMBER_OF_PLAYERS = 2;
     public static final int[] DEFAULT_COLORS = {
-            0xff00ff00,
-            0xff0000ff,
-            0xffff0000,
-            0xffffff00,
-            0xff000000,
-            0xdddddddd,
-            0xffff00ff,
-            0xff00ffff,
-            0xffffffff,
-            0xffff00ff
+            0xff2ECC71,
+            0xff3498DB,
+            0xffE74C3C,
+            0xffF4D03F,
+            0xffB3B6B7,
+            0xff17202A,
+            0xffE67E22,
+            0xff8E44AD,
+            0xff1ABC9C,
+            0xff703325
     };
 
     private Scoreboard scoreboard;
