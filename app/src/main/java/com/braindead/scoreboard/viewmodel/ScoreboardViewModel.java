@@ -80,16 +80,16 @@ public class ScoreboardViewModel extends ViewModel {
     }
 
     private void initObservablePlayerScoreList() {
-        observablePlayerColorList = new ObservableArrayList<>();
+        observablePlayerScoreList = new ObservableArrayList<>();
         for (int i = 0; i < numberOfPlayers; i++) {
-            observablePlayerColorList.add(scoreboard.getPlayer(i).getColor());
+            observablePlayerScoreList.add(Integer.toString(scoreboard.getPlayer(i).getScore()));
         }
     }
 
     private void initObservablePlayerColorList() {
-        observablePlayerScoreList = new ObservableArrayList<>();
+        observablePlayerColorList = new ObservableArrayList<>();
         for (int i = 0; i < numberOfPlayers; i++) {
-            observablePlayerScoreList.add(Integer.toString(scoreboard.getPlayer(i).getScore()));
+            observablePlayerColorList.add(scoreboard.getPlayer(i).getColor());
         }
     }
 
