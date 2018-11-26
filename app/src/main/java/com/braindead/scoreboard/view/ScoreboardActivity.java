@@ -161,4 +161,9 @@ public class ScoreboardActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+    }
 }

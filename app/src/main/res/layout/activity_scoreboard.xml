@@ -53,8 +53,8 @@
                         android:id="@+id/player_0_color"
                         android:layout_width="30sp"
                         android:layout_height="30sp"
-                        android:onLongClick="@{() -> scoreboardViewModel.onActivatePlayerColorChanging(0)}"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:onLongClick="@{() -> scoreboardViewModel.onActivatePlayerColorChanging(0)}" />
 
                     <TextView
                         android:id="@+id/player_0_score"
@@ -90,8 +90,8 @@
                         android:id="@+id/player_1_color"
                         android:layout_width="30sp"
                         android:layout_height="30sp"
-                        android:onLongClick="@{() -> scoreboardViewModel.onActivatePlayerColorChanging(1)}"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:onLongClick="@{() -> scoreboardViewModel.onActivatePlayerColorChanging(1)}" />
 
                     <TextView
                         android:id="@+id/player_1_score"
@@ -127,8 +127,8 @@
                         android:id="@+id/player_2_color"
                         android:layout_width="30sp"
                         android:layout_height="30sp"
-                        android:onLongClick="@{() -> scoreboardViewModel.onActivatePlayerColorChanging(2)}"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:onLongClick="@{() -> scoreboardViewModel.onActivatePlayerColorChanging(2)}" />
 
                     <TextView
                         android:id="@+id/player_2_score"
@@ -164,8 +164,8 @@
                         android:id="@+id/player_3_color"
                         android:layout_width="30sp"
                         android:layout_height="30sp"
-                        android:onLongClick="@{() -> scoreboardViewModel.onActivatePlayerColorChanging(3)}"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:onLongClick="@{() -> scoreboardViewModel.onActivatePlayerColorChanging(3)}" />
 
                     <TextView
                         android:id="@+id/player_3_score"
@@ -201,8 +201,8 @@
                         android:id="@+id/player_4_color"
                         android:layout_width="30sp"
                         android:layout_height="30sp"
-                        android:onLongClick="@{() -> scoreboardViewModel.onActivatePlayerColorChanging(4)}"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:onLongClick="@{() -> scoreboardViewModel.onActivatePlayerColorChanging(4)}" />
 
                     <TextView
                         android:id="@+id/player_4_score"
@@ -238,8 +238,8 @@
                         android:id="@+id/player_5_color"
                         android:layout_width="30sp"
                         android:layout_height="30sp"
-                        android:onLongClick="@{() -> scoreboardViewModel.onActivatePlayerColorChanging(5)}"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:onLongClick="@{() -> scoreboardViewModel.onActivatePlayerColorChanging(5)}" />
 
                     <TextView
                         android:id="@+id/player_5_score"
@@ -275,8 +275,8 @@
                         android:id="@+id/player_6_color"
                         android:layout_width="30sp"
                         android:layout_height="30sp"
-                        android:onLongClick="@{() -> scoreboardViewModel.onActivatePlayerColorChanging(6)}"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:onLongClick="@{() -> scoreboardViewModel.onActivatePlayerColorChanging(6)}" />
 
                     <TextView
                         android:id="@+id/player_6_score"
@@ -312,8 +312,8 @@
                         android:id="@+id/player_7_color"
                         android:layout_width="30sp"
                         android:layout_height="30sp"
-                        android:onLongClick="@{() -> scoreboardViewModel.onActivatePlayerColorChanging(7)}"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:onLongClick="@{() -> scoreboardViewModel.onActivatePlayerColorChanging(7)}" />
 
                     <TextView
                         android:id="@+id/player_7_score"
@@ -349,8 +349,8 @@
                         android:id="@+id/player_8_color"
                         android:layout_width="30sp"
                         android:layout_height="30sp"
-                        android:onLongClick="@{() -> scoreboardViewModel.onActivatePlayerColorChanging(8)}"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:onLongClick="@{() -> scoreboardViewModel.onActivatePlayerColorChanging(8)}" />
 
                     <TextView
                         android:id="@+id/player_8_score"
@@ -386,8 +386,8 @@
                         android:id="@+id/player_9_color"
                         android:layout_width="30sp"
                         android:layout_height="30sp"
-                        android:onLongClick="@{() -> scoreboardViewModel.onActivatePlayerColorChanging(9)}"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:onLongClick="@{() -> scoreboardViewModel.onActivatePlayerColorChanging(9)}" />
 
                     <TextView
                         android:id="@+id/player_9_score"
@@ -401,7 +401,9 @@
                         android:theme="@style/PlayerRowText" />
 
                 </TableRow>
+                
             </TableLayout>
+
         </ScrollView>
 
         <TableLayout
@@ -418,6 +420,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+                <TextView
+                    android:id="@+id/calculator"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@{scoreboardViewModel.observableCalculator}"
+                    android:theme="@style/PlayerRowText" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
                 <Button
                     android:id="@+id/minus_one"
                     style="?android:attr/borderlessButtonStyle"
@@ -425,7 +443,7 @@
                     android:layout_height="match_parent"
                     android:layout_margin="4dp"
                     android:layout_weight="1"
-                    android:onClick="@{() -> scoreboardViewModel.onChangeCurrentPlayerScore(-1)}"
+                    android:onClick="@{() -> scoreboardViewModel.onChangeCurrentDelta(-1)}"
                     android:text="@string/minus1"
                     android:textSize="24sp" />
 
@@ -436,7 +454,7 @@
                     android:layout_height="match_parent"
                     android:layout_margin="4dp"
                     android:layout_weight="1"
-                    android:onClick="@{() -> scoreboardViewModel.onChangeCurrentPlayerScore(1)}"
+                    android:onClick="@{() -> scoreboardViewModel.onChangeCurrentDelta(1)}"
                     android:text="@string/plus1"
                     android:textSize="24sp" />
 
@@ -453,7 +471,7 @@
                     android:layout_height="match_parent"
                     android:layout_margin="4dp"
                     android:layout_weight="1"
-                    android:onClick="@{() -> scoreboardViewModel.onChangeCurrentPlayerScore(-10)}"
+                    android:onClick="@{() -> scoreboardViewModel.onChangeCurrentDelta(-10)}"
                     android:text="@string/minus10"
                     android:textSize="24sp" />
 
@@ -464,11 +482,31 @@
                     android:layout_height="match_parent"
                     android:layout_margin="4dp"
                     android:layout_weight="1"
-                    android:onClick="@{() -> scoreboardViewModel.onChangeCurrentPlayerScore(10)}"
+                    android:onClick="@{() -> scoreboardViewModel.onChangeCurrentDelta(10)}"
                     android:text="@string/plus10"
                     android:textSize="24sp" />
 
             </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/ok"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="0dip"
+                    android:layout_height="match_parent"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    android:onClick="@{() -> scoreboardViewModel.onChangeCurrentPlayerScore()}"
+                    android:text="@string/ok"
+                    android:textSize="24sp" />
+
+            </TableRow>
+
         </TableLayout>
+
     </android.support.constraint.ConstraintLayout>
+
 </layout>
