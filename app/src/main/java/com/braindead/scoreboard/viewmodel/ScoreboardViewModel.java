@@ -35,6 +35,7 @@ public class ScoreboardViewModel extends ViewModel {
     public ObservableArrayList<String> observablePlayerScoreList;
     public ObservableArrayList<Integer> observablePlayerColorList;
 
+    private MutableLiveData<Boolean> playerActivateEvent = new MutableLiveData<>();
     private MutableLiveData<Boolean> playerNameChangingEvent = new MutableLiveData<>();
     private MutableLiveData<Boolean> playerColorChangingEvent = new MutableLiveData<>();
 
@@ -105,6 +106,7 @@ public class ScoreboardViewModel extends ViewModel {
     public void onActivatePlayer(int playerNumber) {
         currentPlayerNumber = playerNumber;
         updateObservablePlayerIsActiveList();
+        playerActivateEvent.setValue(true);
     }
 
     public boolean onActivatePlayerNameChanging(int playerNumber) {
@@ -140,11 +142,19 @@ public class ScoreboardViewModel extends ViewModel {
     }
 
     public String getCurrentPlayerName() {
-    return observablePlayerNameList.get(currentPlayerNumber);
+        return observablePlayerNameList.get(currentPlayerNumber);
     }
 
     public int getCurrentPlayerColor() {
-       return observablePlayerColorList.get(currentPlayerNumber);
+        return observablePlayerColorList.get(currentPlayerNumber);
+    }
+
+    public LiveData<Boolean> getPlayerActivateEvent() {
+        return playerActivateEvent;
+    }
+
+    public void disablePlayerActivateEvent() {
+        this.playerActivateEvent.setValue(false);
     }
 
     public LiveData<Boolean> getPlayerNameChangingEvent() {

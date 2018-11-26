@@ -3,7 +3,7 @@ package com.braindead.scoreboard.db;
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.RoomDatabase;
 
-import com.braindead.scoreboard.db.dao.PlayerDao;
+import com.braindead.scoreboard.dao.PlayerDao;
 import com.braindead.scoreboard.model.Player;
 
 @Database(entities = Player.class, version = 1)

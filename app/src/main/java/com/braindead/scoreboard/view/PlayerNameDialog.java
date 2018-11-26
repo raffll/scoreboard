@@ -14,7 +14,7 @@ import android.view.View;
 
 import com.braindead.scoreboard.R;
 
-public class PlayerNameChangingDialog extends DialogFragment {
+public class PlayerNameDialog extends DialogFragment {
 
     private View rootView;
     private ScoreboardActivity scoreboardActivity;
@@ -23,8 +23,8 @@ public class PlayerNameChangingDialog extends DialogFragment {
 
     private TextInputEditText nameEditText;
 
-    public static PlayerNameChangingDialog newInstance(ScoreboardActivity activity) {
-        PlayerNameChangingDialog dialog = new PlayerNameChangingDialog();
+    public static PlayerNameDialog newInstance(ScoreboardActivity activity) {
+        PlayerNameDialog dialog = new PlayerNameDialog();
         dialog.scoreboardActivity = activity;
         return dialog;
     }

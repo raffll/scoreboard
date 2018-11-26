@@ -12,15 +12,15 @@ import android.widget.NumberPicker;
 import com.braindead.scoreboard.R;
 import com.braindead.scoreboard.viewmodel.ScoreboardViewModel;
 
-public class NumberOfPlayersDialog extends DialogFragment {
+public class NewSessionDialog extends DialogFragment {
 
     private View rootView;
     private ScoreboardActivity scoreboardActivity;
 
     private int numberOfPlayers;
 
-    public static NumberOfPlayersDialog newInstance(ScoreboardActivity activity) {
-        NumberOfPlayersDialog dialog = new NumberOfPlayersDialog();
+    public static NewSessionDialog newInstance(ScoreboardActivity activity) {
+        NewSessionDialog dialog = new NewSessionDialog();
         dialog.scoreboardActivity = activity;
         return dialog;
     }

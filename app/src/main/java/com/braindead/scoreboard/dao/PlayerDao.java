@@ -1,4 +1,4 @@
-package com.braindead.scoreboard.db.dao;
+package com.braindead.scoreboard.dao;
 
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;

@@ -3,10 +3,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".view.ScoreboardActivity">
 
+    <group android:id="@+id/grp1">
+
+        <item
+            android:id="@+id/menu_new_session"
+            android:orderInCategory="1"
+            android:title="@string/menu_new_session"
+            app:showAsAction="never" />
+
+    </group>
+
+    <group android:id="@+id/grp2">
+
     <item
-        android:id="@+id/menu_new_session"
+        android:id="@+id/menu_player_name"
         android:orderInCategory="1"
-        android:title="@string/menu_new_session"
+        android:title="@string/menu_player_name"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_player_color"
+        android:orderInCategory="1"
+        android:title="@string/menu_player_color"
+        app:showAsAction="never" />
+
+    </group>
 
 </menu>

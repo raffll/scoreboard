@@ -2,6 +2,7 @@ package com.braindead.scoreboard.view;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +17,7 @@ import com.thebluealliance.spectrum.SpectrumDialog;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ScoreboardActivity extends AppCompatActivity {
 
@@ -26,18 +28,7 @@ public class ScoreboardActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        promptForNewSession();
-    }
-
-    private void promptForNewSession() {
-        NumberOfPlayersDialog dialog = NumberOfPlayersDialog.newInstance(this);
-        dialog.setCancelable(false);
-        dialog.show(getSupportFragmentManager(), "TAG");
-    }
-
-    public void onNewSessionSet(int numberOfPlayers) {
-        initDataBinding(numberOfPlayers);
-        initDynamicViews(numberOfPlayers);
+        startNewSessionDialog();
     }
 
     private void initDataBinding(int numberOfPlayers) {
@@ -46,6 +37,7 @@ public class ScoreboardActivity extends AppCompatActivity {
         scoreboardViewModel.init(numberOfPlayers);
         activityScoreboardBinding.setScoreboardViewModel(scoreboardViewModel);
 
+        setUpOnPlayerActivateEventListener();
         setUpOnPlayerNameChangingEventListener();
         setUpOnPlayerColorChangingEventListener();
     }
@@ -56,8 +48,13 @@ public class ScoreboardActivity extends AppCompatActivity {
             String playerColorTextView = "player_" + i + "_color";
             int playerColorTextViewID = getResources().getIdentifier(playerColorTextView, "id", getPackageName());
             playerColorTextViewList.add((TextView) findViewById(playerColorTextViewID));
-            setDynamicViewPlayerColor(i, scoreboardViewModel.observablePlayerColorList.get(i));
+            setDynamicViewPlayerColor(i, ScoreboardViewModel.DEFAULT_COLORS[i]);
+            setActionBarColor(ScoreboardViewModel.DEFAULT_COLORS[0]);
         }
+    }
+
+    private void setUpOnPlayerActivateEventListener() {
+        scoreboardViewModel.getPlayerActivateEvent().observe(this, this::onPlayerActivateEventTriggered);
     }
 
     private void setUpOnPlayerNameChangingEventListener() {
@@ -68,32 +65,57 @@ public class ScoreboardActivity extends AppCompatActivity {
         scoreboardViewModel.getPlayerColorChangingEvent().observe(this, this::onPlayerColorChangingEventTriggered);
     }
 
+    private void startNewSessionDialog() {
+        NewSessionDialog dialog = NewSessionDialog.newInstance(this);
+        dialog.setCancelable(false);
+        dialog.show(getSupportFragmentManager(), "TAG");
+    }
+
+    private void startNameChangingDialog() {
+        PlayerNameDialog dialog = PlayerNameDialog.newInstance(this);
+        dialog.setText(scoreboardViewModel.getCurrentPlayerName());
+        dialog.show(getSupportFragmentManager(), "TAG");
+    }
+
+    private void startColorChangingDialog() {
+        SpectrumDialog.Builder dialog = new SpectrumDialog.Builder(this);
+        dialog.setColors(ScoreboardViewModel.DEFAULT_COLORS);
+        dialog.setSelectedColor(scoreboardViewModel.getCurrentPlayerColor());
+        dialog.setPositiveButtonText(R.string.ok);
+        dialog.setNegativeButtonText(R.string.cancel);
+        dialog.setDismissOnColorSelected(false);
+        dialog.setOnColorSelectedListener((positiveResult, color) -> {
+            if (positiveResult) {
+                onPlayerColorSet(color);
+            }
+        });
+        dialog.build().show(getSupportFragmentManager(), "TAG");
+    }
+
+    private void onPlayerActivateEventTriggered(Boolean playerActivateEvent) {
+        if (playerActivateEvent) {
+            setActionBarColor(scoreboardViewModel.getCurrentPlayerColor());
+            scoreboardViewModel.disablePlayerActivateEvent();
+        }
+    }
+
     private void onPlayerNameChangingEventTriggered(Boolean playerNameChangingEvent) {
         if (playerNameChangingEvent) {
-            PlayerNameChangingDialog dialog = PlayerNameChangingDialog.newInstance(this);
-            dialog.setText(scoreboardViewModel.getCurrentPlayerName());
-            dialog.setCancelable(false);
-            dialog.show(getSupportFragmentManager(), "TAG");
+            startNameChangingDialog();
             scoreboardViewModel.disablePlayerNameChangingEvent();
         }
     }
 
     private void onPlayerColorChangingEventTriggered(Boolean playerColorChangingEvent) {
         if (playerColorChangingEvent) {
-            SpectrumDialog.Builder spectrumDialog = new SpectrumDialog.Builder(this);
-            spectrumDialog.setColors(ScoreboardViewModel.DEFAULT_COLORS);
-            spectrumDialog.setSelectedColor(scoreboardViewModel.getCurrentPlayerColor());
-            spectrumDialog.setPositiveButtonText(R.string.ok);
-            spectrumDialog.setNegativeButtonText(R.string.cancel);
-            spectrumDialog.setDismissOnColorSelected(false);
-            spectrumDialog.setOnColorSelectedListener((positiveResult, color) -> {
-                if (positiveResult) {
-                    onPlayerColorSet(color);
-                }
-            });
-            spectrumDialog.build().show(getSupportFragmentManager(), "TAG");
+            startColorChangingDialog();
             scoreboardViewModel.disablePlayerColorChangingEvent();
         }
+    }
+
+    public void onNewSessionSet(int numberOfPlayers) {
+        initDataBinding(numberOfPlayers);
+        initDynamicViews(numberOfPlayers);
     }
 
     public void onPlayerNameSet(String playerName) {
@@ -103,6 +125,7 @@ public class ScoreboardActivity extends AppCompatActivity {
     public void onPlayerColorSet(int playerColor) {
         scoreboardViewModel.onChangeCurrentPlayerColor(playerColor);
         setDynamicViewPlayerColor(scoreboardViewModel.getCurrentPlayerNumber(), playerColor);
+        setActionBarColor(playerColor);
     }
 
     private void setDynamicViewPlayerColor(int playerNumber, int playerColor) {
@@ -110,6 +133,10 @@ public class ScoreboardActivity extends AppCompatActivity {
         shape.setShape(GradientDrawable.OVAL);
         shape.setColor(playerColor);
         playerColorTextViewList.get(playerNumber).setBackground(shape);
+    }
+
+    private void setActionBarColor(int playerColor) {
+        Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(playerColor));
     }
 
     @Override
@@ -122,7 +149,13 @@ public class ScoreboardActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_new_session:
-                promptForNewSession();
+                startNewSessionDialog();
+                return true;
+            case R.id.menu_player_name:
+                startNameChangingDialog();
+                return true;
+            case R.id.menu_player_color:
+                startColorChangingDialog();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
