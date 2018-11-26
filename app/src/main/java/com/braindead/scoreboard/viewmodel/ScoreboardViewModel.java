@@ -198,7 +198,7 @@ public class ScoreboardViewModel extends ViewModel {
     }
 
     public void disablePlayerActivateEvent() {
-        this.playerActivateEvent.setValue(false);
+        playerActivateEvent.setValue(false);
     }
 
     public LiveData<Boolean> getPlayerNameChangingEvent() {
@@ -206,7 +206,7 @@ public class ScoreboardViewModel extends ViewModel {
     }
 
     public void disablePlayerNameChangingEvent() {
-        this.playerNameChangingEvent.setValue(false);
+        playerNameChangingEvent.setValue(false);
     }
 
     public LiveData<Boolean> getPlayerColorChangingEvent() {
@@ -214,6 +214,6 @@ public class ScoreboardViewModel extends ViewModel {
     }
 
     public void disablePlayerColorChangingEvent() {
-        this.playerColorChangingEvent.setValue(false);
+        playerColorChangingEvent.setValue(false);
     }
 }
