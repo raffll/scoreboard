@@ -1,8 +1,12 @@
 package com.braindead.scoreboard.utilities;
 
+import android.content.res.ColorStateList;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public abstract class BindingAdapter {
@@ -30,5 +34,11 @@ public abstract class BindingAdapter {
         shape.setShape(GradientDrawable.OVAL);
         shape.setColor(color);
         view.setBackground(shape);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    @android.databinding.BindingAdapter("android:backgroundTint")
+    public static void setBackgroundTint(Button button, int color) {
+        button.setBackgroundTintList(ColorStateList.valueOf(color));
     }
 }

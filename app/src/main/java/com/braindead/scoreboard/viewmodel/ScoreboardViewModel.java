@@ -40,6 +40,7 @@ public class ScoreboardViewModel extends ViewModel {
     public ObservableArrayList<String> observablePlayerScoreList;
     public ObservableArrayList<Integer> observablePlayerColorList;
     public ObservableField<String> observableCalculator;
+    public ObservableField<Integer> observableCurrentColor;
 
     private MutableLiveData<Boolean> playerActivateEvent = new MutableLiveData<>();
     private MutableLiveData<Boolean> playerNameChangingEvent = new MutableLiveData<>();
@@ -56,6 +57,7 @@ public class ScoreboardViewModel extends ViewModel {
         initObservablePlayerScoreList();
         initObservablePlayerColorList();
         initObservableCalculator();
+        initObservableCurrentColor();
     }
 
     private void initObservablePlayerVisibility() {
@@ -106,10 +108,16 @@ public class ScoreboardViewModel extends ViewModel {
         updateObservableCalculator();
     }
 
+    private void initObservableCurrentColor() {
+        observableCurrentColor = new ObservableField<>();
+        updateObservableCurrentColor();
+    }
+
     public void onActivatePlayer(int playerNumber) {
         currentPlayerNumber = playerNumber;
         updateObservablePlayerIsActiveList();
         updateObservableCalculator();
+        updateObservableCurrentColor();
         playerActivateEvent.setValue(true);
     }
 
@@ -177,20 +185,12 @@ public class ScoreboardViewModel extends ViewModel {
         }
     }
 
-    private Player getCurrentPlayer() {
+    private void updateObservableCurrentColor() {
+        observableCurrentColor.set(getCurrentPlayer().getColor());
+    }
+
+    public Player getCurrentPlayer() {
         return scoreboard.getPlayer(currentPlayerNumber);
-    }
-
-    public int getCurrentPlayerNumber() {
-        return currentPlayerNumber;
-    }
-
-    public String getCurrentPlayerName() {
-        return observablePlayerNameList.get(currentPlayerNumber);
-    }
-
-    public int getCurrentPlayerColor() {
-        return observablePlayerColorList.get(currentPlayerNumber);
     }
 
     public LiveData<Boolean> getPlayerActivateEvent() {

@@ -65,7 +65,7 @@ public class ScoreboardActivity extends AppCompatActivity {
 
     private void onPlayerActivateEventTriggered(Boolean playerActivateEvent) {
         if (playerActivateEvent) {
-            setActionBarColor(scoreboardViewModel.getCurrentPlayerColor());
+            setActionBarColor(scoreboardViewModel.getCurrentPlayer().getColor());
             scoreboardViewModel.disablePlayerActivateEvent();
         }
     }
@@ -86,14 +86,14 @@ public class ScoreboardActivity extends AppCompatActivity {
 
     private void startNameChangingDialog() {
         PlayerNameDialog dialog = PlayerNameDialog.newInstance(this);
-        dialog.setText(scoreboardViewModel.getCurrentPlayerName());
+        dialog.setText(scoreboardViewModel.getCurrentPlayer().getName());
         dialog.show(getSupportFragmentManager(), "TAG");
     }
 
     private void startColorChangingDialog() {
         SpectrumDialog.Builder dialog = new SpectrumDialog.Builder(this);
         dialog.setColors(ScoreboardViewModel.DEFAULT_COLORS);
-        dialog.setSelectedColor(scoreboardViewModel.getCurrentPlayerColor());
+        dialog.setSelectedColor(scoreboardViewModel.getCurrentPlayer().getColor());
         dialog.setPositiveButtonText(R.string.ok);
         dialog.setNegativeButtonText(R.string.cancel);
         dialog.setDismissOnColorSelected(false);
