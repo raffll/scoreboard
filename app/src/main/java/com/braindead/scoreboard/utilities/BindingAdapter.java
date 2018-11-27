@@ -8,13 +8,13 @@ import android.widget.TextView;
 public abstract class BindingAdapter {
 
     @android.databinding.BindingAdapter("android:textStyle")
-    public static void setTypeface(TextView textView, String style) {
+    public static void setTypeface(TextView view, String style) {
         switch (style) {
             case "bold":
-                textView.setTypeface(null, Typeface.BOLD);
+                view.setTypeface(null, Typeface.BOLD);
                 break;
             default:
-                textView.setTypeface(null, Typeface.NORMAL);
+                view.setTypeface(null, Typeface.NORMAL);
                 break;
         }
     }
