@@ -38,8 +38,9 @@ public class ScoreboardViewModel extends ViewModel {
     public ObservableArrayList<Boolean> observablePlayerIsActiveList;
     public ObservableArrayList<String> observablePlayerNameList;
     public ObservableArrayList<String> observablePlayerScoreList;
+    public ObservableArrayList<String> observablePlayerPartialScoreList;
     public ObservableArrayList<Integer> observablePlayerColorList;
-    public ObservableField<String> observableCalculator;
+    public ObservableField<String> observableCurrentDelta;
     public ObservableField<Integer> observableCurrentColor;
 
     private MutableLiveData<Boolean> playerActivateEvent = new MutableLiveData<>();
@@ -55,8 +56,9 @@ public class ScoreboardViewModel extends ViewModel {
         initObservablePlayerIsActiveList();
         initObservablePlayerNameList();
         initObservablePlayerScoreList();
+        initObservablePlayerPartialScoreList();
         initObservablePlayerColorList();
-        initObservableCalculator();
+        initObservableCurrentDelta();
         initObservableCurrentColor();
     }
 
@@ -96,6 +98,13 @@ public class ScoreboardViewModel extends ViewModel {
         }
     }
 
+    private void initObservablePlayerPartialScoreList() {
+        observablePlayerPartialScoreList = new ObservableArrayList<>();
+        for (int i = 0; i < numberOfPlayers; i++) {
+            observablePlayerPartialScoreList.add("");
+        }
+    }
+
     private void initObservablePlayerColorList() {
         observablePlayerColorList = new ObservableArrayList<>();
         for (int i = 0; i < numberOfPlayers; i++) {
@@ -103,9 +112,9 @@ public class ScoreboardViewModel extends ViewModel {
         }
     }
 
-    private void initObservableCalculator() {
-        observableCalculator = new ObservableField<>();
-        updateObservableCalculator();
+    private void initObservableCurrentDelta() {
+        observableCurrentDelta = new ObservableField<>();
+        updateObservableCurrentDelta();
     }
 
     private void initObservableCurrentColor() {
@@ -116,7 +125,7 @@ public class ScoreboardViewModel extends ViewModel {
     public void onActivatePlayer(int playerNumber) {
         currentPlayerNumber = playerNumber;
         updateObservablePlayerIsActiveList();
-        updateObservableCalculator();
+        updateObservableCurrentDelta();
         updateObservableCurrentColor();
         playerActivateEvent.setValue(true);
     }
@@ -135,7 +144,7 @@ public class ScoreboardViewModel extends ViewModel {
 
     public void onChangeCurrentDelta(int delta) {
         currentDelta += delta;
-        updateObservableCalculator();
+        updateObservableCurrentDelta();
     }
 
     public void onChangeCurrentPlayerName(String playerName) {
@@ -146,13 +155,26 @@ public class ScoreboardViewModel extends ViewModel {
     public void onChangeCurrentPlayerScore() {
         getCurrentPlayer().setScore(getCurrentPlayer().getScore() + currentDelta);
         updateObservablePlayerScoreList();
+        updateObservablePlayerPartialScoreList();
         currentDelta = 0;
-        updateObservableCalculator();
+        updateObservableCurrentDelta();
     }
 
     public void onChangeCurrentPlayerColor(int playerColor) {
         getCurrentPlayer().setColor(playerColor);
         updateObservablePlayerColorList();
+        updateObservableCurrentColor();
+    }
+
+    public void onResetSession() {
+        scoreboard.resetScoreboard();
+        updateObservablePlayerScoreList();
+        currentDelta = 0;
+        updateObservableCurrentDelta();
+    }
+
+    public void onSaveSession() {
+
     }
 
     private void updateObservablePlayerIsActiveList() {
@@ -166,27 +188,41 @@ public class ScoreboardViewModel extends ViewModel {
     }
 
     private void updateObservablePlayerNameList() {
-        observablePlayerNameList.set(currentPlayerNumber, getCurrentPlayer().getName());
+        for (int i = 0; i < numberOfPlayers; i++) {
+            observablePlayerNameList.set(i, getPlayer(i).getName());
+        }
     }
 
     private void updateObservablePlayerScoreList() {
-        observablePlayerScoreList.set(currentPlayerNumber, Integer.toString(getCurrentPlayer().getScore()));
+        for (int i = 0; i < numberOfPlayers; i++) {
+            observablePlayerScoreList.set(i, Integer.toString(getPlayer(i).getScore()));
+        }
+    }
+
+    private void updateObservablePlayerPartialScoreList() {
+        observablePlayerPartialScoreList.set(currentPlayerNumber, observablePlayerPartialScoreList.get(currentPlayerNumber) + currentDelta + " / ");
     }
 
     private void updateObservablePlayerColorList() {
-        observablePlayerColorList.set(currentPlayerNumber, getCurrentPlayer().getColor());
+        for (int i = 0; i < numberOfPlayers; i++) {
+            observablePlayerColorList.set(i, getPlayer(i).getColor());
+        }
     }
 
-    private void updateObservableCalculator() {
+    private void updateObservableCurrentDelta() {
         if (currentDelta >= 0) {
-            observableCalculator.set("+ " + Integer.toString(currentDelta));
+            observableCurrentDelta.set("+ " + Integer.toString(currentDelta));
         } else {
-            observableCalculator.set("- " + Integer.toString(abs(currentDelta)));
+            observableCurrentDelta.set("- " + Integer.toString(abs(currentDelta)));
         }
     }
 
     private void updateObservableCurrentColor() {
         observableCurrentColor.set(getCurrentPlayer().getColor());
+    }
+
+    private Player getPlayer(int i) {
+        return scoreboard.getPlayer(i);
     }
 
     public Player getCurrentPlayer() {

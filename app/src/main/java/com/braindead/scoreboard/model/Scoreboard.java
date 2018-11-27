@@ -14,6 +14,12 @@ public class Scoreboard {
         }
     }
 
+    public void resetScoreboard() {
+        for (Player player : playerList) {
+            player.setScore(0);
+        }
+    }
+
     public Player getPlayer(int i) {
         return playerList.get(i);
     }
