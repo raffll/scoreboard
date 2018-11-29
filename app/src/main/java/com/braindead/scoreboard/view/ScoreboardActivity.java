@@ -19,10 +19,10 @@ public class ScoreboardActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        startNewSessionDialog();
+        createNewSessionDialog();
     }
 
-    private void startNewSessionDialog() {
+    private void createNewSessionDialog() {
         NewSessionDialog dialog = NewSessionDialog.newInstance(this);
         dialog.setCancelable(false);
         dialog.show(getSupportFragmentManager(), "TAG");
@@ -41,40 +41,27 @@ public class ScoreboardActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
 
-        setUpOnPlayerActivateEventListener();
         setUpOnPlayerSettingsEventListener();
-    }
-
-    private void setUpOnPlayerActivateEventListener() {
-        scoreboardViewModel.getPlayerActivateEvent().observe(this, this::onPlayerActivateEventTriggered);
     }
 
     private void setUpOnPlayerSettingsEventListener() {
         scoreboardViewModel.getPlayerSettingsEvent().observe(this, this::onPlayerSettingsEventTriggered);
     }
 
-    private void onPlayerActivateEventTriggered(Boolean playerActivateEvent) {
-        if (playerActivateEvent) {
-            //setActionBarColor(scoreboardViewModel.getCurrentPlayer().getColor());
-            scoreboardViewModel.disablePlayerActivateEvent();
-        }
-    }
-
     private void onPlayerSettingsEventTriggered(Boolean playerSettingsEvent) {
         if (playerSettingsEvent) {
-            startPlayerSettingsDialog();
+            createPlayerSettingsDialog();
             scoreboardViewModel.disablePlayerSettingsEvent();
         }
     }
 
-    private void startPlayerSettingsDialog() {
+    private void createPlayerSettingsDialog() {
         PlayerSettingsDialog dialog = PlayerSettingsDialog.newInstance(this);
         dialog.show(getSupportFragmentManager(), "TAG");
     }
 
     public void onPlayerSettingsSet(String playerName, int playerColor) {
         scoreboardViewModel.onChangeCurrentPlayerSettings(playerName, playerColor);
-        //setActionBarColor(playerColor);
     }
 
     @Override
@@ -87,34 +74,31 @@ public class ScoreboardActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_new_session:
-                startNewSessionDialog();
+                createNewSessionDialog();
                 return true;
             case R.id.menu_reset_session:
-                startResetSessionDialog();
+                createResetSessionDialog();
                 return true;
             case R.id.menu_save_session:
-                startSaveSessionDialog();
-                return true;
-            case R.id.menu_player_name:
-                startPlayerSettingsDialog();
+                createSaveSessionDialog();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    private void startResetSessionDialog() {
+    private void createResetSessionDialog() {
         ResetSessionDialog dialog = ResetSessionDialog.newInstance(this);
-        dialog.show(getSupportFragmentManager(), "TAG");
-    }
-
-    private void startSaveSessionDialog() {
-        SaveSessionDialog dialog = SaveSessionDialog.newInstance(this);
         dialog.show(getSupportFragmentManager(), "TAG");
     }
 
     public void onResetSessionSet() {
         scoreboardViewModel.onResetSession();
+    }
+
+    private void createSaveSessionDialog() {
+        SaveSessionDialog dialog = SaveSessionDialog.newInstance(this);
+        dialog.show(getSupportFragmentManager(), "TAG");
     }
 
     public void onSaveSessionSet() {

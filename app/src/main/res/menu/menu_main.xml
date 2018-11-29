@@ -23,19 +23,4 @@
             android:title="@string/menu_save_session"
             app:showAsAction="never" />
     </group>
-
-    <group android:id="@+id/grp2">
-
-        <item
-            android:id="@+id/menu_player_name"
-            android:orderInCategory="1"
-            android:title="@string/menu_player_name"
-            app:showAsAction="never" />
-
-        <item
-            android:id="@+id/menu_player_color"
-            android:orderInCategory="1"
-            android:title="@string/menu_player_color"
-            app:showAsAction="never" />
-    </group>
 </menu>
