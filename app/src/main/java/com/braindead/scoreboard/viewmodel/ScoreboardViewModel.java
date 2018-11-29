@@ -44,8 +44,7 @@ public class ScoreboardViewModel extends ViewModel {
     public ObservableField<Integer> observableCurrentColor;
 
     private MutableLiveData<Boolean> playerActivateEvent = new MutableLiveData<>();
-    private MutableLiveData<Boolean> playerNameChangingEvent = new MutableLiveData<>();
-    private MutableLiveData<Boolean> playerColorChangingEvent = new MutableLiveData<>();
+    private MutableLiveData<Boolean> playerSettingsEvent = new MutableLiveData<>();
 
     public void init(int numberOfPlayers, int defaultScore, String sessionName) {
         this.numberOfPlayers = numberOfPlayers;
@@ -122,23 +121,18 @@ public class ScoreboardViewModel extends ViewModel {
         updateObservableCurrentColor();
     }
 
-    public void onActivatePlayer(int playerNumber) {
+    public boolean onActivatePlayer(int playerNumber) {
         currentPlayerNumber = playerNumber;
         updateObservablePlayerIsActiveList();
         updateObservableCurrentDelta();
         updateObservableCurrentColor();
         playerActivateEvent.setValue(true);
-    }
-
-    public boolean onActivatePlayerNameChanging(int playerNumber) {
-        onActivatePlayer(playerNumber);
-        playerNameChangingEvent.setValue(true);
         return true;
     }
 
-    public boolean onActivatePlayerColorChanging(int playerNumber) {
+    public boolean onActivatePlayerSettings(int playerNumber) {
         onActivatePlayer(playerNumber);
-        playerColorChangingEvent.setValue(true);
+        playerSettingsEvent.setValue(true);
         return true;
     }
 
@@ -147,9 +141,12 @@ public class ScoreboardViewModel extends ViewModel {
         updateObservableCurrentDelta();
     }
 
-    public void onChangeCurrentPlayerName(String playerName) {
+    public void onChangeCurrentPlayerSettings(String playerName, int playerColor) {
         getCurrentPlayer().setName(playerName);
+        getCurrentPlayer().setColor(playerColor);
         updateObservablePlayerNameList();
+        updateObservablePlayerColorList();
+        updateObservableCurrentColor();
     }
 
     public void onChangeCurrentPlayerScore() {
@@ -158,12 +155,6 @@ public class ScoreboardViewModel extends ViewModel {
         updateObservablePlayerPartialScoreList();
         currentDelta = 0;
         updateObservableCurrentDelta();
-    }
-
-    public void onChangeCurrentPlayerColor(int playerColor) {
-        getCurrentPlayer().setColor(playerColor);
-        updateObservablePlayerColorList();
-        updateObservableCurrentColor();
     }
 
     public void onResetSession() {
@@ -237,19 +228,11 @@ public class ScoreboardViewModel extends ViewModel {
         playerActivateEvent.setValue(false);
     }
 
-    public LiveData<Boolean> getPlayerNameChangingEvent() {
-        return playerNameChangingEvent;
+    public LiveData<Boolean> getPlayerSettingsEvent() {
+        return playerSettingsEvent;
     }
 
-    public void disablePlayerNameChangingEvent() {
-        playerNameChangingEvent.setValue(false);
-    }
-
-    public LiveData<Boolean> getPlayerColorChangingEvent() {
-        return playerColorChangingEvent;
-    }
-
-    public void disablePlayerColorChangingEvent() {
-        playerColorChangingEvent.setValue(false);
+    public void disablePlayerSettingsEvent() {
+        playerSettingsEvent.setValue(false);
     }
 }

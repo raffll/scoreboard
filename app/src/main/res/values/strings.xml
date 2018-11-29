@@ -17,9 +17,8 @@
     <string name="plus">+</string>
 
     <string name="menu_new_session">New Session</string>
-    <string name="menu_player_name">Change Player Name</string>
-    <string name="menu_player_color">Change Player Color</string>
     <string name="menu_save_session">Save Session</string>
     <string name="menu_reset_session">Reset Session</string>
-
+    <string name="menu_player_name">Change Player Name</string>
+    <string name="menu_player_color">Change Player Color</string>
 </resources>

@@ -23,17 +23,17 @@
             android:layout_margin="4dp"
             android:layout_weight="2"
             android:onClick="@{() -> scoreboardViewModel.onActivatePlayer(playerNumber)}"
-            android:onLongClick="@{() -> scoreboardViewModel.onActivatePlayerNameChanging(playerNumber)}"
+            android:onLongClick="@{() -> scoreboardViewModel.onActivatePlayerSettings(playerNumber)}"
             android:text="@{scoreboardViewModel.observablePlayerNameList[playerNumber]}"
             android:textStyle='@{safeUnbox(scoreboardViewModel.observablePlayerIsActiveList[playerNumber]) == true ? "bold" : "normal"}'
-            android:theme="@style/PlayerRowText" />
+            android:textSize="30sp" />
 
         <TextView
             android:layout_width="30sp"
             android:layout_height="30sp"
             android:background="@{safeUnbox(scoreboardViewModel.observablePlayerColorList[playerNumber])}"
             android:gravity="center"
-            android:onLongClick="@{() -> scoreboardViewModel.onActivatePlayerColorChanging(playerNumber)}" />
+            android:onLongClick="@{() -> scoreboardViewModel.onActivatePlayerSettings(playerNumber)}" />
 
         <TextView
             android:layout_width="0dip"
@@ -43,6 +43,6 @@
             android:gravity="end"
             android:text="@{scoreboardViewModel.observablePlayerScoreList[playerNumber]}"
             android:textStyle='@{safeUnbox(scoreboardViewModel.observablePlayerIsActiveList[playerNumber]) == true ? "bold" : "normal"}'
-            android:theme="@style/PlayerRowText" />
+            android:textSize="30sp" />
     </TableRow>
 </layout>
