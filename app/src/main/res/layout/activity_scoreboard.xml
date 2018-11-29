@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:bind="http://schemas.android.com/apk/res-auto">
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <variable
             name="scoreboardViewModel"
             type="com.braindead.scoreboard.viewmodel.ScoreboardViewModel" />
-
     </data>
 
     <android.support.constraint.ConstraintLayout
@@ -36,106 +35,104 @@
 
                 <include
                     layout="@layout/activity_scoreboard_player"
-                    bind:scoreboardViewModel="@{scoreboardViewModel}"
-                    bind:playerNumber="@{0}"/>
+                    bind:playerNumber="@{0}"
+                    bind:scoreboardViewModel="@{scoreboardViewModel}" />
 
                 <include
                     layout="@layout/activity_scoreboard_partial_score"
-                    bind:scoreboardViewModel="@{scoreboardViewModel}"
-                    bind:playerNumber="@{0}"/>
+                    bind:playerNumber="@{0}"
+                    bind:scoreboardViewModel="@{scoreboardViewModel}" />
 
                 <include
                     layout="@layout/activity_scoreboard_player"
-                    bind:scoreboardViewModel="@{scoreboardViewModel}"
-                    bind:playerNumber="@{1}"/>
+                    bind:playerNumber="@{1}"
+                    bind:scoreboardViewModel="@{scoreboardViewModel}" />
 
                 <include
                     layout="@layout/activity_scoreboard_partial_score"
-                    bind:scoreboardViewModel="@{scoreboardViewModel}"
-                    bind:playerNumber="@{1}"/>
+                    bind:playerNumber="@{1}"
+                    bind:scoreboardViewModel="@{scoreboardViewModel}" />
 
                 <include
                     layout="@layout/activity_scoreboard_player"
-                    bind:scoreboardViewModel="@{scoreboardViewModel}"
-                    bind:playerNumber="@{2}"/>
+                    bind:playerNumber="@{2}"
+                    bind:scoreboardViewModel="@{scoreboardViewModel}" />
 
                 <include
                     layout="@layout/activity_scoreboard_partial_score"
-                    bind:scoreboardViewModel="@{scoreboardViewModel}"
-                    bind:playerNumber="@{2}"/>
+                    bind:playerNumber="@{2}"
+                    bind:scoreboardViewModel="@{scoreboardViewModel}" />
 
                 <include
                     layout="@layout/activity_scoreboard_player"
-                    bind:scoreboardViewModel="@{scoreboardViewModel}"
-                    bind:playerNumber="@{3}"/>
+                    bind:playerNumber="@{3}"
+                    bind:scoreboardViewModel="@{scoreboardViewModel}" />
 
                 <include
                     layout="@layout/activity_scoreboard_partial_score"
-                    bind:scoreboardViewModel="@{scoreboardViewModel}"
-                    bind:playerNumber="@{3}"/>
+                    bind:playerNumber="@{3}"
+                    bind:scoreboardViewModel="@{scoreboardViewModel}" />
 
                 <include
                     layout="@layout/activity_scoreboard_player"
-                    bind:scoreboardViewModel="@{scoreboardViewModel}"
-                    bind:playerNumber="@{4}"/>
+                    bind:playerNumber="@{4}"
+                    bind:scoreboardViewModel="@{scoreboardViewModel}" />
 
                 <include
                     layout="@layout/activity_scoreboard_partial_score"
-                    bind:scoreboardViewModel="@{scoreboardViewModel}"
-                    bind:playerNumber="@{4}"/>
+                    bind:playerNumber="@{4}"
+                    bind:scoreboardViewModel="@{scoreboardViewModel}" />
 
                 <include
                     layout="@layout/activity_scoreboard_player"
-                    bind:scoreboardViewModel="@{scoreboardViewModel}"
-                    bind:playerNumber="@{5}"/>
+                    bind:playerNumber="@{5}"
+                    bind:scoreboardViewModel="@{scoreboardViewModel}" />
 
                 <include
                     layout="@layout/activity_scoreboard_partial_score"
-                    bind:scoreboardViewModel="@{scoreboardViewModel}"
-                    bind:playerNumber="@{5}"/>
+                    bind:playerNumber="@{5}"
+                    bind:scoreboardViewModel="@{scoreboardViewModel}" />
 
                 <include
                     layout="@layout/activity_scoreboard_player"
-                    bind:scoreboardViewModel="@{scoreboardViewModel}"
-                    bind:playerNumber="@{6}"/>
+                    bind:playerNumber="@{6}"
+                    bind:scoreboardViewModel="@{scoreboardViewModel}" />
 
                 <include
                     layout="@layout/activity_scoreboard_partial_score"
-                    bind:scoreboardViewModel="@{scoreboardViewModel}"
-                    bind:playerNumber="@{6}"/>
+                    bind:playerNumber="@{6}"
+                    bind:scoreboardViewModel="@{scoreboardViewModel}" />
 
                 <include
                     layout="@layout/activity_scoreboard_player"
-                    bind:scoreboardViewModel="@{scoreboardViewModel}"
-                    bind:playerNumber="@{7}"/>
+                    bind:playerNumber="@{7}"
+                    bind:scoreboardViewModel="@{scoreboardViewModel}" />
 
                 <include
                     layout="@layout/activity_scoreboard_partial_score"
-                    bind:scoreboardViewModel="@{scoreboardViewModel}"
-                    bind:playerNumber="@{7}"/>
+                    bind:playerNumber="@{7}"
+                    bind:scoreboardViewModel="@{scoreboardViewModel}" />
 
                 <include
                     layout="@layout/activity_scoreboard_player"
-                    bind:scoreboardViewModel="@{scoreboardViewModel}"
-                    bind:playerNumber="@{8}"/>
+                    bind:playerNumber="@{8}"
+                    bind:scoreboardViewModel="@{scoreboardViewModel}" />
 
                 <include
                     layout="@layout/activity_scoreboard_partial_score"
-                    bind:scoreboardViewModel="@{scoreboardViewModel}"
-                    bind:playerNumber="@{8}"/>
+                    bind:playerNumber="@{8}"
+                    bind:scoreboardViewModel="@{scoreboardViewModel}" />
 
                 <include
                     layout="@layout/activity_scoreboard_player"
-                    bind:scoreboardViewModel="@{scoreboardViewModel}"
-                    bind:playerNumber="@{9}"/>
+                    bind:playerNumber="@{9}"
+                    bind:scoreboardViewModel="@{scoreboardViewModel}" />
 
                 <include
                     layout="@layout/activity_scoreboard_partial_score"
-                    bind:scoreboardViewModel="@{scoreboardViewModel}"
-                    bind:playerNumber="@{9}"/>
-
+                    bind:playerNumber="@{9}"
+                    bind:scoreboardViewModel="@{scoreboardViewModel}" />
             </TableLayout>
-
         </ScrollView>
 
         <TableLayout
@@ -156,7 +153,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="2dp"
                     android:background="@{safeUnbox(scoreboardViewModel.observableCurrentColor)}" />
-
             </TableRow>
 
             <TableRow
@@ -182,7 +178,6 @@
                     android:onClick="@{() -> scoreboardViewModel.onChangeCurrentDelta(1)}"
                     android:text="@string/plus1"
                     android:textSize="20sp" />
-
             </TableRow>
 
             <TableRow
@@ -208,7 +203,6 @@
                     android:onClick="@{() -> scoreboardViewModel.onChangeCurrentDelta(10)}"
                     android:text="@string/plus10"
                     android:textSize="20sp" />
-
             </TableRow>
 
             <TableRow
@@ -225,11 +219,7 @@
                     android:onClick="@{() -> scoreboardViewModel.onChangeCurrentPlayerScore()}"
                     android:text="@string/ok"
                     android:textSize="20sp" />
-
             </TableRow>
-
         </TableLayout>
-
     </android.support.constraint.ConstraintLayout>
-
 </layout>

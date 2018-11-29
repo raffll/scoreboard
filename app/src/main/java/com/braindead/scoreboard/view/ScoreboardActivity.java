@@ -31,8 +31,8 @@ public class ScoreboardActivity extends AppCompatActivity {
         dialog.show(getSupportFragmentManager(), "TAG");
     }
 
-    public void onNewSessionSet(int numberOfPlayers) {
-        initDataBinding(numberOfPlayers);
+    public void onNewSessionSet(int numberOfPlayers, int defaultScore, String sessionName) {
+        initDataBinding(numberOfPlayers, defaultScore, sessionName);
         setActionBarColor(ScoreboardViewModel.DEFAULT_COLORS[0]);
     }
 
@@ -40,10 +40,10 @@ public class ScoreboardActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(playerColor));
     }
 
-    private void initDataBinding(int numberOfPlayers) {
+    private void initDataBinding(int numberOfPlayers, int defaultScore, String sessionName) {
         ActivityScoreboardBinding activityScoreboardBinding = DataBindingUtil.setContentView(this, R.layout.activity_scoreboard);
         scoreboardViewModel = ViewModelProviders.of(this).get(ScoreboardViewModel.class);
-        scoreboardViewModel.init(numberOfPlayers);
+        scoreboardViewModel.init(numberOfPlayers, defaultScore, sessionName);
         activityScoreboardBinding.setScoreboardViewModel(scoreboardViewModel);
 
         setUpOnPlayerActivateEventListener();

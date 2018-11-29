@@ -10,7 +10,6 @@
         <variable
             name="scoreboardViewModel"
             type="com.braindead.scoreboard.viewmodel.ScoreboardViewModel" />
-
     </data>
 
     <TableRow
@@ -45,7 +44,5 @@
             android:text="@{scoreboardViewModel.observablePlayerScoreList[playerNumber]}"
             android:textStyle='@{safeUnbox(scoreboardViewModel.observablePlayerIsActiveList[playerNumber]) == true ? "bold" : "normal"}'
             android:theme="@style/PlayerRowText" />
-
     </TableRow>
-
 </layout>

@@ -47,11 +47,11 @@ public class ScoreboardViewModel extends ViewModel {
     private MutableLiveData<Boolean> playerNameChangingEvent = new MutableLiveData<>();
     private MutableLiveData<Boolean> playerColorChangingEvent = new MutableLiveData<>();
 
-    public void init(int numberOfPlayers) {
+    public void init(int numberOfPlayers, int defaultScore, String sessionName) {
         this.numberOfPlayers = numberOfPlayers;
         currentPlayerNumber = 0;
         currentDelta = 0;
-        scoreboard = new Scoreboard(numberOfPlayers, 0, DEFAULT_COLORS);
+        scoreboard = new Scoreboard(numberOfPlayers, defaultScore, DEFAULT_COLORS, sessionName);
         initObservablePlayerVisibility();
         initObservablePlayerIsActiveList();
         initObservablePlayerNameList();
