@@ -84,16 +84,6 @@ public class ScoreboardActivity extends AppCompatActivity {
         }
     }
 
-    private void startResetSessionDialog() {
-        ResetSessionDialog dialog = ResetSessionDialog.newInstance(this);
-        dialog.show(getSupportFragmentManager(), "TAG");
-    }
-
-    private void startSaveSessionDialog() {
-        SaveSessionDialog dialog = SaveSessionDialog.newInstance(this);
-        dialog.show(getSupportFragmentManager(), "TAG");
-    }
-
     private void startNameChangingDialog() {
         PlayerNameDialog dialog = PlayerNameDialog.newInstance(this);
         dialog.setText(scoreboardViewModel.getCurrentPlayer().getName());
@@ -113,14 +103,6 @@ public class ScoreboardActivity extends AppCompatActivity {
             }
         });
         dialog.build().show(getSupportFragmentManager(), "TAG");
-    }
-
-    public void onResetSessionSet() {
-        scoreboardViewModel.onResetSession();
-    }
-
-    public void onSaveSessionSet() {
-        scoreboardViewModel.onSaveSession();
     }
 
     public void onPlayerNameSet(String playerName) {
@@ -159,6 +141,24 @@ public class ScoreboardActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void startResetSessionDialog() {
+        ResetSessionDialog dialog = ResetSessionDialog.newInstance(this);
+        dialog.show(getSupportFragmentManager(), "TAG");
+    }
+
+    private void startSaveSessionDialog() {
+        SaveSessionDialog dialog = SaveSessionDialog.newInstance(this);
+        dialog.show(getSupportFragmentManager(), "TAG");
+    }
+
+    public void onResetSessionSet() {
+        scoreboardViewModel.onResetSession();
+    }
+
+    public void onSaveSessionSet() {
+        scoreboardViewModel.onSaveSession();
     }
 
     @Override
