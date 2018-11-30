@@ -23,7 +23,10 @@ public class ScoreboardActivity extends AppCompatActivity {
     }
 
     private void createNewSessionDialog() {
-        NewSessionDialog dialog = NewSessionDialog.newInstance(this);
+        NewSessionDialog dialog = NewSessionDialog.newInstance(this,
+                ScoreboardViewModel.DEFAULT_NUMBER_OF_PLAYERS,
+                0,
+                "Scoreboard");
         dialog.show(getSupportFragmentManager(), "TAG");
     }
 
@@ -56,8 +59,8 @@ public class ScoreboardActivity extends AppCompatActivity {
 
     private void createPlayerSettingsDialog() {
         PlayerSettingsDialog dialog = PlayerSettingsDialog.newInstance(this,
-                scoreboardViewModel.observablePlayerNameList.get(scoreboardViewModel.currentPlayerNumber.get()),
-                scoreboardViewModel.observablePlayerColorList.get(scoreboardViewModel.currentPlayerNumber.get()));
+                scoreboardViewModel.currentName.get(),
+                scoreboardViewModel.currentColor.get());
         dialog.show(getSupportFragmentManager(), "TAG");
     }
 

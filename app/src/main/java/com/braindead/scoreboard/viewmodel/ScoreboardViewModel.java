@@ -28,84 +28,164 @@ public class ScoreboardViewModel extends ViewModel {
     };
 
     private Scoreboard scoreboard;
-    private int numberOfPlayers;
 
-    public ObservableField<Integer> currentPlayerNumber = new ObservableField<>();
-    public ObservableArrayList<Boolean> observablePlayerVisibilityList = new ObservableArrayList<>();
-    public ObservableArrayList<Boolean> observablePlayerIsActiveList = new ObservableArrayList<>();
-    public ObservableArrayList<String> observablePlayerNameList = new ObservableArrayList<>();
-    public ObservableArrayList<String> observablePlayerScoreList = new ObservableArrayList<>();
-    public ObservableArrayList<String> observablePlayerPartialScoreList = new ObservableArrayList<>();
-    public ObservableArrayList<Integer> observablePlayerColorList = new ObservableArrayList<>();
-    public ObservableField<String> observableCurrentDelta = new ObservableField<>();
+    private int numberOfPlayers;
+    private int currentPlayerNumber;
+
+    public ObservableArrayList<Boolean> visibilityList = new ObservableArrayList<>();
+    public ObservableArrayList<Boolean> isCurrentList = new ObservableArrayList<>();
+    public ObservableArrayList<String> nameList = new ObservableArrayList<>();
+    public ObservableArrayList<String> scoreList = new ObservableArrayList<>();
+    public ObservableArrayList<String> partialScoreList = new ObservableArrayList<>();
+    public ObservableArrayList<Integer> colorList = new ObservableArrayList<>();
+    public ObservableField<String> currentName = new ObservableField<>();
+    public ObservableField<Integer> currentColor = new ObservableField<>();
+    public ObservableField<String> currentDelta = new ObservableField<>();
+    public ObservableField<String> sessionName = new ObservableField<>();
 
     private MutableLiveData<Boolean> playerSettingsEvent = new MutableLiveData<>();
 
     public void init(int numberOfPlayers, int defaultScore, String sessionName) {
         this.numberOfPlayers = numberOfPlayers;
-        this.currentPlayerNumber.set(0);
+        this.currentPlayerNumber = 0;
         this.scoreboard = new Scoreboard(numberOfPlayers, defaultScore, DEFAULT_COLORS, sessionName);
-        initObservablePlayerVisibility();
-        initObservablePlayerIsActiveList();
-        initObservablePlayerNameList();
-        initObservablePlayerScoreList();
-        initObservablePlayerPartialScoreList();
-        initObservablePlayerColorList();
-        initObservableCurrentDelta();
+        initVisibilityList();
+        initIsCurrentList();
+        initNameList();
+        initScoreList();
+        initPartialScoreList();
+        initColorList();
+        initCurrentName();
+        initCurrentColor();
+        initCurrentDelta();
+        initSessionName();
     }
 
-    private void initObservablePlayerVisibility() {
+    private void initVisibilityList() {
         for (int i = 0; i < MAX_NUMBER_OF_PLAYERS; i++) {
             if (i < numberOfPlayers) {
-                observablePlayerVisibilityList.add(true);
+                visibilityList.add(true);
             } else {
-                observablePlayerVisibilityList.add(false);
+                visibilityList.add(false);
             }
         }
     }
 
-    private void initObservablePlayerIsActiveList() {
+    private void initIsCurrentList() {
         for (int i = 0; i < numberOfPlayers; i++) {
-            if (i == currentPlayerNumber.get()) {
-                observablePlayerIsActiveList.add(true);
+            if (i == currentPlayerNumber) {
+                isCurrentList.add(true);
             } else {
-                observablePlayerIsActiveList.add(false);
+                isCurrentList.add(false);
             }
         }
     }
 
-    private void initObservablePlayerNameList() {
+    private void initNameList() {
         for (int i = 0; i < numberOfPlayers; i++) {
-            observablePlayerNameList.add(scoreboard.getPlayerList().get(i).getName());
+            nameList.add(scoreboard.getPlayerList().get(i).getName());
         }
     }
 
-    private void initObservablePlayerScoreList() {
+    private void initScoreList() {
         for (int i = 0; i < numberOfPlayers; i++) {
-            observablePlayerScoreList.add(Integer.toString(scoreboard.getPlayerList().get(i).getScore()));
+            scoreList.add(Integer.toString(scoreboard.getPlayerList().get(i).getScore()));
         }
     }
 
-    private void initObservablePlayerPartialScoreList() {
+    private void initPartialScoreList() {
         for (int i = 0; i < numberOfPlayers; i++) {
-            observablePlayerPartialScoreList.add("");
+            partialScoreList.add("");
         }
     }
 
-    private void initObservablePlayerColorList() {
+    private void initColorList() {
         for (int i = 0; i < numberOfPlayers; i++) {
-            observablePlayerColorList.add(scoreboard.getPlayerList().get(i).getColor());
+            colorList.add(scoreboard.getPlayerList().get(i).getColor());
         }
     }
 
-    private void initObservableCurrentDelta() {
-        updateObservableCurrentDelta();
+    private void initCurrentName() {
+        updateCurrentName();
+    }
+
+    private void initCurrentColor() {
+        updateCurrentColor();
+    }
+
+    private void initCurrentDelta() {
+        updateCurrentDelta();
+    }
+
+    private void initSessionName() {
+        updateSessionName();
+    }
+
+    private void updateIsCurrentList() {
+        for (int i = 0; i < numberOfPlayers; i++) {
+            if (i == currentPlayerNumber) {
+                isCurrentList.set(i, true);
+            } else {
+                isCurrentList.set(i, false);
+            }
+        }
+    }
+
+    private void updateNameList() {
+        for (int i = 0; i < numberOfPlayers; i++) {
+            nameList.set(i, scoreboard.getPlayerList().get(i).getName());
+        }
+    }
+
+    private void updateScoreList() {
+        for (int i = 0; i < numberOfPlayers; i++) {
+            scoreList.set(i, Integer.toString(scoreboard.getPlayerList().get(i).getScore()));
+        }
+    }
+
+    private void updatePartialScoreList() {
+        String temp;
+        for (int i = 0; i < numberOfPlayers; i++) {
+            temp = "";
+            for (int k = 0; k < scoreboard.getPlayerList().get(i).getPartialScoreList().size(); k++) {
+                temp += scoreboard.getPlayerList().get(i).getPartialScoreList().get(k) + " / ";
+                partialScoreList.set(i, temp);
+            }
+        }
+    }
+
+    private void updateColorList() {
+        for (int i = 0; i < numberOfPlayers; i++) {
+            colorList.set(i, scoreboard.getPlayerList().get(i).getColor());
+        }
+    }
+
+    private void updateCurrentName() {
+        currentName.set(scoreboard.getPlayerList().get(currentPlayerNumber).getName());
+    }
+
+    private void updateCurrentColor() {
+        currentColor.set(scoreboard.getPlayerList().get(currentPlayerNumber).getColor());
+    }
+
+    private void updateCurrentDelta() {
+        if (scoreboard.getDelta() >= 0) {
+            currentDelta.set("+ " + Integer.toString(scoreboard.getDelta()));
+        } else {
+            currentDelta.set("- " + Integer.toString(abs(scoreboard.getDelta())));
+        }
+    }
+
+    private void updateSessionName() {
+        sessionName.set(scoreboard.getSessionName());
     }
 
     public boolean onActivatePlayer(int playerNumber) {
-        currentPlayerNumber.set(playerNumber);
-        updateObservablePlayerIsActiveList();
-        updateObservableCurrentDelta();
+        currentPlayerNumber = playerNumber;
+        updateIsCurrentList();
+        updateCurrentName();
+        updateCurrentColor();
+        updateCurrentDelta();
         return true;
     }
 
@@ -117,74 +197,37 @@ public class ScoreboardViewModel extends ViewModel {
 
     public void onChangeCurrentDelta(int delta) {
         scoreboard.setDelta(scoreboard.getDelta() + delta);
-        updateObservableCurrentDelta();
+        updateCurrentDelta();
     }
 
     public void onChangeCurrentPlayerSettings(String playerName, int playerColor) {
-        scoreboard.getPlayerList().get(currentPlayerNumber.get()).setName(playerName);
-        scoreboard.getPlayerList().get(currentPlayerNumber.get()).setColor(playerColor);
-        updateObservablePlayerNameList();
-        updateObservablePlayerColorList();
+        scoreboard.getPlayerList().get(currentPlayerNumber).setName(playerName);
+        scoreboard.getPlayerList().get(currentPlayerNumber).setColor(playerColor);
+        updateNameList();
+        updateColorList();
+        updateCurrentName();
+        updateCurrentColor();
     }
 
     public void onChangeCurrentPlayerScore() {
-        scoreboard.getPlayerList().get(currentPlayerNumber.get()).setScore(
-                scoreboard.getPlayerList().get(currentPlayerNumber.get()).getScore() + scoreboard.getDelta());
-        updateObservablePlayerScoreList();
-        updateObservablePlayerPartialScoreList();
+        scoreboard.getPlayerList().get(currentPlayerNumber).setScore(
+                scoreboard.getPlayerList().get(currentPlayerNumber).getScore() + scoreboard.getDelta());
+        scoreboard.getPlayerList().get(currentPlayerNumber).getPartialScoreList().add(scoreboard.getDelta());
+        updateScoreList();
+        updatePartialScoreList();
         scoreboard.setDelta(0);
-        updateObservableCurrentDelta();
+        updateCurrentDelta();
     }
 
     public void onResetSession() {
         scoreboard.resetScoreboard();
-        updateObservablePlayerScoreList();
+        updateScoreList();
         scoreboard.setDelta(0);
-        updateObservableCurrentDelta();
+        updateCurrentDelta();
     }
 
     public void onSaveSession() {
 
-    }
-
-    private void updateObservablePlayerIsActiveList() {
-        for (int i = 0; i < numberOfPlayers; i++) {
-            if (i == currentPlayerNumber.get()) {
-                observablePlayerIsActiveList.set(i, true);
-            } else {
-                observablePlayerIsActiveList.set(i, false);
-            }
-        }
-    }
-
-    private void updateObservablePlayerNameList() {
-        for (int i = 0; i < numberOfPlayers; i++) {
-            observablePlayerNameList.set(i, scoreboard.getPlayerList().get(i).getName());
-        }
-    }
-
-    private void updateObservablePlayerScoreList() {
-        for (int i = 0; i < numberOfPlayers; i++) {
-            observablePlayerScoreList.set(i, Integer.toString(scoreboard.getPlayerList().get(i).getScore()));
-        }
-    }
-
-    private void updateObservablePlayerColorList() {
-        for (int i = 0; i < numberOfPlayers; i++) {
-            observablePlayerColorList.set(i, scoreboard.getPlayerList().get(i).getColor());
-        }
-    }
-
-    private void updateObservablePlayerPartialScoreList() {
-        observablePlayerPartialScoreList.set(currentPlayerNumber.get(), observablePlayerPartialScoreList.get(currentPlayerNumber.get()) + scoreboard.getDelta() + " / ");
-    }
-
-    private void updateObservableCurrentDelta() {
-        if (scoreboard.getDelta() >= 0) {
-            observableCurrentDelta.set("+ " + Integer.toString(scoreboard.getDelta()));
-        } else {
-            observableCurrentDelta.set("- " + Integer.toString(abs(scoreboard.getDelta())));
-        }
     }
 
     public LiveData<Boolean> getPlayerSettingsEvent() {

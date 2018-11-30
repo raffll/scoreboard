@@ -15,7 +15,7 @@
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="@{safeUnbox(scoreboardViewModel.observablePlayerVisibilityList[playerNumber])}">
+        android:visibility="@{safeUnbox(scoreboardViewModel.visibilityList[playerNumber])}">
 
         <TextView
             android:layout_width="0dip"
@@ -24,14 +24,14 @@
             android:layout_weight="2"
             android:onClick="@{() -> scoreboardViewModel.onActivatePlayer(playerNumber)}"
             android:onLongClick="@{() -> scoreboardViewModel.onActivatePlayerSettings(playerNumber)}"
-            android:text="@{scoreboardViewModel.observablePlayerNameList[playerNumber]}"
-            android:textStyle='@{safeUnbox(scoreboardViewModel.observablePlayerIsActiveList[playerNumber]) == true ? "bold" : "normal"}'
+            android:text="@{scoreboardViewModel.nameList[playerNumber]}"
+            android:textStyle='@{safeUnbox(scoreboardViewModel.isCurrentList[playerNumber]) == true ? "bold" : "normal"}'
             android:textSize="30sp" />
 
         <TextView
             android:layout_width="30sp"
             android:layout_height="30sp"
-            android:background="@{safeUnbox(scoreboardViewModel.observablePlayerColorList[playerNumber])}"
+            android:background="@{safeUnbox(scoreboardViewModel.colorList[playerNumber])}"
             android:gravity="center"
             android:onLongClick="@{() -> scoreboardViewModel.onActivatePlayerSettings(playerNumber)}" />
 
@@ -41,8 +41,8 @@
             android:layout_margin="4dp"
             android:layout_weight="1"
             android:gravity="end"
-            android:text="@{scoreboardViewModel.observablePlayerScoreList[playerNumber]}"
-            android:textStyle='@{safeUnbox(scoreboardViewModel.observablePlayerIsActiveList[playerNumber]) == true ? "bold" : "normal"}'
+            android:text="@{scoreboardViewModel.scoreList[playerNumber]}"
+            android:textStyle='@{safeUnbox(scoreboardViewModel.isCurrentList[playerNumber]) == true ? "bold" : "normal"}'
             android:textSize="30sp" />
     </TableRow>
 </layout>

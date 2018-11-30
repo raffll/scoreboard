@@ -27,16 +27,18 @@ public class NewSessionDialog extends DialogFragment {
 
     private EditText sessionNameView;
 
-    public static NewSessionDialog newInstance(ScoreboardActivity activity) {
+    public static NewSessionDialog newInstance(ScoreboardActivity activity, int numberOfPlayers, int defaultScore, String sessionName) {
         NewSessionDialog dialog = new NewSessionDialog();
         dialog.scoreboardActivity = activity;
+        dialog.numberOfPlayers = numberOfPlayers;
+        dialog.defaultScore = defaultScore;
+        dialog.sessionName = sessionName;
         return dialog;
     }
 
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        initParams();
         initViews();
         AlertDialog alertDialog = new AlertDialog.Builder(getContext())
                 .setView(rootView)
@@ -47,12 +49,6 @@ public class NewSessionDialog extends DialogFragment {
                 .create();
         alertDialog.setCanceledOnTouchOutside(false);
         return alertDialog;
-    }
-
-    private void initParams() {
-        numberOfPlayers = ScoreboardViewModel.DEFAULT_NUMBER_OF_PLAYERS;
-        defaultScore = 0;
-        sessionName = "Scoreboard";
     }
 
     private void initViews() {

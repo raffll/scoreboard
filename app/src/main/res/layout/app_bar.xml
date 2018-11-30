@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:theme="@style/CustomActionBar"
         app:popupTheme="@style/Theme.AppCompat.Light.DarkActionBar"
-        android:background="@{safeUnbox(scoreboardViewModel.observablePlayerColorList[scoreboardViewModel.currentPlayerNumber])}">
+        android:background="@{safeUnbox(scoreboardViewModel.currentColor)}">
 
     </android.support.v7.widget.Toolbar>
 </layout>
