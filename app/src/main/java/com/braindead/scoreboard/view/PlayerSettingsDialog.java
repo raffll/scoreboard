@@ -26,16 +26,17 @@ public class PlayerSettingsDialog extends DialogFragment {
 
     private EditText playerNameView;
 
-    public static PlayerSettingsDialog newInstance(ScoreboardActivity activity) {
+    public static PlayerSettingsDialog newInstance(ScoreboardActivity activity, String playerName, int playerColor) {
         PlayerSettingsDialog dialog = new PlayerSettingsDialog();
         dialog.scoreboardActivity = activity;
+        dialog.playerName = playerName;
+        dialog.playerColor = playerColor;
         return dialog;
     }
 
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        initParams();
         initViews();
         AlertDialog alertDialog = new AlertDialog.Builder(getContext())
                 .setView(rootView)
@@ -46,11 +47,6 @@ public class PlayerSettingsDialog extends DialogFragment {
                 .create();
         alertDialog.setCanceledOnTouchOutside(false);
         return alertDialog;
-    }
-
-    private void initParams() {
-        playerName = scoreboardActivity.scoreboardViewModel.getCurrentPlayer().getName();
-        playerColor = scoreboardActivity.scoreboardViewModel.getCurrentPlayer().getColor();
     }
 
     private void initViews() {
@@ -65,7 +61,7 @@ public class PlayerSettingsDialog extends DialogFragment {
 
         SpectrumPalette spectrumPalette = rootView.findViewById(R.id.dialog_color_palette);
         spectrumPalette.setColors(ScoreboardViewModel.DEFAULT_COLORS);
-        spectrumPalette.setSelectedColor(scoreboardActivity.scoreboardViewModel.getCurrentPlayer().getColor());
+        spectrumPalette.setSelectedColor(playerColor);
         spectrumPalette.setOnColorSelectedListener((color) -> playerColor = color);
     }
 

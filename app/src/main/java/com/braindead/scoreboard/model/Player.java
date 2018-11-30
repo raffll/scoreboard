@@ -2,10 +2,14 @@ package com.braindead.scoreboard.model;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
-@Entity(tableName = "player_table")
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity(tableName = "player")
 public class Player {
 
     @PrimaryKey(autoGenerate = true)
@@ -20,6 +24,9 @@ public class Player {
 
     @ColumnInfo(name = "color")
     private int color;
+
+    @Ignore
+    private List<Integer> partialScoreList  = new ArrayList<>();
 
     Player(String name, int score, int color) {
         this.name = name;
@@ -49,5 +56,13 @@ public class Player {
 
     public void setColor(int color) {
         this.color = color;
+    }
+
+    public List<Integer> getPartialScoreList() {
+        return partialScoreList;
+    }
+
+    public void setPartialScoreList(List<Integer> partialScoreList) {
+        this.partialScoreList = partialScoreList;
     }
 }

@@ -62,7 +62,7 @@ public class NewSessionDialog extends DialogFragment {
         NumberPicker numberOfPlayersView = rootView.findViewById(R.id.dialog_number_of_players);
         numberOfPlayersView.setMinValue(1);
         numberOfPlayersView.setMaxValue(ScoreboardViewModel.MAX_NUMBER_OF_PLAYERS);
-        numberOfPlayersView.setValue(ScoreboardViewModel.DEFAULT_NUMBER_OF_PLAYERS);
+        numberOfPlayersView.setValue(numberOfPlayers);
         numberOfPlayersView.setOnValueChangedListener(onNumberOfPlayersChangeListener);
 
         NumberPicker defaultScoreView = rootView.findViewById(R.id.dialog_default_score);

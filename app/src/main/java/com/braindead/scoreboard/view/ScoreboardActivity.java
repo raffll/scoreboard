@@ -24,7 +24,6 @@ public class ScoreboardActivity extends AppCompatActivity {
 
     private void createNewSessionDialog() {
         NewSessionDialog dialog = NewSessionDialog.newInstance(this);
-        dialog.setCancelable(false);
         dialog.show(getSupportFragmentManager(), "TAG");
     }
 
@@ -33,10 +32,10 @@ public class ScoreboardActivity extends AppCompatActivity {
     }
 
     private void initDataBinding(int numberOfPlayers, int defaultScore, String sessionName) {
-        ActivityScoreboardBinding activityScoreboardBinding = DataBindingUtil.setContentView(this, R.layout.activity_scoreboard);
+        ActivityScoreboardBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_scoreboard);
         scoreboardViewModel = ViewModelProviders.of(this).get(ScoreboardViewModel.class);
         scoreboardViewModel.init(numberOfPlayers, defaultScore, sessionName);
-        activityScoreboardBinding.setScoreboardViewModel(scoreboardViewModel);
+        binding.setScoreboardViewModel(scoreboardViewModel);
 
         Toolbar toolbar = findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
@@ -56,7 +55,9 @@ public class ScoreboardActivity extends AppCompatActivity {
     }
 
     private void createPlayerSettingsDialog() {
-        PlayerSettingsDialog dialog = PlayerSettingsDialog.newInstance(this);
+        PlayerSettingsDialog dialog = PlayerSettingsDialog.newInstance(this,
+                scoreboardViewModel.observablePlayerNameList.get(scoreboardViewModel.currentPlayerNumber.get()),
+                scoreboardViewModel.observablePlayerColorList.get(scoreboardViewModel.currentPlayerNumber.get()));
         dialog.show(getSupportFragmentManager(), "TAG");
     }
 
