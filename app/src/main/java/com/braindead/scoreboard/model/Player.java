@@ -26,9 +26,9 @@ public class Player {
     private int color;
 
     @Ignore
-    private List<Integer> partialScoreList  = new ArrayList<>();
+    private List<Integer> partialScoreList = new ArrayList<>();
 
-    Player(String name, int score, int color) {
+    public Player(String name, int score, int color) {
         this.name = name;
         this.score = score;
         this.color = color;

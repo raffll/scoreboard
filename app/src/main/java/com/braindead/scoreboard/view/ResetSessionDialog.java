@@ -26,8 +26,8 @@ public class ResetSessionDialog extends DialogFragment {
         AlertDialog alertDialog = new AlertDialog.Builder(getContext())
                 .setTitle("Reset session?")
                 .setCancelable(false)
-                .setPositiveButton(R.string.ok,   ((dialog, which) -> onDoneClicked()))
-                .setNegativeButton(R.string.cancel,  ((dialog, which) -> onCancelClicked()))
+                .setPositiveButton(R.string.ok, ((dialog, which) -> onDoneClicked()))
+                .setNegativeButton(R.string.cancel, ((dialog, which) -> onCancelClicked()))
                 .create();
         alertDialog.setCanceledOnTouchOutside(false);
         return alertDialog;

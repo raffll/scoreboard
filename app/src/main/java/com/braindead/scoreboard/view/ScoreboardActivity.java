@@ -14,7 +14,7 @@ import com.braindead.scoreboard.viewmodel.ScoreboardViewModel;
 
 public class ScoreboardActivity extends AppCompatActivity {
 
-    ScoreboardViewModel scoreboardViewModel;
+    private ScoreboardViewModel scoreboardViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

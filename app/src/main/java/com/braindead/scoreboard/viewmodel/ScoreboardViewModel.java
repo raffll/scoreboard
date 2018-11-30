@@ -32,16 +32,16 @@ public class ScoreboardViewModel extends ViewModel {
     private int numberOfPlayers;
     private int currentPlayerNumber;
 
-    public ObservableArrayList<Boolean> visibilityList = new ObservableArrayList<>();
-    public ObservableArrayList<Boolean> isCurrentList = new ObservableArrayList<>();
-    public ObservableArrayList<String> nameList = new ObservableArrayList<>();
-    public ObservableArrayList<String> scoreList = new ObservableArrayList<>();
-    public ObservableArrayList<String> partialScoreList = new ObservableArrayList<>();
-    public ObservableArrayList<Integer> colorList = new ObservableArrayList<>();
-    public ObservableField<String> currentName = new ObservableField<>();
-    public ObservableField<Integer> currentColor = new ObservableField<>();
-    public ObservableField<String> currentDelta = new ObservableField<>();
-    public ObservableField<String> sessionName = new ObservableField<>();
+    public ObservableArrayList<Boolean> visibilityList;
+    public ObservableArrayList<Boolean> isCurrentList;
+    public ObservableArrayList<String> nameList;
+    public ObservableArrayList<String> scoreList;
+    public ObservableArrayList<String> partialScoreList;
+    public ObservableArrayList<Integer> colorList;
+    public ObservableField<String> currentName;
+    public ObservableField<Integer> currentColor;
+    public ObservableField<String> currentDelta;
+    public ObservableField<String> sessionName;
 
     private MutableLiveData<Boolean> playerSettingsEvent = new MutableLiveData<>();
 
@@ -62,6 +62,7 @@ public class ScoreboardViewModel extends ViewModel {
     }
 
     private void initVisibilityList() {
+        visibilityList = new ObservableArrayList<>();
         for (int i = 0; i < MAX_NUMBER_OF_PLAYERS; i++) {
             if (i < numberOfPlayers) {
                 visibilityList.add(true);
@@ -72,6 +73,7 @@ public class ScoreboardViewModel extends ViewModel {
     }
 
     private void initIsCurrentList() {
+        isCurrentList = new ObservableArrayList<>();
         for (int i = 0; i < numberOfPlayers; i++) {
             if (i == currentPlayerNumber) {
                 isCurrentList.add(true);
@@ -82,42 +84,50 @@ public class ScoreboardViewModel extends ViewModel {
     }
 
     private void initNameList() {
+        nameList = new ObservableArrayList<>();
         for (int i = 0; i < numberOfPlayers; i++) {
             nameList.add(scoreboard.getPlayerList().get(i).getName());
         }
     }
 
     private void initScoreList() {
+        scoreList = new ObservableArrayList<>();
         for (int i = 0; i < numberOfPlayers; i++) {
             scoreList.add(Integer.toString(scoreboard.getPlayerList().get(i).getScore()));
         }
     }
 
     private void initPartialScoreList() {
+        partialScoreList = new ObservableArrayList<>();
         for (int i = 0; i < numberOfPlayers; i++) {
             partialScoreList.add("");
         }
     }
 
     private void initColorList() {
+        colorList = new ObservableArrayList<>();
         for (int i = 0; i < numberOfPlayers; i++) {
             colorList.add(scoreboard.getPlayerList().get(i).getColor());
         }
     }
 
     private void initCurrentName() {
+        currentName = new ObservableField<>();
         updateCurrentName();
     }
 
     private void initCurrentColor() {
+        currentColor = new ObservableField<>();
         updateCurrentColor();
     }
 
     private void initCurrentDelta() {
+        currentDelta = new ObservableField<>();
         updateCurrentDelta();
     }
 
     private void initSessionName() {
+        sessionName = new ObservableField<>();
         updateSessionName();
     }
 
