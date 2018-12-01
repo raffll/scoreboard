@@ -90,10 +90,19 @@ public class ScoreboardActivity extends AppCompatActivity {
                 createSaveSessionDialog();
                 return true;
             case R.id.undo:
-                createSaveSessionDialog();
+                // TODO
                 return true;
             case R.id.redo:
-                createSaveSessionDialog();
+                // TODO
+                return true;
+            case R.id.add_zeroes:
+                if (item.isChecked()) {
+                    item.setChecked(false);
+                    onAddingZeroesSet(false);
+                } else {
+                    item.setChecked(true);
+                    onAddingZeroesSet(true);
+                }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -116,6 +125,10 @@ public class ScoreboardActivity extends AppCompatActivity {
 
     public void onSaveSessionSet() {
         scoreboardViewModel.onSaveSession();
+    }
+
+    public void onAddingZeroesSet(boolean option) {
+        scoreboardViewModel.onAddingZeroes(option);
     }
 
     @Override

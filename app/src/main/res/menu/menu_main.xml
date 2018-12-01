@@ -33,4 +33,13 @@
             android:title="@string/redo"
             app:showAsAction="never" />
     </group>
+
+    <group android:checkableBehavior="all">
+
+        <item
+            android:id="@+id/add_zeroes"
+            android:checkable="true"
+            android:icon="@android:drawable/ic_menu_preferences"
+            android:title="Adding '0' Enabled" />
+    </group>
 </menu>
