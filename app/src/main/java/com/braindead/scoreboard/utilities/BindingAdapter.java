@@ -3,6 +3,7 @@ package com.braindead.scoreboard.utilities;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 public abstract class BindingAdapter {
@@ -36,4 +37,23 @@ public abstract class BindingAdapter {
     public static void setBackgroundTint(View view, int color) {
         view.setBackgroundTintList(ColorStateList.valueOf(color));
     }*/
+
+    @android.databinding.BindingAdapter({"bind:textSize"})
+    public static void setTextSize(TextView view, int value) {
+        view.setTextSize(value);
+    }
+
+    @android.databinding.BindingAdapter({"bind:layout_width"})
+    public static void setLayoutWidth(TextView view, int value) {
+        ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
+        layoutParams.width = value + 10;
+        view.setLayoutParams(layoutParams);
+    }
+
+    @android.databinding.BindingAdapter({"bind:layout_height"})
+    public static void setLayoutHeight(TextView view, int value) {
+        ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
+        layoutParams.height = value + 10;
+        view.setLayoutParams(layoutParams);
+    }
 }

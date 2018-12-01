@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -26,11 +27,11 @@
             android:onLongClick="@{() -> scoreboardViewModel.onActivatePlayerSettings(playerNumber)}"
             android:text="@{scoreboardViewModel.nameList[playerNumber]}"
             android:textStyle='@{safeUnbox(scoreboardViewModel.isCurrentList[playerNumber]) == true ? "bold" : "normal"}'
-            android:textSize="30sp" />
+            bind:textSize="@{scoreboardViewModel.fontSize}" />
 
         <TextView
-            android:layout_width="30sp"
-            android:layout_height="30sp"
+            bind:layout_width="@{scoreboardViewModel.fontSize}"
+            bind:layout_height="@{scoreboardViewModel.fontSize}"
             android:background="@{safeUnbox(scoreboardViewModel.colorList[playerNumber])}"
             android:gravity="center"
             android:onLongClick="@{() -> scoreboardViewModel.onActivatePlayerSettings(playerNumber)}" />
@@ -43,6 +44,6 @@
             android:gravity="end"
             android:text="@{scoreboardViewModel.scoreList[playerNumber]}"
             android:textStyle='@{safeUnbox(scoreboardViewModel.isCurrentList[playerNumber]) == true ? "bold" : "normal"}'
-            android:textSize="30sp" />
+            bind:textSize="@{scoreboardViewModel.fontSize}" />
     </TableRow>
 </layout>

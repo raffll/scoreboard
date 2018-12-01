@@ -43,6 +43,7 @@ public class ScoreboardViewModel extends ViewModel {
     public ObservableField<Integer> currentColor;
     public ObservableField<String> currentDelta;
     public ObservableField<String> sessionName;
+    public ObservableField<Integer> fontSize;
 
     private MutableLiveData<Boolean> playerSettingsEvent = new MutableLiveData<>();
 
@@ -60,6 +61,11 @@ public class ScoreboardViewModel extends ViewModel {
         initCurrentColor();
         initCurrentDelta();
         initSessionName();
+        if (numberOfPlayers > 4) {
+            initFontSize(24);
+        } else {
+            initFontSize(30);
+        }
     }
 
     private void initVisibilityList() {
@@ -132,6 +138,11 @@ public class ScoreboardViewModel extends ViewModel {
         updateSessionName();
     }
 
+    private void initFontSize(int size) {
+        fontSize = new ObservableField<>();
+        updateFontSize(size);
+    }
+
     private void updateIsCurrentList() {
         for (int i = 0; i < numberOfPlayers; i++) {
             if (i == currentPlayerNumber) {
@@ -193,6 +204,10 @@ public class ScoreboardViewModel extends ViewModel {
 
     private void updateSessionName() {
         sessionName.set(scoreboard.getSessionName());
+    }
+
+    private void updateFontSize(int size) {
+        fontSize.set(size);
     }
 
     public boolean onActivatePlayer(int playerNumber) {
