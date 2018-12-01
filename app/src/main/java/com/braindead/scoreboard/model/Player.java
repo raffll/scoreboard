@@ -65,4 +65,17 @@ public class Player {
     public void setPartialScoreList(List<Integer> partialScoreList) {
         this.partialScoreList = partialScoreList;
     }
+
+    public int getLastPartialScore() {
+        if (partialScoreList != null && !partialScoreList.isEmpty()) {
+            return partialScoreList.get(partialScoreList.size() - 1);
+        } else
+            return 0;
+    }
+
+    public void removeLastPartialScore() {
+        if (partialScoreList != null && !partialScoreList.isEmpty()) {
+            partialScoreList.remove(partialScoreList.size() - 1);
+        }
+    }
 }

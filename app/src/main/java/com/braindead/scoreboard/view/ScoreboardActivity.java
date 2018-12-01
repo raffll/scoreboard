@@ -90,10 +90,10 @@ public class ScoreboardActivity extends AppCompatActivity {
                 createSaveSessionDialog();
                 return true;
             case R.id.undo:
-                // TODO
+                onUndoSet();
                 return true;
             case R.id.redo:
-                // TODO
+                onRedoSet();
                 return true;
             case R.id.add_zeroes:
                 if (item.isChecked()) {
@@ -125,6 +125,14 @@ public class ScoreboardActivity extends AppCompatActivity {
 
     public void onSaveSessionSet() {
         scoreboardViewModel.onSaveSession();
+    }
+
+    public void onUndoSet() {
+        scoreboardViewModel.onUndo();
+    }
+
+    public void onRedoSet() {
+        scoreboardViewModel.onRedo();
     }
 
     public void onAddingZeroesSet(boolean option) {

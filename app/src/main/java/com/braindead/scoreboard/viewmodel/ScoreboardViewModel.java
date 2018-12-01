@@ -28,9 +28,6 @@ public class ScoreboardViewModel extends ViewModel {
     };
 
     private Scoreboard scoreboard;
-
-    private int numberOfPlayers;
-    private int currentPlayerNumber;
     private boolean adding_zeroes;
 
     public ObservableArrayList<Boolean> visibilityList;
@@ -48,8 +45,6 @@ public class ScoreboardViewModel extends ViewModel {
     private MutableLiveData<Boolean> playerSettingsEvent = new MutableLiveData<>();
 
     public void init(int numberOfPlayers, int defaultScore, String sessionName) {
-        this.numberOfPlayers = numberOfPlayers;
-        this.currentPlayerNumber = 0;
         this.scoreboard = new Scoreboard(numberOfPlayers, defaultScore, DEFAULT_COLORS, sessionName);
         initVisibilityList();
         initIsCurrentList();
@@ -61,17 +56,13 @@ public class ScoreboardViewModel extends ViewModel {
         initCurrentColor();
         initCurrentDelta();
         initSessionName();
-        if (numberOfPlayers > 4) {
-            initFontSize(24);
-        } else {
-            initFontSize(30);
-        }
+        initFontSize(30);
     }
 
     private void initVisibilityList() {
         visibilityList = new ObservableArrayList<>();
         for (int i = 0; i < MAX_NUMBER_OF_PLAYERS; i++) {
-            if (i < numberOfPlayers) {
+            if (i < scoreboard.getNumberOfPlayers()) {
                 visibilityList.add(true);
             } else {
                 visibilityList.add(false);
@@ -81,8 +72,8 @@ public class ScoreboardViewModel extends ViewModel {
 
     private void initIsCurrentList() {
         isCurrentList = new ObservableArrayList<>();
-        for (int i = 0; i < numberOfPlayers; i++) {
-            if (i == currentPlayerNumber) {
+        for (int i = 0; i < scoreboard.getNumberOfPlayers(); i++) {
+            if (i == scoreboard.getCurrentPlayerNumber()) {
                 isCurrentList.add(true);
             } else {
                 isCurrentList.add(false);
@@ -92,29 +83,29 @@ public class ScoreboardViewModel extends ViewModel {
 
     private void initNameList() {
         nameList = new ObservableArrayList<>();
-        for (int i = 0; i < numberOfPlayers; i++) {
-            nameList.add(scoreboard.getPlayerList().get(i).getName());
+        for (int i = 0; i < scoreboard.getNumberOfPlayers(); i++) {
+            nameList.add(scoreboard.getPlayer(i).getName());
         }
     }
 
     private void initScoreList() {
         scoreList = new ObservableArrayList<>();
-        for (int i = 0; i < numberOfPlayers; i++) {
-            scoreList.add(Integer.toString(scoreboard.getPlayerList().get(i).getScore()));
+        for (int i = 0; i < scoreboard.getNumberOfPlayers(); i++) {
+            scoreList.add(Integer.toString(scoreboard.getPlayer(i).getScore()));
         }
     }
 
     private void initPartialScoreList() {
         partialScoreList = new ObservableArrayList<>();
-        for (int i = 0; i < numberOfPlayers; i++) {
+        for (int i = 0; i < scoreboard.getNumberOfPlayers(); i++) {
             partialScoreList.add("");
         }
     }
 
     private void initColorList() {
         colorList = new ObservableArrayList<>();
-        for (int i = 0; i < numberOfPlayers; i++) {
-            colorList.add(scoreboard.getPlayerList().get(i).getColor());
+        for (int i = 0; i < scoreboard.getNumberOfPlayers(); i++) {
+            colorList.add(scoreboard.getPlayer(i).getColor());
         }
     }
 
@@ -144,8 +135,8 @@ public class ScoreboardViewModel extends ViewModel {
     }
 
     private void updateIsCurrentList() {
-        for (int i = 0; i < numberOfPlayers; i++) {
-            if (i == currentPlayerNumber) {
+        for (int i = 0; i < scoreboard.getNumberOfPlayers(); i++) {
+            if (i == scoreboard.getCurrentPlayerNumber()) {
                 isCurrentList.set(i, true);
             } else {
                 isCurrentList.set(i, false);
@@ -154,26 +145,26 @@ public class ScoreboardViewModel extends ViewModel {
     }
 
     private void updateNameList() {
-        for (int i = 0; i < numberOfPlayers; i++) {
-            nameList.set(i, scoreboard.getPlayerList().get(i).getName());
+        for (int i = 0; i < scoreboard.getNumberOfPlayers(); i++) {
+            nameList.set(i, scoreboard.getPlayer(i).getName());
         }
     }
 
     private void updateScoreList() {
-        for (int i = 0; i < numberOfPlayers; i++) {
-            scoreList.set(i, Integer.toString(scoreboard.getPlayerList().get(i).getScore()));
+        for (int i = 0; i < scoreboard.getNumberOfPlayers(); i++) {
+            scoreList.set(i, Integer.toString(scoreboard.getPlayer(i).getScore()));
         }
     }
 
     private void updatePartialScoreList() {
         String temp;
-        for (int i = 0; i < numberOfPlayers; i++) {
+        for (int i = 0; i < scoreboard.getNumberOfPlayers(); i++) {
             temp = "";
-            if (scoreboard.getPlayerList().get(i).getPartialScoreList().size() == 0) {
+            if (scoreboard.getPlayer(i).getPartialScoreList().size() == 0) {
                 partialScoreList.set(i, temp);
             } else {
-                for (int k = 0; k < scoreboard.getPlayerList().get(i).getPartialScoreList().size(); k++) {
-                    temp += scoreboard.getPlayerList().get(i).getPartialScoreList().get(k) + " / ";
+                for (int k = 0; k < scoreboard.getPlayer(i).getPartialScoreList().size(); k++) {
+                    temp += scoreboard.getPlayer(i).getPartialScoreList().get(k) + " / ";
                     partialScoreList.set(i, temp);
                 }
             }
@@ -181,17 +172,17 @@ public class ScoreboardViewModel extends ViewModel {
     }
 
     private void updateColorList() {
-        for (int i = 0; i < numberOfPlayers; i++) {
-            colorList.set(i, scoreboard.getPlayerList().get(i).getColor());
+        for (int i = 0; i < scoreboard.getNumberOfPlayers(); i++) {
+            colorList.set(i, scoreboard.getPlayer(i).getColor());
         }
     }
 
     private void updateCurrentName() {
-        currentName.set(scoreboard.getPlayerList().get(currentPlayerNumber).getName());
+        currentName.set(scoreboard.getCurrentPlayer().getName());
     }
 
     private void updateCurrentColor() {
-        currentColor.set(scoreboard.getPlayerList().get(currentPlayerNumber).getColor());
+        currentColor.set(scoreboard.getCurrentPlayer().getColor());
     }
 
     private void updateCurrentDelta() {
@@ -211,7 +202,7 @@ public class ScoreboardViewModel extends ViewModel {
     }
 
     public boolean onActivatePlayer(int playerNumber) {
-        currentPlayerNumber = playerNumber;
+        scoreboard.setCurrentPlayerNumber(playerNumber);
         updateIsCurrentList();
         updateCurrentName();
         updateCurrentColor();
@@ -231,8 +222,8 @@ public class ScoreboardViewModel extends ViewModel {
     }
 
     public void onChangeCurrentPlayerSettings(String playerName, int playerColor) {
-        scoreboard.getPlayerList().get(currentPlayerNumber).setName(playerName);
-        scoreboard.getPlayerList().get(currentPlayerNumber).setColor(playerColor);
+        scoreboard.getCurrentPlayer().setName(playerName);
+        scoreboard.getCurrentPlayer().setColor(playerColor);
         updateNameList();
         updateColorList();
         updateCurrentName();
@@ -241,9 +232,9 @@ public class ScoreboardViewModel extends ViewModel {
 
     public void onChangeCurrentPlayerScore() {
         if (adding_zeroes == true || (adding_zeroes == false && scoreboard.getDelta() != 0)) {
-            scoreboard.getPlayerList().get(currentPlayerNumber).setScore(
-                    scoreboard.getPlayerList().get(currentPlayerNumber).getScore() + scoreboard.getDelta());
-            scoreboard.getPlayerList().get(currentPlayerNumber).getPartialScoreList().add(scoreboard.getDelta());
+            scoreboard.getCurrentPlayer().setScore(
+                    scoreboard.getCurrentPlayer().getScore() + scoreboard.getDelta());
+            scoreboard.getCurrentPlayer().getPartialScoreList().add(scoreboard.getDelta());
             updateScoreList();
             updatePartialScoreList();
             scoreboard.setDelta(0);
@@ -260,6 +251,18 @@ public class ScoreboardViewModel extends ViewModel {
     }
 
     public void onSaveSession() {
+
+    }
+
+    public void onUndo() {
+        scoreboard.getCurrentPlayer().setScore(
+                scoreboard.getCurrentPlayer().getScore() - scoreboard.getCurrentPlayer().getLastPartialScore());
+        scoreboard.getCurrentPlayer().removeLastPartialScore();
+        updateScoreList();
+        updatePartialScoreList();
+    }
+
+    public void onRedo() {
 
     }
 
