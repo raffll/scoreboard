@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Scoreboard {
 
-    private List<Player> playerList = new ArrayList<>();;
+    private List<Player> playerList = new ArrayList<>();
     private String sessionName;
     private int delta;
 
