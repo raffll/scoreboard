@@ -31,6 +31,7 @@ public class ScoreboardViewModel extends ViewModel {
 
     private int numberOfPlayers;
     private int currentPlayerNumber;
+    private boolean adding_zeroes;
 
     public ObservableArrayList<Boolean> visibilityList;
     public ObservableArrayList<Boolean> isCurrentList;
@@ -224,9 +225,7 @@ public class ScoreboardViewModel extends ViewModel {
     }
 
     public void onChangeCurrentPlayerScore() {
-        if (scoreboard.getDelta() == 0) {
-
-        } else {
+        if (adding_zeroes == true || (adding_zeroes == false && scoreboard.getDelta() != 0)) {
             scoreboard.getPlayerList().get(currentPlayerNumber).setScore(
                     scoreboard.getPlayerList().get(currentPlayerNumber).getScore() + scoreboard.getDelta());
             scoreboard.getPlayerList().get(currentPlayerNumber).getPartialScoreList().add(scoreboard.getDelta());
@@ -247,6 +246,10 @@ public class ScoreboardViewModel extends ViewModel {
 
     public void onSaveSession() {
 
+    }
+
+    public void onAddingZeroes(boolean option) {
+        adding_zeroes = option;
     }
 
     public LiveData<Boolean> getPlayerSettingsEvent() {
