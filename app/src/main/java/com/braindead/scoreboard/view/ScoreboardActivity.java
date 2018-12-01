@@ -3,6 +3,7 @@ package com.braindead.scoreboard.view;
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.v4.view.MenuCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -40,8 +41,9 @@ public class ScoreboardActivity extends AppCompatActivity {
         scoreboardViewModel.init(numberOfPlayers, defaultScore, sessionName);
         binding.setScoreboardViewModel(scoreboardViewModel);
 
-        Toolbar toolbar = findViewById(R.id.app_bar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         setUpOnPlayerSettingsEventListener();
     }
@@ -71,6 +73,7 @@ public class ScoreboardActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        MenuCompat.setGroupDividerEnabled(menu, true);
         return true;
     }
 
@@ -84,6 +87,12 @@ public class ScoreboardActivity extends AppCompatActivity {
                 createResetSessionDialog();
                 return true;
             case R.id.menu_save_session:
+                createSaveSessionDialog();
+                return true;
+            case R.id.undo:
+                createSaveSessionDialog();
+                return true;
+            case R.id.redo:
                 createSaveSessionDialog();
                 return true;
             default:

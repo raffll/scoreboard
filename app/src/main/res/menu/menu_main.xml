@@ -7,20 +7,30 @@
 
         <item
             android:id="@+id/menu_new_session"
-            android:orderInCategory="1"
             android:title="@string/menu_new_session"
             app:showAsAction="never" />
 
         <item
             android:id="@+id/menu_reset_session"
-            android:orderInCategory="1"
             android:title="@string/menu_reset_session"
             app:showAsAction="never" />
 
         <item
             android:id="@+id/menu_save_session"
-            android:orderInCategory="1"
             android:title="@string/menu_save_session"
+            app:showAsAction="never" />
+    </group>
+
+    <group android:id="@+id/grp2">
+
+        <item
+            android:id="@+id/undo"
+            android:title="@string/undo"
+            app:showAsAction="never" />
+
+        <item
+            android:id="@+id/redo"
+            android:title="@string/redo"
             app:showAsAction="never" />
     </group>
 </menu>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="scoreboardViewModel"
+            type="com.braindead.scoreboard.viewmodel.ScoreboardViewModel" />
+    </data>
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@{safeUnbox(scoreboardViewModel.currentColor)}"
+        android:theme="@style/CustomActionBar"
+        app:popupTheme="@style/Theme.AppCompat.Light.DarkActionBar">
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{scoreboardViewModel.sessionName}"
+            android:textColor="@color/white" />
+    </android.support.v7.widget.Toolbar>
+</layout>

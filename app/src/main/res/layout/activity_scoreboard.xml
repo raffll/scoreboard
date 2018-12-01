@@ -16,8 +16,8 @@
         android:keepScreenOn="true">
 
         <include
-            android:id="@+id/app_bar"
-            layout="@layout/app_bar"
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar"
             bind:scoreboardViewModel="@{scoreboardViewModel}" />
 
         <ScrollView
@@ -26,7 +26,7 @@
             app:layout_constraintBottom_toTopOf="@+id/button_table"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/app_bar">
+            app:layout_constraintTop_toBottomOf="@id/toolbar">
 
             <TableLayout
                 android:id="@+id/player_table"
@@ -222,6 +222,7 @@
                     android:backgroundTint="@{safeUnbox(scoreboardViewModel.currentColor)}"
                     android:onClick="@{() -> scoreboardViewModel.onChangeCurrentPlayerScore()}"
                     android:text="@string/ok"
+                    android:textAllCaps="false"
                     android:textSize="20sp" />
             </TableRow>
         </TableLayout>

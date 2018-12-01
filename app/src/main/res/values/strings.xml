@@ -21,4 +21,6 @@
     <string name="menu_reset_session">Reset Session</string>
     <string name="menu_player_name">Change Player Name</string>
     <string name="menu_player_color">Change Player Color</string>
+    <string name="undo">Undo</string>
+    <string name="redo">Redo</string>
 </resources>

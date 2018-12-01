@@ -157,9 +157,13 @@ public class ScoreboardViewModel extends ViewModel {
         String temp;
         for (int i = 0; i < numberOfPlayers; i++) {
             temp = "";
-            for (int k = 0; k < scoreboard.getPlayerList().get(i).getPartialScoreList().size(); k++) {
-                temp += scoreboard.getPlayerList().get(i).getPartialScoreList().get(k) + " / ";
+            if (scoreboard.getPlayerList().get(i).getPartialScoreList().size() == 0) {
                 partialScoreList.set(i, temp);
+            } else {
+                for (int k = 0; k < scoreboard.getPlayerList().get(i).getPartialScoreList().size(); k++) {
+                    temp += scoreboard.getPlayerList().get(i).getPartialScoreList().get(k) + " / ";
+                    partialScoreList.set(i, temp);
+                }
             }
         }
     }
@@ -220,18 +224,23 @@ public class ScoreboardViewModel extends ViewModel {
     }
 
     public void onChangeCurrentPlayerScore() {
-        scoreboard.getPlayerList().get(currentPlayerNumber).setScore(
-                scoreboard.getPlayerList().get(currentPlayerNumber).getScore() + scoreboard.getDelta());
-        scoreboard.getPlayerList().get(currentPlayerNumber).getPartialScoreList().add(scoreboard.getDelta());
-        updateScoreList();
-        updatePartialScoreList();
-        scoreboard.setDelta(0);
-        updateCurrentDelta();
+        if (scoreboard.getDelta() == 0) {
+
+        } else {
+            scoreboard.getPlayerList().get(currentPlayerNumber).setScore(
+                    scoreboard.getPlayerList().get(currentPlayerNumber).getScore() + scoreboard.getDelta());
+            scoreboard.getPlayerList().get(currentPlayerNumber).getPartialScoreList().add(scoreboard.getDelta());
+            updateScoreList();
+            updatePartialScoreList();
+            scoreboard.setDelta(0);
+            updateCurrentDelta();
+        }
     }
 
     public void onResetSession() {
         scoreboard.resetScoreboard();
         updateScoreList();
+        updatePartialScoreList();
         scoreboard.setDelta(0);
         updateCurrentDelta();
     }
@@ -245,6 +254,6 @@ public class ScoreboardViewModel extends ViewModel {
     }
 
     public void disablePlayerSettingsEvent() {
-        playerSettingsEvent.setValue(false);
+        this.playerSettingsEvent.setValue(false);
     }
 }
