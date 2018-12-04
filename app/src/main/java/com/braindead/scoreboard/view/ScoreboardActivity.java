@@ -33,6 +33,7 @@ public class ScoreboardActivity extends AppCompatActivity {
 
     public void onNewSessionSet(int numberOfPlayers, int defaultScore, String sessionName) {
         initDataBinding(numberOfPlayers, defaultScore, sessionName);
+        initActionBar();
     }
 
     private void initDataBinding(int numberOfPlayers, int defaultScore, String sessionName) {
@@ -40,12 +41,14 @@ public class ScoreboardActivity extends AppCompatActivity {
         scoreboardViewModel = ViewModelProviders.of(this).get(ScoreboardViewModel.class);
         scoreboardViewModel.init(numberOfPlayers, defaultScore, sessionName);
         binding.setScoreboardViewModel(scoreboardViewModel);
+        
+        setUpOnPlayerSettingsEventListener();
+    }
 
+    private void initActionBar() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-
-        setUpOnPlayerSettingsEventListener();
     }
 
     private void setUpOnPlayerSettingsEventListener() {
