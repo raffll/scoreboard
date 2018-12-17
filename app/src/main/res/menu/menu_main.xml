@@ -14,11 +14,6 @@
             android:id="@+id/menu_reset_session"
             android:title="@string/menu_reset_session"
             app:showAsAction="never" />
-
-        <item
-            android:id="@+id/menu_save_session"
-            android:title="@string/menu_save_session"
-            app:showAsAction="never" />
     </group>
 
     <group android:id="@+id/grp2">
@@ -27,19 +22,5 @@
             android:id="@+id/undo"
             android:title="@string/undo"
             app:showAsAction="never" />
-
-        <item
-            android:id="@+id/redo"
-            android:title="@string/redo"
-            app:showAsAction="never" />
-    </group>
-
-    <group android:checkableBehavior="all">
-
-        <item
-            android:id="@+id/add_zeroes"
-            android:checkable="true"
-            android:icon="@android:drawable/ic_menu_preferences"
-            android:title="Adding '0' Enabled" />
     </group>
 </menu>

@@ -20,7 +20,9 @@ public class ScoreboardActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        createNewSessionDialog();
+        if (savedInstanceState == null) {
+            createNewSessionDialog();
+        }
     }
 
     private void createNewSessionDialog() {
@@ -41,7 +43,7 @@ public class ScoreboardActivity extends AppCompatActivity {
         scoreboardViewModel = ViewModelProviders.of(this).get(ScoreboardViewModel.class);
         scoreboardViewModel.init(numberOfPlayers, defaultScore, sessionName);
         binding.setScoreboardViewModel(scoreboardViewModel);
-        
+
         setUpOnPlayerSettingsEventListener();
     }
 
@@ -89,23 +91,8 @@ public class ScoreboardActivity extends AppCompatActivity {
             case R.id.menu_reset_session:
                 createResetSessionDialog();
                 return true;
-            case R.id.menu_save_session:
-                createSaveSessionDialog();
-                return true;
             case R.id.undo:
                 onUndoSet();
-                return true;
-            case R.id.redo:
-                onRedoSet();
-                return true;
-            case R.id.add_zeroes:
-                if (item.isChecked()) {
-                    item.setChecked(false);
-                    onAddingZeroesSet(false);
-                } else {
-                    item.setChecked(true);
-                    onAddingZeroesSet(true);
-                }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -134,16 +121,20 @@ public class ScoreboardActivity extends AppCompatActivity {
         scoreboardViewModel.onUndo();
     }
 
-    public void onRedoSet() {
-        scoreboardViewModel.onRedo();
-    }
-
-    public void onAddingZeroesSet(boolean option) {
-        scoreboardViewModel.onAddingZeroes(option);
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putParcelable("scoreboard", scoreboardViewModel.getScoreboard());
     }
 
     @Override
-    protected void onRestart() {
-        super.onRestart();
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        scoreboardViewModel.setScoreboard(savedInstanceState.getParcelable("scoreboard"));
+    }
+
+    @Override
+    public void onBackPressed() {
+        // Disabled
     }
 }

@@ -28,7 +28,6 @@ public class ScoreboardViewModel extends ViewModel {
     };
 
     private Scoreboard scoreboard;
-    private boolean adding_zeroes;
 
     public ObservableArrayList<Boolean> visibilityList;
     public ObservableArrayList<Boolean> isCurrentList;
@@ -45,7 +44,7 @@ public class ScoreboardViewModel extends ViewModel {
     private MutableLiveData<Boolean> playerSettingsEvent = new MutableLiveData<>();
 
     public void init(int numberOfPlayers, int defaultScore, String sessionName) {
-        this.scoreboard = new Scoreboard(numberOfPlayers, defaultScore, DEFAULT_COLORS, sessionName);
+        this.scoreboard = new Scoreboard(numberOfPlayers, defaultScore, sessionName, DEFAULT_COLORS);
         initVisibilityList();
         initIsCurrentList();
         initNameList();
@@ -57,6 +56,14 @@ public class ScoreboardViewModel extends ViewModel {
         initCurrentDelta();
         initSessionName();
         initFontSize(30);
+    }
+
+    public void setScoreboard(Scoreboard scoreboard) {
+        this.scoreboard = scoreboard;
+    }
+
+    public Scoreboard getScoreboard() {
+        return scoreboard;
     }
 
     private void initVisibilityList() {
@@ -231,7 +238,7 @@ public class ScoreboardViewModel extends ViewModel {
     }
 
     public void onChangeCurrentPlayerScore() {
-        if (adding_zeroes == true || (adding_zeroes == false && scoreboard.getDelta() != 0)) {
+        if (scoreboard.getDelta() != 0) {
             scoreboard.getCurrentPlayer().setScore(
                     scoreboard.getCurrentPlayer().getScore() + scoreboard.getDelta());
             scoreboard.getCurrentPlayer().getPartialScoreList().add(scoreboard.getDelta());
@@ -260,14 +267,6 @@ public class ScoreboardViewModel extends ViewModel {
         scoreboard.getCurrentPlayer().removeLastPartialScore();
         updateScoreList();
         updatePartialScoreList();
-    }
-
-    public void onRedo() {
-
-    }
-
-    public void onAddingZeroes(boolean option) {
-        adding_zeroes = option;
     }
 
     public LiveData<Boolean> getPlayerSettingsEvent() {

@@ -4,13 +4,15 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity(tableName = "player")
-public class Player {
+public class Player implements Parcelable {
 
     @PrimaryKey(autoGenerate = true)
     @NonNull
@@ -77,5 +79,35 @@ public class Player {
         if (partialScoreList != null && !partialScoreList.isEmpty()) {
             partialScoreList.remove(partialScoreList.size() - 1);
         }
+    }
+
+    public int describeContents() {
+        return 0;
+    }
+
+    public void writeToParcel(Parcel out, int flags) {
+        out.writeInt(id);
+        out.writeString(name);
+        out.writeInt(score);
+        out.writeInt(color);
+        out.writeList(partialScoreList);
+    }
+
+    public static final Parcelable.Creator<Player> CREATOR = new Parcelable.Creator<Player>() {
+        public Player createFromParcel(Parcel in) {
+            return new Player(in);
+        }
+
+        public Player[] newArray(int size) {
+            return new Player[size];
+        }
+    };
+
+    private Player(Parcel in) {
+        id = in.readInt();
+        name = in.readString();
+        score = in.readInt();
+        color = in.readInt();
+        partialScoreList = in.readArrayList(null);
     }
 }

@@ -1,9 +1,12 @@
 package com.braindead.scoreboard.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Scoreboard {
+public class Scoreboard implements Parcelable {
 
     private List<Player> playerList = new ArrayList<>();
     private int numberOfPlayers;
@@ -13,7 +16,7 @@ public class Scoreboard {
     private int currentPlayerNumber;
     private int delta;
 
-    public Scoreboard(int numberOfPlayers, int defaultScore, int[] defaultColors, String sessionName) {
+    public Scoreboard(int numberOfPlayers, int defaultScore, String sessionName, int[] defaultColors) {
         this.numberOfPlayers = numberOfPlayers;
         this.defaultScore = defaultScore;
         this.sessionName = sessionName;
@@ -83,5 +86,37 @@ public class Scoreboard {
             player.setScore(defaultScore);
             player.getPartialScoreList().clear();
         }
+    }
+
+    public int describeContents() {
+        return 0;
+    }
+
+    public void writeToParcel(Parcel out, int flags) {
+        out.writeList(playerList);
+        out.writeInt(numberOfPlayers);
+        out.writeInt(defaultScore);
+        out.writeString(sessionName);
+        out.writeInt(currentPlayerNumber);
+        out.writeInt(delta);
+    }
+
+    public static final Parcelable.Creator<Scoreboard> CREATOR = new Parcelable.Creator<Scoreboard>() {
+        public Scoreboard createFromParcel(Parcel in) {
+            return new Scoreboard(in);
+        }
+
+        public Scoreboard[] newArray(int size) {
+            return new Scoreboard[size];
+        }
+    };
+
+    private Scoreboard(Parcel in) {
+        playerList = in.readArrayList(null);
+        numberOfPlayers = in.readInt();
+        defaultScore = in.readInt();
+        sessionName = in.readString();
+        currentPlayerNumber = in.readInt();
+        delta = in.readInt();
     }
 }
