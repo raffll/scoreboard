@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.braindead.scoreboard.ui.scoreboard.ScoreboardFragment;
+import com.braindead.scoreboard.ui.sessions.SessionsFragment;
 
 public class MainSectionsAdapter extends FragmentPagerAdapter
 {
@@ -25,7 +26,7 @@ public class MainSectionsAdapter extends FragmentPagerAdapter
             case 0:
                 return ScoreboardFragment.newInstance();
             case 1:
-                return ScoreboardFragment.newInstance();
+                return SessionsFragment.newInstance();
             default:
                 return null;
         }
