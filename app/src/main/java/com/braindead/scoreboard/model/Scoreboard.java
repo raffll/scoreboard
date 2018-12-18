@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Scoreboard implements Parcelable {
 
-    private List<Player> playerList = new ArrayList<>();
+    private List<Player> playerList;
     private int numberOfPlayers;
     private int defaultScore;
     private String sessionName;
@@ -17,9 +17,12 @@ public class Scoreboard implements Parcelable {
     private int delta;
 
     public Scoreboard(int numberOfPlayers, int defaultScore, String sessionName, int[] defaultColors) {
+        playerList = new ArrayList<>();
         this.numberOfPlayers = numberOfPlayers;
         this.defaultScore = defaultScore;
         this.sessionName = sessionName;
+        this.currentPlayerNumber = 0;
+        this.delta = 0;
         for (int i = 0; i < numberOfPlayers; i++) {
             playerList.add(new Player("Player " + (i + 1), defaultScore, defaultColors[i]));
         }
@@ -37,9 +40,9 @@ public class Scoreboard implements Parcelable {
         return numberOfPlayers;
     }
 
-    public void setNumberOfPlayers(int numberOfPlayers) {
+    /*public void setNumberOfPlayers(int numberOfPlayers) {
         this.numberOfPlayers = numberOfPlayers;
-    }
+    }*/
 
     public int getDefaultScore() {
         return defaultScore;

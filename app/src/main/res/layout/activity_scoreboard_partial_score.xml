@@ -9,14 +9,14 @@
             type="int" />
 
         <variable
-            name="scoreboardViewModel"
-            type="com.braindead.scoreboard.viewmodel.ScoreboardViewModel" />
+            name="mainViewModel"
+            type="com.braindead.scoreboard.ui.main.MainViewModel" />
     </data>
 
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        bind:visibility="@{safeUnbox(scoreboardViewModel.isCurrentList[playerNumber])}">
+        bind:visibility="@{safeUnbox(mainViewModel.isCurrentList[playerNumber])}">
 
         <TextView
             android:layout_width="0dip"
@@ -24,7 +24,7 @@
             android:layout_gravity="top|bottom"
             android:layout_margin="4dp"
             android:layout_weight="2"
-            android:text="@{scoreboardViewModel.partialScoreList[playerNumber]}"
+            android:text="@{mainViewModel.partialScoreList[playerNumber]}"
             android:textSize="12sp"
             android:typeface="monospace" />
 
@@ -35,7 +35,7 @@
             android:layout_margin="4dp"
             android:layout_weight="1"
             android:gravity="end"
-            android:text="@{scoreboardViewModel.currentDelta}"
+            android:text="@{mainViewModel.currentDelta}"
             android:textSize="24sp" />
     </TableRow>
 </layout>

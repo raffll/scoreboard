@@ -9,32 +9,32 @@
             type="int" />
 
         <variable
-            name="scoreboardViewModel"
-            type="com.braindead.scoreboard.viewmodel.ScoreboardViewModel" />
+            name="mainViewModel"
+            type="com.braindead.scoreboard.ui.main.MainViewModel" />
     </data>
 
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        bind:visibility="@{safeUnbox(scoreboardViewModel.visibilityList[playerNumber])}">
+        bind:visibility="@{safeUnbox(mainViewModel.visibilityList[playerNumber])}">
 
         <TextView
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
             android:layout_weight="2"
-            android:onClick="@{() -> scoreboardViewModel.onActivatePlayer(playerNumber)}"
-            android:onLongClick="@{() -> scoreboardViewModel.onActivatePlayerSettings(playerNumber)}"
-            bind:text="@{scoreboardViewModel.nameList[playerNumber]}"
-            bind:textStyle='@{safeUnbox(scoreboardViewModel.isCurrentList[playerNumber])}'
-            bind:textSize="@{scoreboardViewModel.fontSize}" />
+            android:onClick="@{() -> mainViewModel.onActivatePlayer(playerNumber)}"
+            android:onLongClick="@{() -> mainViewModel.onActivatePlayerSettings(playerNumber)}"
+            bind:text="@{mainViewModel.nameList[playerNumber]}"
+            bind:textStyle='@{safeUnbox(mainViewModel.isCurrentList[playerNumber])}'
+            bind:textSize="@{mainViewModel.fontSize}" />
 
         <TextView
-            bind:layout_width="@{scoreboardViewModel.fontSize}"
-            bind:layout_height="@{scoreboardViewModel.fontSize}"
-            bind:background="@{safeUnbox(scoreboardViewModel.colorList[playerNumber])}"
+            bind:layout_width="@{mainViewModel.fontSize}"
+            bind:layout_height="@{mainViewModel.fontSize}"
+            bind:background="@{safeUnbox(mainViewModel.colorList[playerNumber])}"
             android:gravity="center"
-            android:onLongClick="@{() -> scoreboardViewModel.onActivatePlayerSettings(playerNumber)}" />
+            android:onLongClick="@{() -> mainViewModel.onActivatePlayerSettings(playerNumber)}" />
 
         <TextView
             android:layout_width="0dip"
@@ -42,8 +42,8 @@
             android:layout_margin="4dp"
             android:layout_weight="1"
             android:gravity="end"
-            android:text="@{scoreboardViewModel.scoreList[playerNumber]}"
-            bind:textStyle='@{safeUnbox(scoreboardViewModel.isCurrentList[playerNumber])}'
-            bind:textSize="@{scoreboardViewModel.fontSize}" />
+            android:text="@{mainViewModel.scoreList[playerNumber]}"
+            bind:textStyle='@{safeUnbox(mainViewModel.isCurrentList[playerNumber])}'
+            bind:textSize="@{mainViewModel.fontSize}" />
     </TableRow>
 </layout>

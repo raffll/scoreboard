@@ -2,9 +2,14 @@ package com.braindead.scoreboard.utilities;
 
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.braindead.scoreboard.ui.main.MainActivity;
+import com.braindead.scoreboard.ui.main.MainSectionsAdapter;
 
 public abstract class BindingAdapter {
 
@@ -43,5 +48,16 @@ public abstract class BindingAdapter {
         ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
         layoutParams.height = value + 10;
         view.setLayoutParams(layoutParams);
+    }
+
+    @android.databinding.BindingAdapter({"bind:handler"})
+    public static void bindViewPagerAdapter(final ViewPager view, final MainActivity activity) {
+        final MainSectionsAdapter adapter = new MainSectionsAdapter(activity.getSupportFragmentManager());
+        view.setAdapter(adapter);
+    }
+
+    @android.databinding.BindingAdapter({"bind:pager"})
+    public static void bindViewPagerTabs(final TabLayout view, final ViewPager pagerView) {
+        view.setupWithViewPager(pagerView, true);
     }
 }

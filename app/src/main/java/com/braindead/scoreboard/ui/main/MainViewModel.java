@@ -1,4 +1,4 @@
-package com.braindead.scoreboard.viewmodel;
+package com.braindead.scoreboard.ui.main;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
@@ -10,10 +10,12 @@ import com.braindead.scoreboard.model.Scoreboard;
 
 import static java.lang.Math.abs;
 
-public class ScoreboardViewModel extends ViewModel {
+public class MainViewModel extends ViewModel {
 
     public static final int MAX_NUMBER_OF_PLAYERS = 10;
     public static final int DEFAULT_NUMBER_OF_PLAYERS = 2;
+    public static final int DEFAULT_SCORE = 0;
+    public static final String DEFAULT_SESSION_NAME = "Scoreboard";
     public static final int[] DEFAULT_COLORS = {
             0xff2ECC71,
             0xff3498DB,
@@ -43,8 +45,7 @@ public class ScoreboardViewModel extends ViewModel {
 
     private MutableLiveData<Boolean> playerSettingsEvent = new MutableLiveData<>();
 
-    public void init(int numberOfPlayers, int defaultScore, String sessionName) {
-        this.scoreboard = new Scoreboard(numberOfPlayers, defaultScore, sessionName, DEFAULT_COLORS);
+    public void init() {
         initVisibilityList();
         initIsCurrentList();
         initNameList();
@@ -58,91 +59,85 @@ public class ScoreboardViewModel extends ViewModel {
         initFontSize(30);
     }
 
-    public void setScoreboard(Scoreboard scoreboard) {
-        this.scoreboard = scoreboard;
-    }
-
-    public Scoreboard getScoreboard() {
-        return scoreboard;
-    }
-
     private void initVisibilityList() {
         visibilityList = new ObservableArrayList<>();
         for (int i = 0; i < MAX_NUMBER_OF_PLAYERS; i++) {
-            if (i < scoreboard.getNumberOfPlayers()) {
-                visibilityList.add(true);
-            } else {
-                visibilityList.add(false);
-            }
+            visibilityList.add(false);
         }
     }
 
     private void initIsCurrentList() {
         isCurrentList = new ObservableArrayList<>();
-        for (int i = 0; i < scoreboard.getNumberOfPlayers(); i++) {
-            if (i == scoreboard.getCurrentPlayerNumber()) {
-                isCurrentList.add(true);
-            } else {
-                isCurrentList.add(false);
-            }
+        for (int i = 0; i < MAX_NUMBER_OF_PLAYERS; i++) {
+            isCurrentList.add(false);
         }
     }
 
     private void initNameList() {
         nameList = new ObservableArrayList<>();
-        for (int i = 0; i < scoreboard.getNumberOfPlayers(); i++) {
-            nameList.add(scoreboard.getPlayer(i).getName());
+        for (int i = 0; i < MAX_NUMBER_OF_PLAYERS; i++) {
+            nameList.add("");
         }
     }
 
     private void initScoreList() {
         scoreList = new ObservableArrayList<>();
-        for (int i = 0; i < scoreboard.getNumberOfPlayers(); i++) {
-            scoreList.add(Integer.toString(scoreboard.getPlayer(i).getScore()));
+        for (int i = 0; i < MAX_NUMBER_OF_PLAYERS; i++) {
+            scoreList.add("0");
         }
     }
 
     private void initPartialScoreList() {
         partialScoreList = new ObservableArrayList<>();
-        for (int i = 0; i < scoreboard.getNumberOfPlayers(); i++) {
+        for (int i = 0; i < MAX_NUMBER_OF_PLAYERS; i++) {
             partialScoreList.add("");
         }
     }
 
     private void initColorList() {
         colorList = new ObservableArrayList<>();
-        for (int i = 0; i < scoreboard.getNumberOfPlayers(); i++) {
-            colorList.add(scoreboard.getPlayer(i).getColor());
+        for (int i = 0; i < MAX_NUMBER_OF_PLAYERS; i++) {
+            colorList.add(0);
         }
     }
 
     private void initCurrentName() {
         currentName = new ObservableField<>();
-        updateCurrentName();
+        currentName.set("");
     }
 
     private void initCurrentColor() {
         currentColor = new ObservableField<>();
-        updateCurrentColor();
+        currentColor.set(0);
     }
 
     private void initCurrentDelta() {
         currentDelta = new ObservableField<>();
-        updateCurrentDelta();
+        currentDelta.set("");
     }
 
     private void initSessionName() {
         sessionName = new ObservableField<>();
-        updateSessionName();
+        sessionName.set("");
     }
 
     private void initFontSize(int size) {
         fontSize = new ObservableField<>();
-        updateFontSize(size);
+        fontSize.set(size);
+    }
+
+    private void updateVisibilityList() {
+        for (int i = 0; i < MAX_NUMBER_OF_PLAYERS; i++) {
+            if (i < scoreboard.getNumberOfPlayers()) {
+                visibilityList.set(i, true);
+            } else {
+                visibilityList.set(i, false);
+            }
+        }
     }
 
     private void updateIsCurrentList() {
-        for (int i = 0; i < scoreboard.getNumberOfPlayers(); i++) {
+        for (int i = 0; i < MAX_NUMBER_OF_PLAYERS; i++) {
             if (i == scoreboard.getCurrentPlayerNumber()) {
                 isCurrentList.set(i, true);
             } else {
@@ -206,6 +201,21 @@ public class ScoreboardViewModel extends ViewModel {
 
     private void updateFontSize(int size) {
         fontSize.set(size);
+    }
+
+    public void onNewSession(int numberOfPlayers, int defaultScore, String sessionName) {
+        scoreboard = new Scoreboard(numberOfPlayers, defaultScore, sessionName, DEFAULT_COLORS);
+        updateVisibilityList();
+        updateIsCurrentList();
+        updateNameList();
+        updateScoreList();
+        updatePartialScoreList();
+        updateColorList();
+        updateCurrentName();
+        updateCurrentColor();
+        updateCurrentDelta();
+        updateSessionName();
+        updateFontSize(30);
     }
 
     public boolean onActivatePlayer(int playerNumber) {
@@ -275,5 +285,13 @@ public class ScoreboardViewModel extends ViewModel {
 
     public void disablePlayerSettingsEvent() {
         this.playerSettingsEvent.setValue(false);
+    }
+
+    public void setScoreboard(Scoreboard scoreboard) {
+        this.scoreboard = scoreboard;
+    }
+
+    public Scoreboard getScoreboard() {
+        return scoreboard;
     }
 }

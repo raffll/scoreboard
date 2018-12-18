@@ -1,4 +1,4 @@
-package com.braindead.scoreboard.view;
+package com.braindead.scoreboard.ui.main;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -14,12 +14,11 @@ import android.widget.EditText;
 import android.widget.NumberPicker;
 
 import com.braindead.scoreboard.R;
-import com.braindead.scoreboard.viewmodel.ScoreboardViewModel;
 
 public class NewSessionDialog extends DialogFragment {
 
     private View rootView;
-    private ScoreboardActivity scoreboardActivity;
+    private MainActivity mainActivity;
 
     private int numberOfPlayers;
     private int defaultScore;
@@ -27,9 +26,9 @@ public class NewSessionDialog extends DialogFragment {
 
     private EditText sessionNameView;
 
-    public static NewSessionDialog newInstance(ScoreboardActivity activity, int numberOfPlayers, int defaultScore, String sessionName) {
+    public static NewSessionDialog newInstance(MainActivity activity, int numberOfPlayers, int defaultScore, String sessionName) {
         NewSessionDialog dialog = new NewSessionDialog();
-        dialog.scoreboardActivity = activity;
+        dialog.mainActivity = activity;
         dialog.numberOfPlayers = numberOfPlayers;
         dialog.defaultScore = defaultScore;
         dialog.sessionName = sessionName;
@@ -57,7 +56,7 @@ public class NewSessionDialog extends DialogFragment {
 
         NumberPicker numberOfPlayersView = rootView.findViewById(R.id.dialog_number_of_players);
         numberOfPlayersView.setMinValue(1);
-        numberOfPlayersView.setMaxValue(ScoreboardViewModel.MAX_NUMBER_OF_PLAYERS);
+        numberOfPlayersView.setMaxValue(MainViewModel.MAX_NUMBER_OF_PLAYERS);
         numberOfPlayersView.setValue(numberOfPlayers);
         numberOfPlayersView.setOnValueChangedListener(onNumberOfPlayersChangeListener);
 
@@ -108,7 +107,7 @@ public class NewSessionDialog extends DialogFragment {
     }
 
     private void onDoneClicked() {
-        scoreboardActivity.onNewSessionSet(numberOfPlayers, defaultScore, sessionName);
+        mainActivity.onNewSessionSet(numberOfPlayers, defaultScore, sessionName);
         dismiss();
     }
 

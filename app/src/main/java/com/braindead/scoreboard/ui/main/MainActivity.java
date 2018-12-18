@@ -1,4 +1,4 @@
-package com.braindead.scoreboard.view;
+package com.braindead.scoreboard.ui.main;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
@@ -10,39 +10,30 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.braindead.scoreboard.R;
-import com.braindead.scoreboard.databinding.ActivityScoreboardBinding;
-import com.braindead.scoreboard.viewmodel.ScoreboardViewModel;
+import com.braindead.scoreboard.databinding.ActivityMainBinding;
+import com.braindead.scoreboard.ui.scoreboard.PlayerSettingsDialog;
 
-public class ScoreboardActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
-    private ScoreboardViewModel scoreboardViewModel;
+    private MainViewModel mainViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (savedInstanceState == null) {
+            initDataBinding();
+            initActionBar();
             createNewSessionDialog();
         }
     }
 
-    private void createNewSessionDialog() {
-        NewSessionDialog dialog = NewSessionDialog.newInstance(this,
-                ScoreboardViewModel.DEFAULT_NUMBER_OF_PLAYERS,
-                0,
-                "Scoreboard");
-        dialog.show(getSupportFragmentManager(), "TAG");
-    }
-
-    public void onNewSessionSet(int numberOfPlayers, int defaultScore, String sessionName) {
-        initDataBinding(numberOfPlayers, defaultScore, sessionName);
-        initActionBar();
-    }
-
-    private void initDataBinding(int numberOfPlayers, int defaultScore, String sessionName) {
-        ActivityScoreboardBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_scoreboard);
-        scoreboardViewModel = ViewModelProviders.of(this).get(ScoreboardViewModel.class);
-        scoreboardViewModel.init(numberOfPlayers, defaultScore, sessionName);
-        binding.setScoreboardViewModel(scoreboardViewModel);
+    private void initDataBinding() {
+        ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        mainViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
+        mainViewModel.init();
+        binding.setMainViewModel(mainViewModel);
+        binding.setHandler(this);
+        binding.setManager(getSupportFragmentManager());
 
         setUpOnPlayerSettingsEventListener();
     }
@@ -53,26 +44,38 @@ public class ScoreboardActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
 
+    private void createNewSessionDialog() {
+        NewSessionDialog dialog = NewSessionDialog.newInstance(this,
+                MainViewModel.DEFAULT_NUMBER_OF_PLAYERS,
+                MainViewModel.DEFAULT_SCORE,
+                MainViewModel.DEFAULT_SESSION_NAME);
+        dialog.show(getSupportFragmentManager(), "TAG");
+    }
+
+    public void onNewSessionSet(int numberOfPlayers, int defaultScore, String sessionName) {
+        mainViewModel.onNewSession(numberOfPlayers, defaultScore, sessionName);
+    }
+
     private void setUpOnPlayerSettingsEventListener() {
-        scoreboardViewModel.getPlayerSettingsEvent().observe(this, this::onPlayerSettingsEventTriggered);
+        mainViewModel.getPlayerSettingsEvent().observe(this, this::onPlayerSettingsEventTriggered);
     }
 
     private void onPlayerSettingsEventTriggered(Boolean playerSettingsEvent) {
         if (playerSettingsEvent) {
             createPlayerSettingsDialog();
-            scoreboardViewModel.disablePlayerSettingsEvent();
+            mainViewModel.disablePlayerSettingsEvent();
         }
     }
 
     private void createPlayerSettingsDialog() {
         PlayerSettingsDialog dialog = PlayerSettingsDialog.newInstance(this,
-                scoreboardViewModel.currentName.get(),
-                scoreboardViewModel.currentColor.get());
+                mainViewModel.currentName.get(),
+                mainViewModel.currentColor.get());
         dialog.show(getSupportFragmentManager(), "TAG");
     }
 
     public void onPlayerSettingsSet(String playerName, int playerColor) {
-        scoreboardViewModel.onChangeCurrentPlayerSettings(playerName, playerColor);
+        mainViewModel.onChangeCurrentPlayerSettings(playerName, playerColor);
     }
 
     @Override
@@ -105,7 +108,7 @@ public class ScoreboardActivity extends AppCompatActivity {
     }
 
     public void onResetSessionSet() {
-        scoreboardViewModel.onResetSession();
+        mainViewModel.onResetSession();
     }
 
     private void createSaveSessionDialog() {
@@ -114,23 +117,23 @@ public class ScoreboardActivity extends AppCompatActivity {
     }
 
     public void onSaveSessionSet() {
-        scoreboardViewModel.onSaveSession();
+        mainViewModel.onSaveSession();
     }
 
     public void onUndoSet() {
-        scoreboardViewModel.onUndo();
+        mainViewModel.onUndo();
     }
 
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
-        savedInstanceState.putParcelable("scoreboard", scoreboardViewModel.getScoreboard());
+        savedInstanceState.putParcelable("scoreboard", mainViewModel.getScoreboard());
     }
 
     @Override
     public void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        scoreboardViewModel.setScoreboard(savedInstanceState.getParcelable("scoreboard"));
+        mainViewModel.setScoreboard(savedInstanceState.getParcelable("scoreboard"));
     }
 
     @Override

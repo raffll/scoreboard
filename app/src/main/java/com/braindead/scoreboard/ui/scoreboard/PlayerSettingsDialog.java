@@ -1,4 +1,4 @@
-package com.braindead.scoreboard.view;
+package com.braindead.scoreboard.ui.scoreboard;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -13,22 +13,23 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.braindead.scoreboard.R;
-import com.braindead.scoreboard.viewmodel.ScoreboardViewModel;
+import com.braindead.scoreboard.ui.main.MainViewModel;
+import com.braindead.scoreboard.ui.main.MainActivity;
 import com.thebluealliance.spectrum.SpectrumPalette;
 
 public class PlayerSettingsDialog extends DialogFragment {
 
     private View rootView;
-    private ScoreboardActivity scoreboardActivity;
+    private MainActivity mainActivity;
 
     private String playerName;
     private int playerColor;
 
     private EditText playerNameView;
 
-    public static PlayerSettingsDialog newInstance(ScoreboardActivity activity, String playerName, int playerColor) {
+    public static PlayerSettingsDialog newInstance(MainActivity activity, String playerName, int playerColor) {
         PlayerSettingsDialog dialog = new PlayerSettingsDialog();
-        dialog.scoreboardActivity = activity;
+        dialog.mainActivity = activity;
         dialog.playerName = playerName;
         dialog.playerColor = playerColor;
         return dialog;
@@ -60,13 +61,13 @@ public class PlayerSettingsDialog extends DialogFragment {
         addTextWatchers();
 
         SpectrumPalette spectrumPalette = rootView.findViewById(R.id.dialog_color_palette);
-        spectrumPalette.setColors(ScoreboardViewModel.DEFAULT_COLORS);
+        spectrumPalette.setColors(MainViewModel.DEFAULT_COLORS);
         spectrumPalette.setSelectedColor(playerColor);
         spectrumPalette.setOnColorSelectedListener((color) -> playerColor = color);
     }
 
     private void onDoneClicked() {
-        scoreboardActivity.onPlayerSettingsSet(playerName, playerColor);
+        mainActivity.onPlayerSettingsSet(playerName, playerColor);
         dismiss();
     }
 
