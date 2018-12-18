@@ -11,7 +11,6 @@ import android.view.MenuItem;
 
 import com.braindead.scoreboard.R;
 import com.braindead.scoreboard.databinding.ActivityMainBinding;
-import com.braindead.scoreboard.ui.scoreboard.PlayerSettingsDialog;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,8 +33,6 @@ public class MainActivity extends AppCompatActivity {
         binding.setMainViewModel(mainViewModel);
         binding.setHandler(this);
         binding.setManager(getSupportFragmentManager());
-
-        setUpOnPlayerSettingsEventListener();
     }
 
     private void initActionBar() {
@@ -54,28 +51,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void onNewSessionSet(int numberOfPlayers, int defaultScore, String sessionName) {
         mainViewModel.onNewSession(numberOfPlayers, defaultScore, sessionName);
-    }
-
-    private void setUpOnPlayerSettingsEventListener() {
-        mainViewModel.getPlayerSettingsEvent().observe(this, this::onPlayerSettingsEventTriggered);
-    }
-
-    private void onPlayerSettingsEventTriggered(Boolean playerSettingsEvent) {
-        if (playerSettingsEvent) {
-            createPlayerSettingsDialog();
-            mainViewModel.disablePlayerSettingsEvent();
-        }
-    }
-
-    private void createPlayerSettingsDialog() {
-        PlayerSettingsDialog dialog = PlayerSettingsDialog.newInstance(this,
-                mainViewModel.currentName.get(),
-                mainViewModel.currentColor.get());
-        dialog.show(getSupportFragmentManager(), "TAG");
-    }
-
-    public void onPlayerSettingsSet(String playerName, int playerColor) {
-        mainViewModel.onChangeCurrentPlayerSettings(playerName, playerColor);
     }
 
     @Override

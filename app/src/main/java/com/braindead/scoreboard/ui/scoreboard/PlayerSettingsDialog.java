@@ -14,22 +14,21 @@ import android.widget.EditText;
 
 import com.braindead.scoreboard.R;
 import com.braindead.scoreboard.ui.main.MainViewModel;
-import com.braindead.scoreboard.ui.main.MainActivity;
 import com.thebluealliance.spectrum.SpectrumPalette;
 
 public class PlayerSettingsDialog extends DialogFragment {
 
     private View rootView;
-    private MainActivity mainActivity;
+    private ScoreboardFragment scoreboardFragment;
 
     private String playerName;
     private int playerColor;
 
     private EditText playerNameView;
 
-    public static PlayerSettingsDialog newInstance(MainActivity activity, String playerName, int playerColor) {
+    public static PlayerSettingsDialog newInstance(ScoreboardFragment scoreboardFragment, String playerName, int playerColor) {
         PlayerSettingsDialog dialog = new PlayerSettingsDialog();
-        dialog.mainActivity = activity;
+        dialog.scoreboardFragment = scoreboardFragment;
         dialog.playerName = playerName;
         dialog.playerColor = playerColor;
         return dialog;
@@ -67,7 +66,7 @@ public class PlayerSettingsDialog extends DialogFragment {
     }
 
     private void onDoneClicked() {
-        mainActivity.onPlayerSettingsSet(playerName, playerColor);
+        scoreboardFragment.onPlayerSettingsSet(playerName, playerColor);
         dismiss();
     }
 

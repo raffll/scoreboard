@@ -29,6 +29,29 @@ public class ScoreboardFragment extends Fragment {
         View view = binding.getRoot();
         mainViewModel = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
         binding.setMainViewModel(mainViewModel);
+        setUpOnPlayerSettingsEventListener();
         return view;
+    }
+
+    private void setUpOnPlayerSettingsEventListener() {
+        mainViewModel.getPlayerSettingsEvent().observe(this, this::onPlayerSettingsEventTriggered);
+    }
+
+    private void onPlayerSettingsEventTriggered(Boolean playerSettingsEvent) {
+        if (playerSettingsEvent) {
+            createPlayerSettingsDialog();
+            mainViewModel.disablePlayerSettingsEvent();
+        }
+    }
+
+    private void createPlayerSettingsDialog() {
+        PlayerSettingsDialog dialog = PlayerSettingsDialog.newInstance(this,
+                mainViewModel.currentName.get(),
+                mainViewModel.currentColor.get());
+        dialog.show(getActivity().getSupportFragmentManager(), "TAG");
+    }
+
+    public void onPlayerSettingsSet(String playerName, int playerColor) {
+        mainViewModel.onChangeCurrentPlayerSettings(playerName, playerColor);
     }
 }
