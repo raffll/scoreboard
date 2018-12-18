@@ -33,102 +33,102 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <include
-                    layout="@layout/activity_scoreboard_player"
+                    layout="@layout/fragment_scoreboard_player_row"
                     bind:playerNumber="@{0}"
                     bind:mainViewModel="@{mainViewModel}" />
 
                 <include
-                    layout="@layout/activity_scoreboard_partial_score"
+                    layout="@layout/fragment_scoreboard_calculator_row"
                     bind:playerNumber="@{0}"
                     bind:mainViewModel="@{mainViewModel}" />
 
                 <include
-                    layout="@layout/activity_scoreboard_player"
+                    layout="@layout/fragment_scoreboard_player_row"
                     bind:playerNumber="@{1}"
                     bind:mainViewModel="@{mainViewModel}" />
 
                 <include
-                    layout="@layout/activity_scoreboard_partial_score"
+                    layout="@layout/fragment_scoreboard_calculator_row"
                     bind:playerNumber="@{1}"
                     bind:mainViewModel="@{mainViewModel}" />
 
                 <include
-                    layout="@layout/activity_scoreboard_player"
+                    layout="@layout/fragment_scoreboard_player_row"
                     bind:playerNumber="@{2}"
                     bind:mainViewModel="@{mainViewModel}" />
 
                 <include
-                    layout="@layout/activity_scoreboard_partial_score"
+                    layout="@layout/fragment_scoreboard_calculator_row"
                     bind:playerNumber="@{2}"
                     bind:mainViewModel="@{mainViewModel}" />
 
                 <include
-                    layout="@layout/activity_scoreboard_player"
+                    layout="@layout/fragment_scoreboard_player_row"
                     bind:playerNumber="@{3}"
                     bind:mainViewModel="@{mainViewModel}" />
 
                 <include
-                    layout="@layout/activity_scoreboard_partial_score"
+                    layout="@layout/fragment_scoreboard_calculator_row"
                     bind:playerNumber="@{3}"
                     bind:mainViewModel="@{mainViewModel}" />
 
                 <include
-                    layout="@layout/activity_scoreboard_player"
+                    layout="@layout/fragment_scoreboard_player_row"
                     bind:playerNumber="@{4}"
                     bind:mainViewModel="@{mainViewModel}" />
 
                 <include
-                    layout="@layout/activity_scoreboard_partial_score"
+                    layout="@layout/fragment_scoreboard_calculator_row"
                     bind:playerNumber="@{4}"
                     bind:mainViewModel="@{mainViewModel}" />
 
                 <include
-                    layout="@layout/activity_scoreboard_player"
+                    layout="@layout/fragment_scoreboard_player_row"
                     bind:playerNumber="@{5}"
                     bind:mainViewModel="@{mainViewModel}" />
 
                 <include
-                    layout="@layout/activity_scoreboard_partial_score"
+                    layout="@layout/fragment_scoreboard_calculator_row"
                     bind:playerNumber="@{5}"
                     bind:mainViewModel="@{mainViewModel}" />
 
                 <include
-                    layout="@layout/activity_scoreboard_player"
+                    layout="@layout/fragment_scoreboard_player_row"
                     bind:playerNumber="@{6}"
                     bind:mainViewModel="@{mainViewModel}" />
 
                 <include
-                    layout="@layout/activity_scoreboard_partial_score"
+                    layout="@layout/fragment_scoreboard_calculator_row"
                     bind:playerNumber="@{6}"
                     bind:mainViewModel="@{mainViewModel}" />
 
                 <include
-                    layout="@layout/activity_scoreboard_player"
+                    layout="@layout/fragment_scoreboard_player_row"
                     bind:playerNumber="@{7}"
                     bind:mainViewModel="@{mainViewModel}" />
 
                 <include
-                    layout="@layout/activity_scoreboard_partial_score"
+                    layout="@layout/fragment_scoreboard_calculator_row"
                     bind:playerNumber="@{7}"
                     bind:mainViewModel="@{mainViewModel}" />
 
                 <include
-                    layout="@layout/activity_scoreboard_player"
+                    layout="@layout/fragment_scoreboard_player_row"
                     bind:playerNumber="@{8}"
                     bind:mainViewModel="@{mainViewModel}" />
 
                 <include
-                    layout="@layout/activity_scoreboard_partial_score"
+                    layout="@layout/fragment_scoreboard_calculator_row"
                     bind:playerNumber="@{8}"
                     bind:mainViewModel="@{mainViewModel}" />
 
                 <include
-                    layout="@layout/activity_scoreboard_player"
+                    layout="@layout/fragment_scoreboard_player_row"
                     bind:playerNumber="@{9}"
                     bind:mainViewModel="@{mainViewModel}" />
 
                 <include
-                    layout="@layout/activity_scoreboard_partial_score"
+                    layout="@layout/fragment_scoreboard_calculator_row"
                     bind:playerNumber="@{9}"
                     bind:mainViewModel="@{mainViewModel}" />
             </TableLayout>
