@@ -5,7 +5,11 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.MenuCompat;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -20,6 +24,12 @@ public class ScoreboardFragment extends Fragment {
     public static Fragment newInstance() {
         ScoreboardFragment fragment = new ScoreboardFragment();
         return fragment;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
 
     @Nullable
@@ -53,5 +63,63 @@ public class ScoreboardFragment extends Fragment {
 
     public void onPlayerSettingsSet(String playerName, int playerColor) {
         mainViewModel.onChangeCurrentPlayerSettings(playerName, playerColor);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_main, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+        MenuCompat.setGroupDividerEnabled(menu, true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_new_session:
+                createNewSessionDialog();
+                return true;
+            case R.id.menu_reset_session:
+                createResetSessionDialog();
+                return true;
+            case R.id.undo:
+                onUndoSet();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void createNewSessionDialog() {
+        NewSessionDialog dialog = NewSessionDialog.newInstance(this,
+                MainViewModel.DEFAULT_NUMBER_OF_PLAYERS,
+                MainViewModel.DEFAULT_SCORE,
+                MainViewModel.DEFAULT_SESSION_NAME);
+        dialog.show(getActivity().getSupportFragmentManager(), "TAG");
+    }
+
+    public void onNewSessionSet(int numberOfPlayers, int defaultScore, String sessionName) {
+        mainViewModel.onNewSession(numberOfPlayers, defaultScore, sessionName);
+    }
+
+    private void createResetSessionDialog() {
+        ResetSessionDialog dialog = ResetSessionDialog.newInstance(this);
+        dialog.show(getActivity().getSupportFragmentManager(), "TAG");
+    }
+
+    public void onResetSessionSet() {
+        mainViewModel.onResetSession();
+    }
+
+    private void createSaveSessionDialog() {
+        SaveSessionDialog dialog = SaveSessionDialog.newInstance(this);
+        dialog.show(getActivity().getSupportFragmentManager(), "TAG");
+    }
+
+    public void onSaveSessionSet() {
+        mainViewModel.onSaveSession();
+    }
+
+    public void onUndoSet() {
+        mainViewModel.onUndo();
     }
 }

@@ -26,7 +26,9 @@ public class PlayerSettingsDialog extends DialogFragment {
 
     private EditText playerNameView;
 
-    public static PlayerSettingsDialog newInstance(ScoreboardFragment scoreboardFragment, String playerName, int playerColor) {
+    public static PlayerSettingsDialog newInstance(ScoreboardFragment scoreboardFragment,
+                                                   String playerName,
+                                                   int playerColor) {
         PlayerSettingsDialog dialog = new PlayerSettingsDialog();
         dialog.scoreboardFragment = scoreboardFragment;
         dialog.playerName = playerName;

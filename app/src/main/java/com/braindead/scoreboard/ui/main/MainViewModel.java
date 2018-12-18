@@ -108,7 +108,7 @@ public class MainViewModel extends ViewModel {
 
     private void initCurrentColor() {
         currentColor = new ObservableField<>();
-        currentColor.set(0);
+        currentColor.set(DEFAULT_COLORS[0]);
     }
 
     private void initCurrentDelta() {

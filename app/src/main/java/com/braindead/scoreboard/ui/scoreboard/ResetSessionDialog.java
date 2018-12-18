@@ -1,4 +1,4 @@
-package com.braindead.scoreboard.ui.main;
+package com.braindead.scoreboard.ui.scoreboard;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -12,11 +12,11 @@ import com.braindead.scoreboard.R;
 public class ResetSessionDialog extends DialogFragment {
 
     private View rootView;
-    private MainActivity mainActivity;
+    private ScoreboardFragment scoreboardFragment;
 
-    public static ResetSessionDialog newInstance(MainActivity activity) {
+    public static ResetSessionDialog newInstance(ScoreboardFragment scoreboardFragment) {
         ResetSessionDialog dialog = new ResetSessionDialog();
-        dialog.mainActivity = activity;
+        dialog.scoreboardFragment = scoreboardFragment;
         return dialog;
     }
 
@@ -34,7 +34,7 @@ public class ResetSessionDialog extends DialogFragment {
     }
 
     private void onDoneClicked() {
-        mainActivity.onResetSessionSet();
+        scoreboardFragment.onResetSessionSet();
         dismiss();
     }
 

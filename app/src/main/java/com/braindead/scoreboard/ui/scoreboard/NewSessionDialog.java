@@ -1,4 +1,4 @@
-package com.braindead.scoreboard.ui.main;
+package com.braindead.scoreboard.ui.scoreboard;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -14,11 +14,12 @@ import android.widget.EditText;
 import android.widget.NumberPicker;
 
 import com.braindead.scoreboard.R;
+import com.braindead.scoreboard.ui.main.MainViewModel;
 
 public class NewSessionDialog extends DialogFragment {
 
     private View rootView;
-    private MainActivity mainActivity;
+    private ScoreboardFragment scoreboardFragment;
 
     private int numberOfPlayers;
     private int defaultScore;
@@ -26,9 +27,12 @@ public class NewSessionDialog extends DialogFragment {
 
     private EditText sessionNameView;
 
-    public static NewSessionDialog newInstance(MainActivity activity, int numberOfPlayers, int defaultScore, String sessionName) {
+    public static NewSessionDialog newInstance(ScoreboardFragment scoreboardFragment,
+                                               int numberOfPlayers,
+                                               int defaultScore,
+                                               String sessionName) {
         NewSessionDialog dialog = new NewSessionDialog();
-        dialog.mainActivity = activity;
+        dialog.scoreboardFragment = scoreboardFragment;
         dialog.numberOfPlayers = numberOfPlayers;
         dialog.defaultScore = defaultScore;
         dialog.sessionName = sessionName;
@@ -107,7 +111,7 @@ public class NewSessionDialog extends DialogFragment {
     }
 
     private void onDoneClicked() {
-        mainActivity.onNewSessionSet(numberOfPlayers, defaultScore, sessionName);
+        scoreboardFragment.onNewSessionSet(numberOfPlayers, defaultScore, sessionName);
         dismiss();
     }
 
