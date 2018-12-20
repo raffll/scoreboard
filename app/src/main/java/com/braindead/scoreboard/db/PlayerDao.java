@@ -1,5 +1,6 @@
-package com.braindead.scoreboard.dao;
+package com.braindead.scoreboard.db;
 
+import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
@@ -23,6 +24,9 @@ public interface PlayerDao {
     @Delete
     void delete(Player player);
 
-    @Query("SELECT * FROM player")
-    List<Player> getAll();
+    @Query("DELETE FROM player_table")
+    void deleteAllPlayers();
+
+    @Query("SELECT * FROM player_table")
+    LiveData<List<Player>> getAllPlayers();
 }
