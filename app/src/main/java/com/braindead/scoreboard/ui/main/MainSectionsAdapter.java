@@ -34,7 +34,14 @@ public class MainSectionsAdapter extends FragmentPagerAdapter
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return "Page " + position;
+        switch (position) {
+            case 0:
+                return "Scoreboard";
+            case 1:
+                return "Sessions";
+            default:
+                return null;
+        }
     }
 }
 
