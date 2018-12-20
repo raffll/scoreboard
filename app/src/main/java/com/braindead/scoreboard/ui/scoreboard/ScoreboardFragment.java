@@ -36,7 +36,9 @@ public class ScoreboardFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        FragmentScoreboardBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_scoreboard, container, false);
+        FragmentScoreboardBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_scoreboard,
+                container,
+                false);
         View view = binding.getRoot();
         mainViewModel = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
         binding.setMainViewModel(mainViewModel);
@@ -56,7 +58,8 @@ public class ScoreboardFragment extends Fragment {
     }
 
     private void createPlayerSettingsDialog() {
-        PlayerSettingsDialog dialog = PlayerSettingsDialog.newInstance(this,
+        PlayerSettingsDialog dialog = PlayerSettingsDialog.newInstance(
+                this,
                 mainViewModel.currentName.get(),
                 mainViewModel.currentColor.get());
         dialog.show(getActivity().getSupportFragmentManager(), "TAG");
@@ -91,7 +94,8 @@ public class ScoreboardFragment extends Fragment {
     }
 
     private void createNewSessionDialog() {
-        NewSessionDialog dialog = NewSessionDialog.newInstance(this,
+        NewSessionDialog dialog = NewSessionDialog.newInstance(
+                this,
                 AppConstants.DEFAULT_NUMBER_OF_PLAYERS,
                 AppConstants.DEFAULT_SCORE,
                 AppConstants.DEFAULT_SESSION_NAME);

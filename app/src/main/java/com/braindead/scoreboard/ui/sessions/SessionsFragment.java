@@ -11,10 +11,11 @@ import android.view.ViewGroup;
 
 import com.braindead.scoreboard.R;
 import com.braindead.scoreboard.databinding.FragmentSessionsBinding;
+import com.braindead.scoreboard.ui.main.MainViewModel;
 
 public class SessionsFragment extends Fragment {
 
-    private SessionsViewModel sessionsViewModel;
+    private MainViewModel mainViewModel;
 
     public static Fragment newInstance() {
         SessionsFragment fragment = new SessionsFragment();
@@ -26,8 +27,8 @@ public class SessionsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         FragmentSessionsBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_sessions, container, false);
         View view = binding.getRoot();
-        sessionsViewModel = ViewModelProviders.of(getActivity()).get(SessionsViewModel.class);
-        binding.setSessionsViewModel(sessionsViewModel);
+        mainViewModel = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
+        binding.setMainViewModel(mainViewModel);
         return view;
     }
 }

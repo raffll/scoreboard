@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="sessionsViewModel"
-            type="com.braindead.scoreboard.ui.sessions.SessionsViewModel" />
+            name="mainViewModel"
+            type="com.braindead.scoreboard.ui.main.MainViewModel" />
     </data>
 
     <android.support.constraint.ConstraintLayout
