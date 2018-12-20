@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import com.braindead.scoreboard.R;
 import com.braindead.scoreboard.databinding.FragmentScoreboardBinding;
 import com.braindead.scoreboard.ui.main.MainViewModel;
+import com.braindead.scoreboard.utilities.AppConstants;
 
 public class ScoreboardFragment extends Fragment {
 
@@ -91,9 +92,9 @@ public class ScoreboardFragment extends Fragment {
 
     private void createNewSessionDialog() {
         NewSessionDialog dialog = NewSessionDialog.newInstance(this,
-                MainViewModel.DEFAULT_NUMBER_OF_PLAYERS,
-                MainViewModel.DEFAULT_SCORE,
-                MainViewModel.DEFAULT_SESSION_NAME);
+                AppConstants.DEFAULT_NUMBER_OF_PLAYERS,
+                AppConstants.DEFAULT_SCORE,
+                AppConstants.DEFAULT_SESSION_NAME);
         dialog.show(getActivity().getSupportFragmentManager(), "TAG");
     }
 

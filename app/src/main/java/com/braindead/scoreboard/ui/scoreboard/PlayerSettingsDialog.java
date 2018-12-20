@@ -13,7 +13,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.braindead.scoreboard.R;
-import com.braindead.scoreboard.ui.main.MainViewModel;
+import com.braindead.scoreboard.utilities.AppConstants;
 import com.thebluealliance.spectrum.SpectrumPalette;
 
 public class PlayerSettingsDialog extends DialogFragment {
@@ -62,7 +62,7 @@ public class PlayerSettingsDialog extends DialogFragment {
         addTextWatchers();
 
         SpectrumPalette spectrumPalette = rootView.findViewById(R.id.dialog_color_palette);
-        spectrumPalette.setColors(MainViewModel.DEFAULT_COLORS);
+        spectrumPalette.setColors(AppConstants.DEFAULT_COLORS);
         spectrumPalette.setSelectedColor(playerColor);
         spectrumPalette.setOnColorSelectedListener((color) -> playerColor = color);
     }

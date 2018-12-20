@@ -14,7 +14,7 @@ import android.widget.EditText;
 import android.widget.NumberPicker;
 
 import com.braindead.scoreboard.R;
-import com.braindead.scoreboard.ui.main.MainViewModel;
+import com.braindead.scoreboard.utilities.AppConstants;
 
 public class NewSessionDialog extends DialogFragment {
 
@@ -60,7 +60,7 @@ public class NewSessionDialog extends DialogFragment {
 
         NumberPicker numberOfPlayersView = rootView.findViewById(R.id.dialog_number_of_players);
         numberOfPlayersView.setMinValue(1);
-        numberOfPlayersView.setMaxValue(MainViewModel.MAX_NUMBER_OF_PLAYERS);
+        numberOfPlayersView.setMaxValue(AppConstants.MAX_NUMBER_OF_PLAYERS);
         numberOfPlayersView.setValue(numberOfPlayers);
         numberOfPlayersView.setOnValueChangedListener(onNumberOfPlayersChangeListener);
 

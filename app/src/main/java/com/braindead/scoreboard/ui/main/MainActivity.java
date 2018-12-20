@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 
 import com.braindead.scoreboard.R;
 import com.braindead.scoreboard.databinding.ActivityMainBinding;
+import com.braindead.scoreboard.utilities.AppConstants;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,9 +27,9 @@ public class MainActivity extends AppCompatActivity {
         ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         mainViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
         mainViewModel.init();
-        mainViewModel.onNewSession(MainViewModel.DEFAULT_NUMBER_OF_PLAYERS,
-                MainViewModel.DEFAULT_SCORE,
-                MainViewModel.DEFAULT_SESSION_NAME);
+        mainViewModel.onNewSession(AppConstants.DEFAULT_NUMBER_OF_PLAYERS,
+                AppConstants.DEFAULT_SCORE,
+                AppConstants.DEFAULT_SESSION_NAME);
         binding.setMainViewModel(mainViewModel);
         binding.setHandler(this);
         binding.setManager(getSupportFragmentManager());

@@ -7,27 +7,11 @@ import android.databinding.ObservableArrayList;
 import android.databinding.ObservableField;
 
 import com.braindead.scoreboard.model.Scoreboard;
+import com.braindead.scoreboard.utilities.AppConstants;
 
 import static java.lang.Math.abs;
 
 public class MainViewModel extends ViewModel {
-
-    public static final int MAX_NUMBER_OF_PLAYERS = 10;
-    public static final int DEFAULT_NUMBER_OF_PLAYERS = 2;
-    public static final int DEFAULT_SCORE = 0;
-    public static final String DEFAULT_SESSION_NAME = "Scoreboard";
-    public static final int[] DEFAULT_COLORS = {
-            0xff2ECC71,
-            0xff3498DB,
-            0xffE74C3C,
-            0xffF4D03F,
-            0xffB3B6B7,
-            0xff333333,
-            0xffE67E22,
-            0xff8E44AD,
-            0xff1ABC9C,
-            0xff703325
-    };
 
     private Scoreboard scoreboard;
 
@@ -61,42 +45,42 @@ public class MainViewModel extends ViewModel {
 
     private void initVisibilityList() {
         visibilityList = new ObservableArrayList<>();
-        for (int i = 0; i < MAX_NUMBER_OF_PLAYERS; i++) {
+        for (int i = 0; i < AppConstants.MAX_NUMBER_OF_PLAYERS; i++) {
             visibilityList.add(false);
         }
     }
 
     private void initIsCurrentList() {
         isCurrentList = new ObservableArrayList<>();
-        for (int i = 0; i < MAX_NUMBER_OF_PLAYERS; i++) {
+        for (int i = 0; i < AppConstants.MAX_NUMBER_OF_PLAYERS; i++) {
             isCurrentList.add(false);
         }
     }
 
     private void initNameList() {
         nameList = new ObservableArrayList<>();
-        for (int i = 0; i < MAX_NUMBER_OF_PLAYERS; i++) {
+        for (int i = 0; i < AppConstants.MAX_NUMBER_OF_PLAYERS; i++) {
             nameList.add("");
         }
     }
 
     private void initScoreList() {
         scoreList = new ObservableArrayList<>();
-        for (int i = 0; i < MAX_NUMBER_OF_PLAYERS; i++) {
+        for (int i = 0; i < AppConstants.MAX_NUMBER_OF_PLAYERS; i++) {
             scoreList.add("0");
         }
     }
 
     private void initPartialScoreList() {
         partialScoreList = new ObservableArrayList<>();
-        for (int i = 0; i < MAX_NUMBER_OF_PLAYERS; i++) {
+        for (int i = 0; i < AppConstants.MAX_NUMBER_OF_PLAYERS; i++) {
             partialScoreList.add("");
         }
     }
 
     private void initColorList() {
         colorList = new ObservableArrayList<>();
-        for (int i = 0; i < MAX_NUMBER_OF_PLAYERS; i++) {
+        for (int i = 0; i < AppConstants.MAX_NUMBER_OF_PLAYERS; i++) {
             colorList.add(0);
         }
     }
@@ -108,7 +92,7 @@ public class MainViewModel extends ViewModel {
 
     private void initCurrentColor() {
         currentColor = new ObservableField<>();
-        currentColor.set(DEFAULT_COLORS[0]);
+        currentColor.set(AppConstants.DEFAULT_COLORS[0]);
     }
 
     private void initCurrentDelta() {
@@ -127,7 +111,7 @@ public class MainViewModel extends ViewModel {
     }
 
     private void updateVisibilityList() {
-        for (int i = 0; i < MAX_NUMBER_OF_PLAYERS; i++) {
+        for (int i = 0; i < AppConstants.MAX_NUMBER_OF_PLAYERS; i++) {
             if (i < scoreboard.getNumberOfPlayers()) {
                 visibilityList.set(i, true);
             } else {
@@ -137,7 +121,7 @@ public class MainViewModel extends ViewModel {
     }
 
     private void updateIsCurrentList() {
-        for (int i = 0; i < MAX_NUMBER_OF_PLAYERS; i++) {
+        for (int i = 0; i < AppConstants.MAX_NUMBER_OF_PLAYERS; i++) {
             if (i == scoreboard.getCurrentPlayerNumber()) {
                 isCurrentList.set(i, true);
             } else {
@@ -204,7 +188,7 @@ public class MainViewModel extends ViewModel {
     }
 
     public void onNewSession(int numberOfPlayers, int defaultScore, String sessionName) {
-        scoreboard = new Scoreboard(numberOfPlayers, defaultScore, sessionName, DEFAULT_COLORS);
+        scoreboard = new Scoreboard(numberOfPlayers, defaultScore, sessionName, AppConstants.DEFAULT_COLORS);
         updateVisibilityList();
         updateIsCurrentList();
         updateNameList();
