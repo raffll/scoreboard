@@ -2,9 +2,6 @@ package com.braindead.scoreboard.ui.scoreboard;
 
 import android.app.Dialog;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.DialogFragment;
-import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
@@ -15,6 +12,10 @@ import android.widget.NumberPicker;
 
 import com.braindead.scoreboard.R;
 import com.braindead.scoreboard.utilities.AppConstants;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.DialogFragment;
 
 public class NewSessionDialog extends DialogFragment {
 

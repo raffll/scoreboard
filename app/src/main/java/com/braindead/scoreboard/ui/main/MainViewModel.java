@@ -1,12 +1,6 @@
 package com.braindead.scoreboard.ui.main;
 
 import android.app.Application;
-import android.arch.lifecycle.AndroidViewModel;
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
-import android.databinding.ObservableArrayList;
-import android.databinding.ObservableField;
-import android.support.annotation.NonNull;
 
 import com.braindead.scoreboard.db.PlayerRepository;
 import com.braindead.scoreboard.model.Player;
@@ -14,6 +8,13 @@ import com.braindead.scoreboard.model.Scoreboard;
 import com.braindead.scoreboard.utilities.AppConstants;
 
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.databinding.ObservableArrayList;
+import androidx.databinding.ObservableField;
+import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import static java.lang.Math.abs;
 

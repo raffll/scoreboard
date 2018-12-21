@@ -1,14 +1,15 @@
 package com.braindead.scoreboard.ui.main;
 
-import android.arch.lifecycle.ViewModelProviders;
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 
 import com.braindead.scoreboard.R;
 import com.braindead.scoreboard.databinding.ActivityMainBinding;
 import com.braindead.scoreboard.utilities.AppConstants;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProviders;
 
 public class MainActivity extends AppCompatActivity {
 

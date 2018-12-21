@@ -1,11 +1,6 @@
 package com.braindead.scoreboard.ui.scoreboard;
 
-import android.arch.lifecycle.ViewModelProviders;
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.MenuCompat;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,6 +12,12 @@ import com.braindead.scoreboard.R;
 import com.braindead.scoreboard.databinding.FragmentScoreboardBinding;
 import com.braindead.scoreboard.ui.main.MainViewModel;
 import com.braindead.scoreboard.utilities.AppConstants;
+
+import androidx.annotation.Nullable;
+import androidx.core.view.MenuCompat;
+import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
 public class ScoreboardFragment extends Fragment {
 
@@ -42,7 +43,8 @@ public class ScoreboardFragment extends Fragment {
                 R.layout.fragment_scoreboard,
                 container,
                 false);
-        View view = binding.getRoot();
+        View view;
+        view = binding.getRoot();
         mainViewModel = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
         binding.setMainViewModel(mainViewModel);
         setUpOnPlayerSettingsEventListener();

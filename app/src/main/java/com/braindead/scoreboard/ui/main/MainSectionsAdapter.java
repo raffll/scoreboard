@@ -1,11 +1,11 @@
 package com.braindead.scoreboard.ui.main;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-
 import com.braindead.scoreboard.ui.scoreboard.ScoreboardFragment;
 import com.braindead.scoreboard.ui.sessions.SessionsFragment;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
 
 public class MainSectionsAdapter extends FragmentPagerAdapter
 {

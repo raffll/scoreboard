@@ -2,28 +2,30 @@ package com.braindead.scoreboard.utilities;
 
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.braindead.scoreboard.ui.main.MainActivity;
 import com.braindead.scoreboard.ui.main.MainSectionsAdapter;
+import com.google.android.material.tabs.TabLayout;
 
-public abstract class BindingAdapter {
+import androidx.databinding.BindingAdapter;
+import androidx.viewpager.widget.ViewPager;
 
-    @android.databinding.BindingAdapter("bind:textStyle")
+public abstract class BindingAdapters {
+
+    @BindingAdapter({"textStyle"})
     public static void setTypeface(TextView view, Boolean value) {
         view.setTypeface(null, value ? Typeface.BOLD : Typeface.NORMAL);
     }
 
-    @android.databinding.BindingAdapter("bind:visibility")
+    @BindingAdapter({"visibility"})
     public static void setVisibility(View view, Boolean value) {
         view.setVisibility(value ? View.VISIBLE : View.GONE);
     }
 
-    @android.databinding.BindingAdapter("bind:background")
+    @BindingAdapter({"background"})
     public static void setBackground(TextView view, int color) {
         GradientDrawable shape = new GradientDrawable();
         shape.setShape(GradientDrawable.OVAL);
@@ -31,32 +33,32 @@ public abstract class BindingAdapter {
         view.setBackground(shape);
     }
 
-    @android.databinding.BindingAdapter({"bind:textSize"})
+    @BindingAdapter({"textSize"})
     public static void setTextSize(TextView view, int value) {
         view.setTextSize(value);
     }
 
-    @android.databinding.BindingAdapter({"bind:layout_width"})
+    @BindingAdapter({"layout_width"})
     public static void setLayoutWidth(TextView view, int value) {
         ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
         layoutParams.width = value + 10;
         view.setLayoutParams(layoutParams);
     }
 
-    @android.databinding.BindingAdapter({"bind:layout_height"})
+    @BindingAdapter({"layout_height"})
     public static void setLayoutHeight(TextView view, int value) {
         ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
         layoutParams.height = value + 10;
         view.setLayoutParams(layoutParams);
     }
 
-    @android.databinding.BindingAdapter({"bind:handler"})
+    @BindingAdapter({"handler"})
     public static void bindViewPagerAdapter(final ViewPager view, final MainActivity activity) {
         final MainSectionsAdapter adapter = new MainSectionsAdapter(activity.getSupportFragmentManager());
         view.setAdapter(adapter);
     }
 
-    @android.databinding.BindingAdapter({"bind:pager"})
+    @BindingAdapter({"pager"})
     public static void bindViewPagerTabs(final TabLayout view, final ViewPager pagerView) {
         view.setupWithViewPager(pagerView, true);
     }

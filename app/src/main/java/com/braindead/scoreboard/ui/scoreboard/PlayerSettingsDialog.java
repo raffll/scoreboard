@@ -2,9 +2,6 @@ package com.braindead.scoreboard.ui.scoreboard;
 
 import android.app.Dialog;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.DialogFragment;
-import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
@@ -13,8 +10,10 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.braindead.scoreboard.R;
-import com.braindead.scoreboard.utilities.AppConstants;
-import com.thebluealliance.spectrum.SpectrumPalette;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.DialogFragment;
 
 public class PlayerSettingsDialog extends DialogFragment {
 
@@ -61,10 +60,10 @@ public class PlayerSettingsDialog extends DialogFragment {
         playerNameView.setSelection(playerNameView.getText().length());
         addTextWatchers();
 
-        SpectrumPalette spectrumPalette = rootView.findViewById(R.id.dialog_color_palette);
+        /*SpectrumPalette spectrumPalette = rootView.findViewById(R.id.dialog_color_palette);
         spectrumPalette.setColors(AppConstants.DEFAULT_COLORS);
         spectrumPalette.setSelectedColor(playerColor);
-        spectrumPalette.setOnColorSelectedListener((color) -> playerColor = color);
+        spectrumPalette.setOnColorSelectedListener((color) -> playerColor = color);*/
     }
 
     private void onDoneClicked() {

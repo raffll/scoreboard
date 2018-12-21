@@ -26,13 +26,13 @@
             android:onClick="@{() -> mainViewModel.onActivatePlayer(playerNumber)}"
             android:onLongClick="@{() -> mainViewModel.onActivatePlayerSettings(playerNumber)}"
             android:text="@{mainViewModel.nameList[playerNumber]}"
-            bind:textStyle='@{safeUnbox(mainViewModel.isCurrentList[playerNumber])}'
-            bind:textSize="@{mainViewModel.fontSize}" />
+            bind:textStyle="@{safeUnbox(mainViewModel.isCurrentList[playerNumber])}"
+            android:textSize="@{safeUnbox(mainViewModel.fontSize)}" />
 
         <TextView
-            bind:layout_width="@{mainViewModel.fontSize}"
-            bind:layout_height="@{mainViewModel.fontSize}"
-            bind:background="@{safeUnbox(mainViewModel.colorList[playerNumber])}"
+            bind:layout_width="@{safeUnbox(mainViewModel.fontSize)}"
+            bind:layout_height="@{safeUnbox(mainViewModel.fontSize)}"
+            android:background="@{safeUnbox(mainViewModel.colorList[playerNumber])}"
             android:gravity="center"
             android:onLongClick="@{() -> mainViewModel.onActivatePlayerSettings(playerNumber)}" />
 
@@ -43,7 +43,7 @@
             android:layout_weight="1"
             android:gravity="end"
             android:text="@{mainViewModel.scoreList[playerNumber]}"
-            bind:textStyle='@{safeUnbox(mainViewModel.isCurrentList[playerNumber])}'
-            bind:textSize="@{mainViewModel.fontSize}" />
+            bind:textStyle="@{safeUnbox(mainViewModel.isCurrentList[playerNumber])}"
+            android:textSize="@{safeUnbox(mainViewModel.fontSize)}" />
     </TableRow>
 </layout>

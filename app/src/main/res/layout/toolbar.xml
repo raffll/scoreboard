@@ -9,7 +9,7 @@
             type="com.braindead.scoreboard.ui.main.MainViewModel" />
     </data>
 
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@{safeUnbox(mainViewModel.currentColor)}"
@@ -25,5 +25,5 @@
             android:maxLines="1"
             android:text="@{mainViewModel.sessionName}"
             android:textColor="@color/white" />
-    </android.support.v7.widget.Toolbar>
+    </androidx.appcompat.widget.Toolbar>
 </layout>
