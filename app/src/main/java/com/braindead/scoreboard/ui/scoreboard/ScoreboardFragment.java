@@ -35,8 +35,11 @@ public class ScoreboardFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        FragmentScoreboardBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_scoreboard,
+    public View onCreateView(LayoutInflater inflater,
+                             @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        FragmentScoreboardBinding binding = DataBindingUtil.inflate(inflater,
+                R.layout.fragment_scoreboard,
                 container,
                 false);
         View view = binding.getRoot();
