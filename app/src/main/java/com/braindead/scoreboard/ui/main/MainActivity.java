@@ -14,7 +14,6 @@ import androidx.lifecycle.ViewModelProviders;
 public class MainActivity extends AppCompatActivity {
 
     private MainViewModel mainViewModel;
-    private RoomViewModel roomViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +34,6 @@ public class MainActivity extends AppCompatActivity {
         binding.setMainViewModel(mainViewModel);
         binding.setHandler(this);
         binding.setManager(getSupportFragmentManager());
-
-        roomViewModel = ViewModelProviders.of(this).get(RoomViewModel.class);
     }
 
     private void initActionBar() {
