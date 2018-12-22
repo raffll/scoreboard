@@ -43,11 +43,11 @@ public class ScoreboardFragment extends Fragment {
                 R.layout.fragment_scoreboard,
                 container,
                 false);
-        View view;
-        view = binding.getRoot();
         mainViewModel = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
         binding.setMainViewModel(mainViewModel);
         setUpOnPlayerSettingsEventListener();
+
+        View view = binding.getRoot();
         return view;
     }
 
@@ -76,7 +76,7 @@ public class ScoreboardFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_main, menu);
+        inflater.inflate(R.menu.menu_scoreboard, menu);
         super.onCreateOptionsMenu(menu, inflater);
         MenuCompat.setGroupDividerEnabled(menu, true);
     }

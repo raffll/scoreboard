@@ -27,10 +27,10 @@ public class SessionsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         FragmentSessionsBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_sessions, container, false);
-        View view;
-        view = binding.getRoot();
         mainViewModel = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
         binding.setMainViewModel(mainViewModel);
+
+        View view = binding.getRoot();
         return view;
     }
 }
