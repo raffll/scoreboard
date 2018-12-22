@@ -1,5 +1,6 @@
 package com.braindead.scoreboard.utilities;
 
+import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.view.View;
@@ -18,6 +19,7 @@ public abstract class BindingAdapters {
     @BindingAdapter({"textStyle"})
     public static void setTypeface(TextView view, Boolean value) {
         view.setTypeface(null, value ? Typeface.BOLD : Typeface.NORMAL);
+        view.setPaintFlags(value ? Paint.UNDERLINE_TEXT_FLAG : 0);
     }
 
     @BindingAdapter({"visibility"})
