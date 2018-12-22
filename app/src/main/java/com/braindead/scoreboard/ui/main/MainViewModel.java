@@ -1,53 +1,17 @@
 package com.braindead.scoreboard.ui.main;
 
-import android.app.Application;
-
-import com.braindead.scoreboard.db.PlayerRepository;
-import com.braindead.scoreboard.model.Player;
 import com.braindead.scoreboard.model.Scoreboard;
 import com.braindead.scoreboard.utilities.AppConstants;
 
-import java.util.List;
-
-import androidx.annotation.NonNull;
 import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableField;
-import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
 
 import static java.lang.Math.abs;
 
-public class MainViewModel extends AndroidViewModel {
-
-    private PlayerRepository repository;
-    private LiveData<List<Player>> allPlayers;
-
-    public MainViewModel(@NonNull Application application) {
-        super(application);
-        repository = new PlayerRepository(application);
-        allPlayers = repository.getAllPlayers();
-    }
-
-    public void insert(Player player) {
-        repository.insert(player);
-    }
-
-    public void update(Player player) {
-        repository.update(player);
-    }
-
-    public void delete(Player player) {
-        repository.delete(player);
-    }
-
-    public void deleteAllPlayers() {
-        repository.deleteAllPlayers();
-    }
-
-    public LiveData<List<Player>> getAllPlayers() {
-        return allPlayers;
-    }
+public class MainViewModel extends ViewModel {
 
     private Scoreboard scoreboard;
 
