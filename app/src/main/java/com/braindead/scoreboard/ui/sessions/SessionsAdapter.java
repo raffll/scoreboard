@@ -27,9 +27,9 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.Sessio
 
     @Override
     public void onBindViewHolder(@NonNull SessionsHolder holder, int position) {
-        Player currentNote = players.get(position);
-        holder.textViewTitle.setText(currentNote.getName());
-        holder.textViewPriority.setText(String.valueOf(currentNote.getScore()));
+        Player currentPlayer = players.get(position);
+        //holder.textViewTitle.setText(currentPlayer.getName());
+        //holder.textViewPriority.setText(String.valueOf(currentNote.getScore()));
     }
 
     @Override
@@ -37,21 +37,20 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.Sessio
         return players.size();
     }
 
-    public void setNotes(List<Player> notes) {
-        this.players = notes;
+    public void setPlayers(List<Player> players) {
+        this.players = players;
         notifyDataSetChanged();
     }
 
     class SessionsHolder extends RecyclerView.ViewHolder {
-        private TextView textViewTitle;
-        private TextView textViewDescription;
-        private TextView textViewPriority;
+        private TextView textViewName;
+        private TextView textViewScore;
 
         public SessionsHolder(View itemView) {
             super(itemView);
-            textViewTitle = itemView.findViewById(R.id.text_view_title);
-            textViewDescription = itemView.findViewById(R.id.text_view_description);
-            textViewPriority = itemView.findViewById(R.id.text_view_priority);
+            //textViewTitle = itemView.findViewById(R.id.text_view_title);
+            //textViewDescription = itemView.findViewById(R.id.text_view_description);
+            //textViewPriority = itemView.findViewById(R.id.text_view_priority);
         }
     }
 }
